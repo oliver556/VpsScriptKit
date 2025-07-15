@@ -10,7 +10,7 @@
 # 函数: 提示用户按任意键继续
 break_end() {
     echo ""
-    echo -e "操作完成"
+    echo -e "${GREEN}操作完成${RESET}"
 	echo "按任意键继续..."
 	read -n 1 -s -r -p ""
 	echo ""

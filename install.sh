@@ -81,7 +81,8 @@ download_and_extract() {
 
 # --- 主安装函数 ---
 install_main() {
-    
+    clear
+    # 1. 清理旧版本
     echo -e "${CYAN}🧹 正在清理旧版本...${RESET}"
     rm -rf "$INSTALL_DIR"
     rm -rf "/usr/local/bin/vsk"

@@ -2,14 +2,14 @@
 
 ### === 脚本描述 === ###
 # 名称: constant.sh
-# 功能: 常量设置
+# 功能: 常量库
 # 作者: 
 # 创建日期: 2025-07-15
 # 许可证: MIT
 
 
 ### === 版本信息 === ###
-SCRIPT_VERSION="0.0.1"
+SCRIPT_VERSION="0.0.5"
 SCRIPT_NAME="vps_script_kit.sh"
 
 ### === 退出状态码 === ###
