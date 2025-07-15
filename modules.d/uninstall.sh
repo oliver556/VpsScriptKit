@@ -7,16 +7,6 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-# ==============================================================================
-# == 通用导入
-# 获取当前脚本所在的真实目录 (例如 /opt/VpsScriptKit/modules.d)
-CURRENT_SCRIPT_DIR=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")
-# 获取项目根目录 (即当前脚本目录的上一级)
-PROJECT_ROOT=$(dirname "$CURRENT_SCRIPT_DIR")
-# 从项目根目录出发，引用 init.sh
-source "$PROJECT_ROOT/lib/init.sh"
-# ==============================================================================
-
 INSTALL_DIR="/opt/VpsScriptKit"
 
 uninstall_main() {
@@ -34,6 +24,7 @@ uninstall_main() {
                 echo -e "${CYAN}🧹 正在清理卸载...${RESET}"
                 rm -rf "$INSTALL_DIR"
                 rm -rf "/usr/local/bin/vsk"
+                rm -rf "/usr/local/bin/v"
                 sleep 1
                 echo ""
                 echo -e "${CYAN}✅ 脚本已卸载，江湖有缘再见！${RESET}"

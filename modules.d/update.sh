@@ -7,16 +7,6 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-# ==============================================================================
-# == 通用导入
-# 获取当前脚本所在的真实目录 (例如 /opt/VpsScriptKit/modules.d)
-CURRENT_SCRIPT_DIR=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")
-# 获取项目根目录 (即当前脚本目录的上一级)
-PROJECT_ROOT=$(dirname "$CURRENT_SCRIPT_DIR")
-# 从项目根目录出发，引用 init.sh
-source "$PROJECT_ROOT/lib/init.sh"
-# ==============================================================================
-
 update_now() {
     echo -e "${GREEN_BOLD}正在更新...${RESET_BOLD}"
     sleep 1
