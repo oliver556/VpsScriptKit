@@ -20,52 +20,30 @@ jobs:
     # 任务步骤
     steps:
       # 第 1 步：检出仓库代码
-      # Action 需要访问你的代码才能进行打包
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 第 2 步：打包发行文件
-      # 使用 tar 的 --exclude 选项来创建一个干净的、不含开发文件的压缩包
-      - name: Create release tarball
-        run: |
-          tar -czvf release.tar.gz \
-            --exclude='./.git' \
-            --exclude='./.github' \
-            --exclude='README.md' \
-            --exclude='LICENSE' \
-            --exclude='art_word.toml' \
-            --exclude='*.log' \
-            --exclude='release.tar.gz' \
-            .
+      # 第 2 步：使用 git archive 创建发行包 (更稳定、更推荐)
+      # git archive 会自动读取 .gitattributes 文件来排除不需要的文件
+      - name: Create release archive
+        run: git archive -o release.tar.gz --format=tar.gz HEAD
       
       # 第 3 步：创建带版本号的 Release
-      # 这个 Release 是永久的，用于版本存档
       - name: Create Versioned Release (e.g., v1.2.3)
         uses: softprops/action-gh-release@v2
         with:
-          # 使用触发工作流的 Git 标签名 (例如 "v1.2.3") 作为 Release 的版本号
           tag_name: ${{ github.ref_name }}
-          # Release 的标题
           name: "Release ${{ github.ref_name }}"
-          # Release 的描述信息
           body: "Automated release for version ${{ github.ref_name }}."
-          # 要上传的文件
           files: release.tar.gz
-          # 一个小技巧：如果 tag 名包含连字符(如 'v1.2.3-beta'), 则自动标记为“预发布”
           prerelease: ${{ contains(github.ref, '-') }}
 
       # 第 4 步：更新 "latest" Release
-      # 这个 Release 是一个动态指针，始终指向最新的发行版，为 install.sh 提供固定下载地址
       - name: Update Latest Release
         uses: softprops/action-gh-release@v2
         with:
-          # 固定使用 "latest" 作为 tag 名
           tag_name: latest
-          # Release 的标题
           name: "Latest Build (matches ${{ github.ref_name }})"
-          # Release 的描述信息
           body: "This is the latest automated build, automatically updated to match version ${{ github.ref_name }}."
-          # 上传相同的文件
           files: release.tar.gz
-          # 'latest' Release 不应标记为预发布
           prerelease: false
