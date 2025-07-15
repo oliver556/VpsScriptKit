@@ -35,6 +35,7 @@ jobs:
             --exclude='LICENSE' \
             --exclude='art_word.toml' \
             --exclude='*.log' \
+            --exclude='release.tar.gz' \
             .
       
       # 第 3 步：创建带版本号的 Release
