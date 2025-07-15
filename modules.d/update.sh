@@ -7,10 +7,12 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd) # 获取当前脚本所在目录
+
 # 引用 constant.sh 中的常量
-source config/constant.sh
-# 引用 public 中的 public_lib.sh
-source lib/public/public_lib.sh
+source "$SCRIPT_DIR/config/constant.sh"
+# 导入 public 中的 public_lib.sh
+source "$SCRIPT_DIR/lib/public/public_lib.sh"
 
 update_now() {
     echo -e "${GREEN_BOLD}正在更新...${RESET_BOLD}"
@@ -48,3 +50,4 @@ update_menu() {
     done
 }
 
+update_menu

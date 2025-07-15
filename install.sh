@@ -34,7 +34,8 @@ command_exists() {
 # 函数：获取最新发行版的下载链接
 # 通过 echo 将结果输出，以便被调用者捕获
 get_latest_release_url() {
-    echo -e "${BLUE_BOLD}--> 正在查询最新版本...${RESET}"
+    # ✅ 将状态信息输出到标准错误流(stderr)，这样它就不会被命令替换捕获
+    echo -e "${BLUE_BOLD}--> 正在查询最新版本...${RESET}" >&2
     
     # 调用 GitHub API 获取最新 Release 的信息
     local LATEST_RELEASE_JSON
@@ -49,7 +50,7 @@ get_latest_release_url() {
         error_exit "无法找到最新的发行版下载链接！请检查仓库 Release 页面。"
     fi
     
-    # 将找到的 URL 作为函数的输出
+    # 将找到的 URL 作为函数的唯一标准输出
     echo "$TARBALL_URL"
 }
 
@@ -58,7 +59,7 @@ get_latest_release_url() {
 download_and_extract() {
     local tarball_url="$1"
 
-    echo -e "${BLUE_BOLD}--> 正在下载并解压文件...${RESET}"
+    echo -e "${BLUE_BOLD}--> 正在下载并解压文件...${RESET}" >&2
     
     # 创建一个临时文件来存放下载的压缩包
     local TMP_TARBALL

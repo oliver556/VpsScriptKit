@@ -7,12 +7,13 @@
 # 创建日期: 2025-07-15
 # 许可证: MIT
 
-### === 引用配置文件 === ###
-source config/constant.sh
-source config/color.sh
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" # 获取当前脚本所在目录
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd) # 获取当前脚本所在目录
 MODULE_DIR="$SCRIPT_DIR/modules.d"                         # 模块目录
+
+### === 引用配置文件 === ###
+source "$SCRIPT_DIR/config/constant.sh"
+source "$SCRIPT_DIR/config/color.sh"
+source "$SCRIPT_DIR/modules.d/update.sh"
 
 # ✅ 模块映射表
 declare -A modules=(
