@@ -19,6 +19,11 @@ EXIT_INTERRUPT=130
 
 # 分割线宽度
 width_70=70
+width_71=71
 width_60=60
+width_50=50
+width_48=48
 width_40=40
+width_30=30
+width_28=28
 width_20=20

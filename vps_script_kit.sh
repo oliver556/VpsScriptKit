@@ -26,7 +26,7 @@ MODULE_DIR="$ROOT_DIR/modules.d"
 
 declare -A modules=(
   [1]="system.sh:system_menu"
-  [9]="test.sh:test_menu"
+  [8]="test.sh:test_menu"
   [00]="update.sh:update_menu"
 )
 
@@ -59,17 +59,19 @@ while true; do
     clear
     
     # 标题
-    title="🚀 一款全功能的 Linux 管理脚本！ | By JAMISON  |  v: $SCRIPT_VERSION"
+    title="🚀 一款全功能的 Linux 管理脚本！ |  By JAMISON  |  v$SCRIPT_VERSION"
 
     # 🔷 打印 ASCII 标题框（兼容所有终端）
     printf "${BLUE}+%${width_60}s+${RESET}\n" | tr ' ' '-'
-    printf "${BLUE}| %-${width_60}s |${RESET}\n" "$title"
+    printf "${BLUE}| %-${width_71}s |${RESET}\n" "$title"
     printf "${BLUE}+%${width_60}s+${RESET}\n" | tr ' ' '-'
-
+    # 命令行输入 v  可快速启动脚本
+    echo -e "${BLUE}+--------------- 命令行输入 ${YELLOW}v${RESET} ${BLUE}可快速启动脚本 ----------------+${RESET}"
     # 📋 菜单项
     printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${BLUE}1. ${RESET} 系统工具  ▶ \n"
-    printf "${BLUE}9. ${RESET} 常用测试脚本  ▶ \n"
+    printf "${BLUE}1. ${RESET} 系统工具     ▶ \n"
+    printf "${BLUE}2. ${RESET} Docker 管理  ▶ \n"
+    printf "${BLUE}8. ${RESET} 常用测试脚本 ▶ \n"
     printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
     printf "${BLUE}00.${RESET} 脚本更新 \n"
     printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
@@ -80,6 +82,7 @@ while true; do
     read -p "$(echo -e "${BLUE}👉 请输入选项编号: ${RESET}")" choice
 
     if [[ "$choice" = "0" ]]; then
+        echo
         echo -e "${GREEN_BOLD}感谢使用，再见！${RESET_BOLD}"
         sleep 1
         clear
