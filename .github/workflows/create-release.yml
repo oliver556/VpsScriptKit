@@ -16,8 +16,7 @@ jobs:
     name: Create Release Package
     # 运行环境
     runs-on: ubuntu-latest
-
-    # ✅ 为本次任务授予写入权限，以便创建 Release
+    # 授予写入权限
     permissions:
       contents: write
 
@@ -27,26 +26,50 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 第 2 步：使用 git archive 创建发行包
+      # 第 2 步：准备变量 (方便自定义)
+      - name: Set up release variables
+        run: |
+          # 提取版本号 (例如从 "v1.2.3" 得到 "1.2.3")
+          VERSION=$(echo ${{ github.ref_name }} | sed 's/v//')
+          # 🚀 在这里定义压缩包文件名前缀
+          ASSET_NAME_PREFIX="VpsScriptKit"
+          # 组合成最终的压缩包文件名
+          echo "ASSET_NAME=${ASSET_NAME_PREFIX}-${{ github.ref_name }}.tar.gz" >> $GITHUB_ENV
+
+      # 第 3 步：使用 git archive 创建发行包
       - name: Create release archive
-        run: git archive -o release.tar.gz --format=tar.gz HEAD
+        run: git archive -o ${{ env.ASSET_NAME }} --format=tar.gz HEAD
       
-      # 第 3 步：创建带版本号的 Release
+      # 第 4 步：创建带版本号的 Release
       - name: Create Versioned Release (e.g., v1.2.3)
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: "Release ${{ github.ref_name }}"
-          body: "Automated release for version ${{ github.ref_name }}."
-          files: release.tar.gz
+          # ✅ Release 的标题直接使用版本号
+          name: ${{ github.ref_name }}
+          # 🚀 带版本号 Release 的描述内容
+          body: "这是 VpsScriptKit ${{ github.ref_name }} 版本的自动构建版本。"
+          files: ${{ env.ASSET_NAME }}
           prerelease: ${{ contains(github.ref, '-') }}
 
-      # 第 4 步：更新 "latest" Release
-      - name: Update Latest Release
+      # 第 5 步：更新 "latest" Release (通过先删除再创建来确保独立)
+      - name: Delete latest release if it exists
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        with:
+          tag_name: latest
+          delete_release: true # 确保删除关联的 Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # 如果 latest 标签不存在，会报错，所以我们忽略错误继续执行
+        continue-on-error: true
+
+      - name: Create Latest Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: "Latest Build (matches ${{ github.ref_name }})"
-          body: "This is the latest automated build, automatically updated to match version ${{ github.ref_name }}."
-          files: release.tar.gz
+          # ✅ "latest" Release 的标题也直接使用版本号
+          name: ${{ github.ref_name }}
+          # 🚀 "latest" Release 的描述内容
+          body: "此版本为最新自动构建版，与 ${{ github.ref_name }} 版本内容一致。推荐用于一键安装脚本。"
+          files: ${{ env.ASSET_NAME }}
           prerelease: false
