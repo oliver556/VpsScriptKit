@@ -1,2 +1,7 @@
 # VpsScriptKit
-服务器脚本快捷收藏夹！Server scripts quick favorites ! 
+
+VpsScriptKit 项目，简称 vsk 项目。它是
+- 一个社区驱动的，命令小抄项目
+- 一个可自由扩展配置，支持订阅，交互式的，服务器辅助脚本汇总集合
+- 一个能够节省你大量命令/脚本查找时间的项目
+
