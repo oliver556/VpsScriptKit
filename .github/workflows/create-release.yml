@@ -3,7 +3,7 @@
 # 工作流名称
 name: Create and Publish Release
 
-# 触发条件：仅当一个符合 'v*.*.*' 格式的 tag被推送到仓库时运行
+# 触发条件
 on:
   push:
     tags:
@@ -17,14 +17,17 @@ jobs:
     # 运行环境
     runs-on: ubuntu-latest
 
+    # ✅ 为本次任务授予写入权限，以便创建 Release
+    permissions:
+      contents: write
+
     # 任务步骤
     steps:
       # 第 1 步：检出仓库代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 第 2 步：使用 git archive 创建发行包 (更稳定、更推荐)
-      # git archive 会自动读取 .gitattributes 文件来排除不需要的文件
+      # 第 2 步：使用 git archive 创建发行包
       - name: Create release archive
         run: git archive -o release.tar.gz --format=tar.gz HEAD
       
