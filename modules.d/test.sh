@@ -7,7 +7,7 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd) # 获取当前脚本所在目录
+SCRIPT_DIR=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")") # 获取当前脚本所在目录
 
 # 引用 config 中 color.sh 中的颜色变量
 source "$SCRIPT_DIR/config/color.sh"
