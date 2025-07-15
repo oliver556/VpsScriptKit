@@ -49,5 +49,3 @@ update_menu() {
         esac
     done
 }
-
-update_menu

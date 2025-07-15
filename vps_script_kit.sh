@@ -13,7 +13,6 @@ MODULE_DIR="$SCRIPT_DIR/modules.d"                         # 模块目录
 ### === 引用配置文件 === ###
 source "$SCRIPT_DIR/config/constant.sh"
 source "$SCRIPT_DIR/config/color.sh"
-source "$SCRIPT_DIR/modules.d/update.sh"
 
 # ✅ 模块映射表
 declare -A modules=(

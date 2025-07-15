@@ -27,8 +27,8 @@ uninstall_main() {
             [Yy])
                 clear
                 echo -e "${CYAN}🧹 正在清理卸载...${RESET}"
-                # rm -rf "$INSTALL_DIR"
-                # rm -rf "/usr/local/bin/vsk"
+                rm -rf "$INSTALL_DIR"
+                rm -rf "/usr/local/bin/vsk"
                 sleep 1
                 echo ""
                 echo -e "${CYAN}✅ 脚本已卸载，江湖有缘再见！${RESET}"

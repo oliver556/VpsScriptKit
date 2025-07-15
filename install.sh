@@ -81,10 +81,16 @@ download_and_extract() {
 
 # --- 主安装函数 ---
 install_main() {
-    # 1. 检查是否已安装
-    if [ -d "$INSTALL_DIR" ]; then
-        error_exit "脚本已安装在 $INSTALL_DIR 目录！如果需要重新安装，请删除该目录后重试。"
-    fi
+    
+    echo -e "${CYAN}🧹 正在清理旧版本...${RESET}"
+    rm -rf "$INSTALL_DIR"
+    rm -rf "/usr/local/bin/vsk"
+    rm -rf "/usr/local/bin/v"
+    sleep 1
+    echo ""
+    echo -e "${CYAN}✅ 脚本已清理，即将覆盖安装！${RESET}"
+    sleep 2
+    clear
 
     echo -e "${GREEN_BOLD}正在安装 VpsScriptKit...${RESET}"
 
