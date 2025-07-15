@@ -51,7 +51,7 @@ jobs:
           # 要上传的文件
           files: release.tar.gz
           # 一个小技巧：如果 tag 名包含连字符(如 'v1.2.3-beta'), 则自动标记为“预发布”
-          prerelease: contains(github.ref, '-')
+          prerelease: ${{ contains(github.ref, '-') }}
 
       # 第 4 步：更新 "latest" Release
       # 这个 Release 是一个动态指针，始终指向最新的发行版，为 install.sh 提供固定下载地址
