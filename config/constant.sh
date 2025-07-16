@@ -16,6 +16,13 @@ EXIT_SUCCESS=0
 EXIT_ERROR=1
 EXIT_INTERRUPT=130
 
+# 安装目录
+INSTALL_DIR="/opt/VpsScriptKit"
+# 仓库地址
+REPO="oliver556/VpsScriptKit"
+# 自动更新的 Cron 任务标识
+CRON_COMMENT="VpsScriptKit-AutoUpdate"
+
 # 分割线宽度
 width_70=70
 width_71=71

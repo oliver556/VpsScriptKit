@@ -39,7 +39,6 @@ declare -A modules=(
 for key in "${!modules[@]}"; do
   IFS=":" read -r file func <<< "${modules[$key]}"
   path="$MODULE_DIR/$file"
-  echo "$path"
   if [[ -f "$path" ]]; then
     source "$path"
     if ! declare -F "$func" >/dev/null; then

@@ -39,7 +39,7 @@ system_menu() {
                 system_info_main
                 break_end;;
             2)
-                update_menu
+                system_info_main
                 break_end no_wait ;;
             3)
                 system_clean_main

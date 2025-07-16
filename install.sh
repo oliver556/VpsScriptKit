@@ -105,15 +105,18 @@ install_main() {
 
     echo
     # 1. 清理旧版本
-    echo -e "${CYAN}🧹 正在清理旧版本...${BOLD_WHITE}"
-    rm -rf "$INSTALL_DIR"
-    rm -rf "/usr/local/bin/vsk"
-    rm -rf "/usr/local/bin/v"
-    sleep 1
-    echo
-    echo -e "${CYAN}✅ 脚本已清理，即将覆盖安装！${BOLD_WHITE}"
-    sleep 2
-    clear
+    # 如果存在旧版本，则清理
+    if [ -d "$INSTALL_DIR" ]; then
+        echo -e "${CYAN}🧹 正在清理旧版本...${BOLD_WHITE}"
+        rm -rf "$INSTALL_DIR"
+        rm -rf "/usr/local/bin/vsk"
+        rm -rf "/usr/local/bin/v"
+        sleep 1
+        echo
+        echo -e "${CYAN}✅ 脚本已清理，即将覆盖安装！${BOLD_WHITE}"
+        sleep 2
+        clear
+    fi
 
     echo -e "${BOLD_GREEN}正在安装 VpsScriptKit...${BOLD_WHITE}"
 

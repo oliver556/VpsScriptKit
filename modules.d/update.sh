@@ -7,14 +7,6 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-### === 配置 === ###
-# 安装目录
-INSTALL_DIR="/opt/VpsScriptKit"
-# 仓库地址
-REPO="oliver556/VpsScriptKit"
-# 自动更新的 Cron 任务标识
-CRON_COMMENT="VpsScriptKit-AutoUpdate"
-
 ### === 函数定义 === ###
 # 函数：退出脚本并显示错误信息
 error_exit() {
@@ -22,58 +14,25 @@ error_exit() {
     exit 1
 }
 
-# 函数：获取最新发行版的下载链接
-# TODO 需要优化，如果版本一直，则提醒，无需更新，如果版本不一致，则更新
-get_latest_release_url() {
-    echo -e "${BOLD_BLUE}--> 正在查询最新版本...${WHITE}" >&2
-    
-    local LATEST_RELEASE_JSON
-    LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
-    
-    local TARBALL_URL
-    TARBALL_URL=$(echo "$LATEST_RELEASE_JSON" | grep "browser_download_url" | grep "\.tar\.gz" | cut -d '"' -f 4)
-
-    if [ -z "$TARBALL_URL" ]; then
-        error_exit "无法找到最新的发行版下载链接！请检查仓库 Release 页面。"
-    fi
-    
-    echo "$TARBALL_URL"
-}
-
-# 函数：下载并解压指定的 URL
+## === 函数：下载并解压指定的 URL === ###
+# @param $1: 要下载的压缩包 URL
 download_and_extract() {
-    local tarball_url="$1"
-
-    echo -e "${BOLD_BLUE}--> 正在下载并解压文件...${WHITE}" >&2
+    local TARBALL_URL="$1"
+    echo -e "${BOLD_BLUE}--> 正在下载更新包...${WHITE}" >&2
     
     local TMP_TARBALL
     TMP_TARBALL=$(mktemp)
 
-    curl -L "$tarball_url" -o "$TMP_TARBALL" || error_exit "下载发行版压缩包失败！"
+    curl -L "$TARBALL_URL" -o "$TMP_TARBALL" || error_exit "下载发行版压缩包失败！"
+    echo -e "${BOLD_BLUE}--> 正在覆盖安装文件...${WHITE}" >&2
     
-    # 清理旧文件，准备更新
-    echo -e "${BOLD_BLUE}--> 正在清理旧版本文件...${WHITE}"
-    # 删除除了日志等特定文件外的所有内容
-    find "$INSTALL_DIR" -mindepth 1 -maxdepth 1 ! -name 'logs' -exec rm -rf {} +
-
-    echo -e "${BOLD_BLUE}--> 正在解压新版本...${WHITE}"
-    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" --strip-components=1 || error_exit "解压文件失败！"
+    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
     
     rm -f "$TMP_TARBALL"
 }
 
-### ===核心更新功能 === ###
-
-# 函数：更新脚本
-# 函数：更新脚本（带版本对比）
-# 函数：更新脚本（优化版）
-update_now() {
-    clear
-    echo -e "${BOLD_GREEN}🚀 正在检查更新...${WHITE}"
-    sleep 1
-
-    # 1. 直接从 GitHub API 获取最新发布信息
-    echo -e "${BOLD_BLUE}--> 正在查询最新版本信息...${WHITE}"
+### === 函数：获取版本对比 === ###
+get_latest_version_tag() {
     local LATEST_RELEASE_JSON
     LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
 
@@ -81,60 +40,60 @@ update_now() {
     if [ -z "$LATEST_RELEASE_JSON" ]; then
         error_exit "无法从 GitHub API 获取信息，请检查网络或仓库状态。"
     fi
-
-    # 2. 从 JSON 中解析出最新的版本号 (tag_name)
-    local latest_version
-    latest_version=$(echo "$LATEST_RELEASE_JSON" | grep '"tag_name":' | cut -d '"' -f 4)
     
-    # 打印当前版本和最新版本以供比较
-    # SCRIPT_VERSION 变量由 init_lib.sh 提供
-    echo -e "--> ${LIGHT_CYAN}当前版本: ${WHITE}${SCRIPT_VERSION}"
-    echo -e "--> ${LIGHT_CYAN}最新版本: ${WHITE}${latest_version}"
-    echo ""
+    echo "$LATEST_RELEASE_JSON" | grep '"tag_name":' | cut -d '"' -f 4
+}
 
-    # 3. 比较版本，如果完全相等，则无需更新
-    if [[ "${SCRIPT_VERSION}" == "${latest_version}" ]]; then
-        echo -e "${BOLD_GREEN}✅ 您当前已是最新版本，无需更新。${WHITE}"
-        echo
-        break_end
-        return
-    fi
+### === 函数：获取下载链接 === ###
+get_latest_release_url() {
+    # 获取完整的最新版本信息
+    echo -e "${BOLD_BLUE}--> 正在获取下载链接...${WHITE}"
+    local LATEST_RELEASE_JSON
+    LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
 
-    # 4. 如果版本不一致，则准备更新
-    echo -e "${BOLD_YELLOW}发现新版本，准备开始更新...${WHITE}"
-
-    # 从 JSON 中解析出 .tar.gz 文件的下载链接
-    local latest_url
-    latest_url=$(echo "$LATEST_RELEASE_JSON" | grep "browser_download_url" | grep "\.tar\.gz" | cut -d '"' -f 4)
-    
-    # 再次检查 URL 是否获取成功
-    if [ -z "$latest_url" ]; then
-        error_exit "成功获取版本号，但未能找到 .tar.gz 下载链接。"
+    if [ -z "$LATEST_RELEASE_JSON" ]; then
+        error_exit "无法从 GitHub API 获取信息，请检查网络或仓库状态。"
     fi
     
-    echo -e "--> 准备从以下链接下载:\n    $latest_url"
+    #  从 JSON 中解析出下载链接
+    local LATEST_URL
+    LATEST_URL=$(echo "$LATEST_RELEASE_JSON" | grep "browser_download_url" | grep "\.tar\.gz" | cut -d '"' -f 4)
+    
+    if [ -z "$LATEST_URL" ]; then
+        error_exit "未能找到 .tar.gz 下载链接。"
+    fi
+    
+    echo -e "--> 准备从以下链接下载:\n    $LATEST_URL"
+    download_and_extract "$LATEST_URL"
+}
 
-    # 5. 下载并解压替换文件 (调用已有的函数)
-    download_and_extract "$latest_url"
+### ===核心更新功能 === ###
 
-    # 6. 设置权限
+## === 函数：更新脚本 === ###
+update_now() {
+    clear
+    echo -e "${BOLD_GREEN}🚀 发现新版本，准备开始更新...${WHITE}"
+    sleep 1
+
+    get_latest_release_url
+
+    # 3. 设置权限和链接
     echo -e "${BOLD_BLUE}--> 正在设置文件权限...${WHITE}"
     find "$INSTALL_DIR" -type f -name "*.sh" -exec chmod +x {} +
 
-    # 7. 重新创建快速启动命令
     echo -e "${BOLD_BLUE}--> 正在刷新快速启动命令...${WHITE}"
     if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
         ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
         ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
-    else
-        echo -e "${BOLD_YELLOW}警告: vps_script_kit.sh 未找到，跳过创建快捷命令。${WHITE}"
     fi
 
     echo ""
-    # 更新完成后，可以从 API 获取的最新版本号来显示
-    echo -e "${BOLD_GREEN}✅ 更新完成！现在版本为 ${latest_version}${WHITE}"
-    sleep 3
-    clear
+    echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
+    sleep 2
+
+    # 4. 重启脚本
+    # exec bash "$INSTALL_DIR/vps_script_kit.sh"
+    vskit
 }
 
 # 函数：开启自动更新
@@ -191,6 +150,18 @@ update_menu() {
         printf "+%${width_40}s+\n" "" | tr ' ' '-'
         printf "| %-${width_48}s |\n" "$title"
         printf "+%${width_40}s+\n" "" | tr ' ' '-'
+        
+        # 获取最新版本号
+        local LATEST_SCRIPT_VERSION
+        LATEST_SCRIPT_VERSION=$(get_latest_version_tag)
+
+        if [[ "${SCRIPT_VERSION}" == "${LATEST_SCRIPT_VERSION}" ]]; then
+            echo -e "${BOLD_GREEN}✅ 您当前已是最新版本 ${SCRIPT_VERSION}。${WHITE}"
+        else 
+            echo -e "${BOLD_GREEN}🚀  发现新版本！"
+            echo -e "${LIGHT_CYAN}当前版本：${SCRIPT_VERSION}       最新版本：${YELLOW}${LATEST_SCRIPT_VERSION}${WHITE}"
+        fi
+
         echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
         echo -e "${LIGHT_CYAN}1. ${WHITE}现在更新            ${LIGHT_CYAN}2. ${WHITE}开启自动更新            ${LIGHT_CYAN}3. ${WHITE}关闭自动更新"
         echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"

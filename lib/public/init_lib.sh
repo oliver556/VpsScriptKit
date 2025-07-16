@@ -62,3 +62,4 @@ export SCRIPT_VERSION
 source "$CONFIG_DIR/color.sh"
 source "$CONFIG_DIR/constant.sh"
 source "$LIB_DIR/public/public_lib.sh"
+
