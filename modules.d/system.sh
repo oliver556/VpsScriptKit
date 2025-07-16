@@ -37,7 +37,7 @@ system_menu() {
         case "$sys_choice" in
             1)
                 system_info_main
-                break_end no_wait ;;
+                break_end;;
             2)
                 update_menu
                 break_end no_wait ;;

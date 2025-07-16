@@ -10,8 +10,8 @@
 ### === 系统更新 === ###
 linux_update_utils() {
     clear
-	echo -e "${YELLOW_BOLD}正在系统更新...${RESET}"
-    echo -e "${BLUE}--------------------------------${RESET}"
+	echo -e "${YELLOW_BOLD}正在系统更新...${WHITE}"
+    echo -e "${BLUE}--------------------------------${WHITE}"
 	# Fedora, CentOS 8+, RHEL 8+
 	if command -v dnf &>/dev/null; then
 		dnf -y update

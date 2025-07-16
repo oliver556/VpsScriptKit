@@ -95,7 +95,8 @@ update_now() {
     # 3. 比较版本，如果完全相等，则无需更新
     if [[ "${SCRIPT_VERSION}" == "${latest_version}" ]]; then
         echo -e "${BOLD_GREEN}✅ 您当前已是最新版本，无需更新。${WHITE}"
-        sleep 2
+        echo
+        break_end
         return
     fi
 
