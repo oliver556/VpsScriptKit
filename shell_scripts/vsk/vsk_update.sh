@@ -140,7 +140,7 @@ disable_auto_update() {
 }
 
 ### === 更新脚本 主菜单 === ###
-update_menu() {
+vsk_update_menu() {
     clear
 
     while true; do

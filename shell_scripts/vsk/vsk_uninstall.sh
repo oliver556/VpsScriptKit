@@ -10,7 +10,7 @@
 INSTALL_DIR="/opt/VpsScriptKit"
 
 ### === 卸载脚本 主菜单 === ###
-uninstall_main() {
+vsk_uninstall_menu() {
     while true; do
         clear
         echo -e "🔄 卸载 vsk 脚本"
@@ -37,14 +37,13 @@ uninstall_main() {
                 echo -e "${YELLOW_BOLD}已取消卸载。${WHITE}"
                 sleep 1
                 clear
-                break_end no_wait ;;
+                break_end no_wait
+                break ;;
             *)
                 echo -e "${RED_BOLD}❌ 无效选项，请输入 Y 或 N。${WHITE}"
                 sleep 1
                 clear
-                break_end no_wait ;;
+                break_end no_wait
         esac
     done
 }
-
-uninstall_main

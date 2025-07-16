@@ -30,7 +30,7 @@ declare -A modules=(
   [1]="system.sh:system_menu"
   [2]="docker.sh:docker_menu"
   [8]="test.sh:test_menu"
-  [00]="update.sh:update_menu"
+  [00]="vsk.sh:vsk_menu"
 )
 
 ### === 动态加载所有在映射表中的模块 === ###
@@ -57,7 +57,7 @@ while true; do
     clear
     
     # # 标题
-    title="${BOLD}🚀 一款全功能的 Linux 管理脚本！ |   By Vskit   |   ${SCRIPT_VERSION}"
+    title="${BOLD}🚀 一款全功能的 Linux 管理脚本！ | By Vskit | ${SCRIPT_VERSION}"
     # 🔷 ASCII 标题框
     printf "${LIGHT_CYAN}"
     printf "+%${width_60}s+\n" "" | tr ' ' '-'
@@ -71,7 +71,7 @@ while true; do
     printf "${LIGHT_CYAN}2. ${WHITE} Docker 管理  ▶ \n"
     printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
     printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${LIGHT_CYAN}00.${WHITE} 脚本更新 \n"
+    printf "${LIGHT_CYAN}00.${WHITE} 脚本工具 \n"
     printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
     printf "${LIGHT_CYAN}0. ${WHITE} 退出程序 \n"
     printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"

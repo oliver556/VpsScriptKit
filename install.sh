@@ -104,7 +104,7 @@ install_main() {
     fi
 
     echo
-    # 1. 清理旧版本
+    # 清理旧版本
     # 如果存在旧版本，则清理
     if [ -d "$INSTALL_DIR" ]; then
         echo -e "${CYAN}🧹 正在清理旧版本...${BOLD_WHITE}"
