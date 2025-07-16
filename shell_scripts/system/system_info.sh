@@ -7,7 +7,7 @@
 # 创建日期：
 # 许可证：MIT
 
-# 获取当前时区函数
+### === 获取当前时区函数 === ###
 current_timezone() {
 	if grep -q 'Alpine' /etc/issue; then
 	   date +"%Z %z"
@@ -16,6 +16,33 @@ current_timezone() {
 	fi
 }
 
+### === 获取网络状态 === ###
+output_status() {
+	output=$(awk 'BEGIN { rx_total = 0; tx_total = 0 }
+		$1 ~ /^(eth|ens|enp|eno)[0-9]+/ {
+			rx_total += $2
+			tx_total += $10
+		}
+		END {
+			rx_units = "Bytes";
+			tx_units = "Bytes";
+			if (rx_total > 1024) { rx_total /= 1024; rx_units = "K"; }
+			if (rx_total > 1024) { rx_total /= 1024; rx_units = "M"; }
+			if (rx_total > 1024) { rx_total /= 1024; rx_units = "G"; }
+
+			if (tx_total > 1024) { tx_total /= 1024; tx_units = "K"; }
+			if (tx_total > 1024) { tx_total /= 1024; tx_units = "M"; }
+			if (tx_total > 1024) { tx_total /= 1024; tx_units = "G"; }
+
+			printf("%.2f%s %.2f%s\n", rx_total, rx_units, tx_total, tx_units);
+		}' /proc/net/dev)
+
+	rx=$(echo "$output" | awk '{print $1}')
+	tx=$(echo "$output" | awk '{print $2}')
+
+}
+
+### === 系统信息查询 === ###
 system_info_utils() {
     # ==========================================================
     # 主机名
@@ -58,6 +85,10 @@ system_info_utils() {
     disk_info=$(df -h | awk '$NF=="/"{printf "%s/%s (%s)", $3, $2, $5}')
 
     # ==========================================================
+	# 获取系统网络状态
+	output_status
+	
+    # ==========================================================
     # 网络算法
 	congestion_algorithm=$(sysctl -n net.ipv4.tcp_congestion_control)
 	queue_algorithm=$(sysctl -n net.core.default_qdisc)
@@ -65,7 +96,6 @@ system_info_utils() {
     # ==========================================================
     # 运营商
 	isp_info=$(echo "$ipinfo" | grep 'org' | awk -F': ' '{print $2}' | tr -d '",')
-
 
     # DNS 地址
 	dns_addresses=$(awk '/^nameserver/{printf "%s ", $2} END {print ""}' /etc/resolv.conf)
@@ -81,9 +111,10 @@ system_info_utils() {
     # ==========================================================
 
     # 地理位置
-    # 国家
+	ipinfo=$(curl -s ipinfo.io)
+	# 国家
 	country=$(echo "$ipinfo" | grep 'country' | awk -F': ' '{print $2}' | tr -d '",')
-    # 城市
+	# 城市
 	city=$(echo "$ipinfo" | grep 'city' | awk -F': ' '{print $2}' | tr -d '",')
 
     # 时区 / 当前时间
@@ -93,58 +124,55 @@ system_info_utils() {
     # ==========================================================
     # 运行时间
 	runtime=$(cat /proc/uptime | awk -F. '{run_days=int($1 / 86400);run_hours=int(($1 % 86400) / 3600);run_minutes=int(($1 % 3600) / 60); if (run_days > 0) printf("%d天 ", run_days); if (run_hours > 0) printf("%d时 ", run_hours); printf("%d分\n", run_minutes)}')
-
-
-
 }
 
 show_system_info() {
 	clear
 
-    echo -e "${BLUE}正在查询中，请稍后...${RESET}"
+    echo -e "${BLUE}正在查询中，请稍后...${WHITE}"
 
     system_info_utils
 
-    echo -e "${GREEN}查询完成${RESET}"
+    echo -e "${GREEN}查询完成${WHITE}"
     sleep 1
     clear
     
 	echo ""
 	echo -e "系统信息查询"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}主机名:       ${RESET}$hostname"
-	echo -e "${CYAN}系统版本:     ${RESET}$os_info"
-	echo -e "${CYAN}Linux版本:    ${RESET}$kernel_version"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}CPU架构:      ${RESET}$cpu_arch"
-	echo -e "${CYAN}CPU型号:      ${RESET}$cpu_info"
-	echo -e "${CYAN}CPU核心数:    ${RESET}$cpu_cores"
-	echo -e "${CYAN}CPU频率:      ${RESET}$cpu_freq"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}CPU占用:      ${RESET}$cpu_usage_percent%"
-	echo -e "${CYAN}系统负载:     ${RESET}$load"
-	echo -e "${CYAN}物理内存:     ${RESET}$mem_info"
-	echo -e "${CYAN}虚拟内存:     ${RESET}$swap_info"
-	echo -e "${CYAN}硬盘占用:     ${RESET}$disk_info"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}总接收:       ${RESET}$rx"
-	echo -e "${CYAN}总发送:       ${RESET}$tx"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}网络算法:     ${RESET}$congestion_algorithm $queue_algorithm"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}运营商:       ${RESET}$isp_info"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}主机名:       ${WHITE}$hostname"
+	echo -e "${LIGHT_CYAN}系统版本:     ${WHITE}$os_info"
+	echo -e "${LIGHT_CYAN}Linux版本:    ${WHITE}$kernel_version"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}CPU架构:      ${WHITE}$cpu_arch"
+	echo -e "${LIGHT_CYAN}CPU型号:      ${WHITE}$cpu_info"
+	echo -e "${LIGHT_CYAN}CPU核心数:    ${WHITE}$cpu_cores"
+	echo -e "${LIGHT_CYAN}CPU频率:      ${WHITE}$cpu_freq"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}CPU占用:      ${WHITE}$cpu_usage_percent%"
+	echo -e "${LIGHT_CYAN}系统负载:     ${WHITE}$load"
+	echo -e "${LIGHT_CYAN}物理内存:     ${WHITE}$mem_info"
+	echo -e "${LIGHT_CYAN}虚拟内存:     ${WHITE}$swap_info"
+	echo -e "${LIGHT_CYAN}硬盘占用:     ${WHITE}$disk_info"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}总接收:       ${WHITE}$rx"
+	echo -e "${LIGHT_CYAN}总发送:       ${WHITE}$tx"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}网络算法:     ${WHITE}$congestion_algorithm $queue_algorithm"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}运营商:       ${WHITE}$isp_info"
 	if [ -n "$ipv4_address" ]; then
-		echo -e "${CYAN}IPv4地址:     ${RESET}$ipv4_address"
+		echo -e "${LIGHT_CYAN}IPv4地址:     ${WHITE}$ipv4_address"
 	fi
 
 	if [ -n "$ipv6_address" ]; then
-		echo -e "${CYAN}IPv6地址:     ${RESET}$ipv6_address"
+		echo -e "${LIGHT_CYAN}IPv6地址:     ${WHITE}$ipv6_address"
 	fi
-	echo -e "${CYAN}DNS地址:      ${RESET}$dns_addresses"
-	echo -e "${CYAN}地理位置:     ${RESET}$country $city"
-	echo -e "${CYAN}系统时间:     ${RESET}$timezone $current_time"
-	echo -e "${CYAN}-------------"
-	echo -e "${CYAN}运行时长:     ${RESET}$runtime"
+	echo -e "${LIGHT_CYAN}DNS地址:      ${WHITE}$dns_addresses"
+	echo -e "${LIGHT_CYAN}地理位置:     ${WHITE}$country $city"
+	echo -e "${LIGHT_CYAN}系统时间:     ${WHITE}$timezone $current_time"
+	echo -e "${LIGHT_CYAN}-------------"
+	echo -e "${LIGHT_CYAN}运行时长:     ${WHITE}$runtime"
 	echo
 }
 

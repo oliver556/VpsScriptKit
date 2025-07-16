@@ -7,33 +7,34 @@
 # 创建日期: 2025-07-15
 # 许可证: MIT
 
-# ==============================================================================
-# == 通用导入
-# ==============================================================================
+### === 通用导入 === ###
 source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_lib.sh"
 
-# 模块目录
+### === 导入更新脚本 === ###
+source "$ROOT_DIR/modules.d/update.sh"
+
+### === 模块目录 === ###
 MODULE_DIR="$ROOT_DIR/modules.d"
 
-# ==============================================================================
-# == 模块加载
-# ==============================================================================
+### === 命令行参数【进阶用法】 === ###
+# 检查命令行参数
+if [[ "$1" == "--update" ]]; then
+    update_now
+    exit 0
+fi
 
-# ==============================================================================
-# == ✅ 模块映射表
-# == 格式： [菜单编号]="模块文件名:要调用的函数名"
-# ==============================================================================
+### === 模块映射表 === ###
+# 格式： [菜单编号]="模块文件名:要调用的函数名"
 
 declare -A modules=(
   [1]="system.sh:system_menu"
+  [2]="docker.sh:docker_menu"
   [8]="test.sh:test_menu"
   [00]="update.sh:update_menu"
 )
 
-# ==============================================================================
-# == ✅ 动态加载所有在映射表中的模块
-# == 这个循环只在脚本启动时运行一次
-# ==============================================================================
+### === 动态加载所有在映射表中的模块 === ###
+# 这个循环只在脚本启动时运行一次
 
 for key in "${!modules[@]}"; do
   IFS=":" read -r file func <<< "${modules[$key]}"
@@ -51,39 +52,37 @@ for key in "${!modules[@]}"; do
   fi
 done
 
-# ==============================================================================
-# == ✅ 主菜单循环
-# ==============================================================================
+### === 主菜单循环 === ###
 
 while true; do
     clear
     
-    # 标题
-    title="🚀 一款全功能的 Linux 管理脚本！ |  By JAMISON  |  v$SCRIPT_VERSION"
+    # # 标题
+    title="${BOLD}🚀 一款全功能的 Linux 管理脚本！ |   By Vskit   |   ${SCRIPT_VERSION}"
+    # 🔷 ASCII 标题框
+    printf "${LIGHT_CYAN}"
+    printf "+%${width_60}s+\n" "" | tr ' ' '-'
+    printf "| %-${width_71}s |\n" "$title"
+    printf "+%${width_60}s+\n" "" | tr ' ' '-'
 
-    # 🔷 打印 ASCII 标题框（兼容所有终端）
-    printf "${BLUE}+%${width_60}s+${RESET}\n" | tr ' ' '-'
-    printf "${BLUE}| %-${width_71}s |${RESET}\n" "$title"
-    printf "${BLUE}+%${width_60}s+${RESET}\n" | tr ' ' '-'
-    # 命令行输入 v  可快速启动脚本
-    echo -e "${BLUE}+--------------- 命令行输入 ${YELLOW}v${RESET} ${BLUE}可快速启动脚本 ----------------+${RESET}"
+    echo -e "${LIGHT_CYAN}# == Tip: 命令行输入 ${YELLOW}v${WHITE} ${LIGHT_CYAN}可快速启动脚本 =======================#${WHITE}"
     # 📋 菜单项
-    printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${BLUE}1. ${RESET} 系统工具     ▶ \n"
-    printf "${BLUE}2. ${RESET} Docker 管理  ▶ \n"
-    printf "${BLUE}8. ${RESET} 常用测试脚本 ▶ \n"
-    printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${BLUE}00.${RESET} 脚本更新 \n"
-    printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${BLUE}0. ${RESET} 退出程序 \n"
-    printf "${BLUE}%s${RESET}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    printf "${LIGHT_CYAN}1. ${WHITE} 系统工具     ▶ \n"
+    printf "${LIGHT_CYAN}2. ${WHITE} Docker 管理  ▶ \n"
+    printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
+    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    printf "${LIGHT_CYAN}00.${WHITE} 脚本更新 \n"
+    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    printf "${LIGHT_CYAN}0. ${WHITE} 退出程序 \n"
+    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
 
     # 🔽 用户输入
-    read -p "$(echo -e "${BLUE}👉 请输入选项编号: ${RESET}")" choice
+    read -p "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" choice
 
     if [[ "$choice" = "0" ]]; then
         echo
-        echo -e "${GREEN_BOLD}感谢使用，再见！${RESET_BOLD}"
+        echo -e "${BOLD_GREEN}感谢使用，再见！${WHITE}"
         sleep 1
         clear
         exit $EXIT_SUCCESS
@@ -91,6 +90,6 @@ while true; do
         IFS=":" read -r _ func <<< "${modules[$choice]}"
         "$func"
     else
-        echo -e "${YELLOW}❌ 无效选项，请重新输入。${RESET}" && sleep 1
+        echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
     fi
 done

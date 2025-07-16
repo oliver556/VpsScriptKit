@@ -9,60 +9,76 @@
 
 source "$ROOT_DIR/shell_scripts/test/test.tool.sh"
 
+### === 测试脚本合集 主菜单 === ###
 test_menu() {
     while true; do
         clear
-        title="🧪  常用测试脚本合集"
-        printf "${BLUE}+%${width_40}s+${RESET}\n" | tr ' ' '-'
-        printf "${BLUE}| %-${width_48}s |${RESET}\n" "$title"
-        printf "${BLUE}+%${width_40}s+${RESET}\n" | tr ' ' '-'
-	    echo -e "${CYAN}IP及解锁状态检测"${RESET}
-        echo -e "${BLUE}1. ${RESET}IP 质量测试"
-        echo -e "${BLUE}2. ${RESET}ChatGPT 解锁检测"
-        echo -e "${BLUE}3. ${RESET}Region 解锁检测"
-        echo -e "${BLUE}4. ${RESET}yeahwu 流媒体解锁检测"
-        echo -e "${CYAN}网络线路测试"${RESET}
-        echo -e "${BLUE}18. ${RESET}NetQuality 网络质量检测 ${YELLOW}★${RESET}"
-        echo -e "${CYAN}综合测试"${RESET}
-        echo -e "${BLUE}31. ${RESET}bench 性能测试"
-        echo -e "${BLUE}32. ${RESET}spiritysdx 融合怪测评"
-        echo -e "${BLUE}------------------------------------------${RESET}"
-        echo "0. 返回主菜单"
-        echo -e "${BLUE}------------------------------------------${RESET}"
+        title="🧪  测试脚本合集"
+        printf "${LIGHT_CYAN}"
+        printf "+%${width_40}s+\n" "" | tr ' ' '-'
+        printf "| %-${width_46}s |\n" "$title"
+        printf "+%${width_40}s+\n" "" | tr ' ' '-'
+
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+	    echo -e "${LIGHT_CYAN}常用检测"${WHITE}
+        echo -e "${LIGHT_CYAN}1. ${WHITE}IP 质量测试"
+        echo -e "${LIGHT_CYAN}2. ${WHITE}网络质量测试"
+        echo -e "${LIGHT_CYAN}3. ${WHITE}回程路由"
+        # echo -e "${LIGHT_CYAN}2. ${WHITE}ChatGPT 解锁检测"
+        # echo -e "${LIGHT_CYAN}3. ${WHITE}Region 解锁检测"
+        # echo -e "${LIGHT_CYAN}4. ${WHITE}yeahwu 流媒体解锁检测"
+        # echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        # echo -e "${CYAN}网络线路测试"${WHITE}
+        # echo -e "${LIGHT_CYAN}18. ${WHITE}NetQuality 网络质量检测 ${YELLOW}★${WHITE}"
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        echo -e "${CYAN}综合测试"${WHITE}
+        echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
+        echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
         echo ""
-        read -p "👉 请输入操作编号: " sys_choice
+        read -p "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
+            # IP 质量检测
             1)
                 clear
                 echo "🚀 正在运行 IP 质量检测..."
-                bash <(curl -Ls Check.Place) -I
+                bash <(curl -sL Check.Place) -I
                 ;;
-            # ChatGPT 解锁检测
+            # 网络质量检测
             2)
-                clear
-                echo "🚀 正在运行 ChatGPT 解锁检测..."
-                bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/OpenAI-Checker/openai.sh)
-                ;;
-            # Region 解锁检测
-            3)
-                clear
-                echo "🚀 正在运行 Region 解锁检测..."
-                bash <(curl -L -s check.unlock.media)
-                ;;
-            # yeahwu 流媒体解锁检测
-            4)
-                clear
-                install wget
-                echo "🚀 正在运行 yeahwu 流媒体解锁检测..."
-			    wget -qO- ${gh_proxy}github.com/yeahwu/check/raw/main/check.sh | bash
-                ;;
-            # NetQuality 网络质量体检脚本
-            18)
                 clear
                 echo "🚀 正在运行 NetQuality 网络质量检测..."
                 bash <(curl -sL Check.Place) -N
                 ;;
+            
+            # # ChatGPT 解锁检测
+            # 2)
+            #     clear
+            #     echo "🚀 正在运行 ChatGPT 解锁检测..."
+            #     bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/OpenAI-Checker/openai.sh)
+            #     ;;
+            # # Region 解锁检测
+            # 3)
+            #     clear
+            #     echo "🚀 正在运行 Region 解锁检测..."
+            #     bash <(curl -L -s check.unlock.media)
+            #     ;;
+            # # yeahwu 流媒体解锁检测
+            # 4)
+            #     clear
+            #     install wget
+            #     echo "🚀 正在运行 yeahwu 流媒体解锁检测..."
+			#     wget -qO- ${gh_proxy}github.com/yeahwu/check/raw/main/check.sh | bash
+            #     ;;
+            # NetQuality 网络质量体检脚本
+            # 18)
+            #     clear
+            #     echo "🚀 正在运行 NetQuality 网络质量检测..."
+            #     bash <(curl -sL Check.Place) -N
+            #     ;;
             # bench 性能测试
             31)
                 clear

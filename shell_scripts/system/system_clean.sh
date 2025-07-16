@@ -7,10 +7,11 @@
 # 创建日期：
 # 许可证：MIT
 
+### === 系统清理 === ###
 linux_clean_utils() {
     clear
-    echo -e "${YELLOW_BOLD}正在系统清理...${RESET}"
-    echo -e "${BLUE}--------------------------------${RESET}"
+    echo -e "${BOLD_YELLOW}正在系统清理...${WHITE}"
+    echo -e "${LIGHT_CYAN}--------------------------------${WHITE}"
     # Fedora, CentOS 8+, RHEL 8+
     if command -v dnf &>/dev/null; then
         rpm --rebuilddb                # 重建 RPM 数据库

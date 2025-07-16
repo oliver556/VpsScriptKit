@@ -9,6 +9,7 @@
 
 INSTALL_DIR="/opt/VpsScriptKit"
 
+### === 卸载脚本 主菜单 === ###
 uninstall_main() {
     while true; do
         clear
@@ -30,18 +31,18 @@ uninstall_main() {
                 echo -e "${CYAN}✅ 脚本已卸载，江湖有缘再见！${RESET}"
                 sleep 2
                 clear
-                break_end;;
+                break_end no_wait ;;
             [Nn])
                 clear
                 echo -e "${YELLOW_BOLD}已取消卸载。${RESET}"
                 sleep 1
                 clear
-                break_end;;
+                break_end no_wait ;;
             *)
                 echo -e "${RED_BOLD}❌ 无效选项，请输入 Y 或 N。${RESET}"
                 sleep 1
                 clear
-                break_end;;
+                break_end no_wait ;;
         esac
     done
 }

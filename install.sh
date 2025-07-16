@@ -10,23 +10,25 @@ set -e
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-# --- 配置 ---
+### === 配置 === ###
+# 安装目录
 INSTALL_DIR="/opt/VpsScriptKit"
+# 仓库地址
 REPO="oliver556/VpsScriptKit"
 # 用户许可协议同意
 AGREEMENT_ACCEPTED="false"
 
-# --- 颜色定义 ---
-RESET="\033[0m"
-RED_BOLD="\033[1;31m"
-GREEN_BOLD="\033[1;32m"
-YELLOW_BOLD="\033[1;33m"
-BLUE_BOLD="\033[1;34m"
+### === 颜色定义 === ###
+BOLD_WHITE=$(tput bold)$(tput setaf 7)    # 加粗白色
+BOLD_RED=$(tput bold)$(tput setaf 1)      # 加粗红色
+BOLD_GREEN=$(tput bold)$(tput setaf 2)    # 加粗绿色
+BOLD_YELLOW=$(tput bold)$(tput setaf 3)   # 加粗黄色
+BOLD_BLUE=$(tput bold)$(tput setaf 4)     # 加粗蓝色
 
-# --- 函数定义 ---
+### === 函数定义 === ###
 # 函数：退出脚本并显示错误信息
 error_exit() {
-    echo -e "${RED_BOLD}错误: $1${RESET}" >&2
+    echo -e "${BOLD_RED}错误: $1${BOLD_WHITE}" >&2
     exit 1
 }
 
@@ -38,8 +40,7 @@ command_exists() {
 # 函数：获取最新发行版的下载链接
 # 通过 echo 将结果输出，以便被调用者捕获
 get_latest_release_url() {
-    # ✅ 将状态信息输出到标准错误流(stderr)，这样它就不会被命令替换捕获
-    echo -e "${BLUE_BOLD}--> 正在查询最新版本...${RESET}" >&2
+    echo -e "${BOLD_BLUE}--> 正在查询最新版本...${BOLD_WHITE}" >&2
     
     # 调用 GitHub API 获取最新 Release 的信息
     local LATEST_RELEASE_JSON
@@ -63,7 +64,7 @@ get_latest_release_url() {
 download_and_extract() {
     local tarball_url="$1"
 
-    echo -e "${BLUE_BOLD}--> 正在下载并解压文件...${RESET}" >&2
+    echo -e "${BOLD_BLUE}--> 正在下载并解压文件...${BOLD_WHITE}" >&2
     
     # 创建一个临时文件来存放下载的压缩包
     local TMP_TARBALL
@@ -93,27 +94,28 @@ install_main() {
     # ✅ 如果用户不同意 (变量仍为 "false")，则退出安装
     if [[ "$AGREEMENT_ACCEPTED" != "true" ]]; then
         echo
-        echo -e "${RED_BOLD}您已拒绝用户协议，安装已取消。${RESET}"
+        echo -e "${BOLD_RED}您已拒绝用户协议，安装已取消。${BOLD_WHITE}"
         rm -rf "$INSTALL_DIR"
         rm -rf "/usr/local/bin/vsk"
         rm -rf "/usr/local/bin/v"
+        sleep 1
         clear
         exit 1
     fi
 
     echo
     # 1. 清理旧版本
-    echo -e "${CYAN}🧹 正在清理旧版本...${RESET}"
+    echo -e "${CYAN}🧹 正在清理旧版本...${BOLD_WHITE}"
     rm -rf "$INSTALL_DIR"
     rm -rf "/usr/local/bin/vsk"
     rm -rf "/usr/local/bin/v"
     sleep 1
     echo
-    echo -e "${CYAN}✅ 脚本已清理，即将覆盖安装！${RESET}"
+    echo -e "${CYAN}✅ 脚本已清理，即将覆盖安装！${BOLD_WHITE}"
     sleep 2
     clear
 
-    echo -e "${GREEN_BOLD}正在安装 VpsScriptKit...${RESET}"
+    echo -e "${BOLD_GREEN}正在安装 VpsScriptKit...${BOLD_WHITE}"
 
     # 2. 调用函数获取最新发行版的下载链接
     local latest_url
@@ -124,21 +126,21 @@ install_main() {
     download_and_extract "$latest_url"
 
     # 4. 设置权限
-    echo -e "${BLUE_BOLD}--> 正在设置文件权限...${RESET}"
+    echo -e "${BOLD_BLUE}--> 正在设置文件权限...${BOLD_WHITE}"
     find "$INSTALL_DIR" -type f -name "*.sh" -exec chmod +x {} +
 
     # 5. 创建快速启动命令
-    echo -e "${BLUE_BOLD}--> 正在创建快速启动命令...${RESET}"
+    echo -e "${BOLD_BLUE}--> 正在创建快速启动命令...${BOLD_WHITE}"
     if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
         ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
         ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
     else
-        echo -e "${YELLOW_BOLD}警告: 未在仓库根目录找到 vps_script_kit.sh，跳过创建快捷命令。${RESET}"
+        echo -e "${BOLD_YELLOW}警告: 未在仓库根目录找到 vps_script_kit.sh，跳过创建快捷命令。${BOLD_WHITE}"
     fi
 
     # 6. 显示成功信息
     clear
-    # 使用 cat 和 here-document 来打印 ASCII art，避免前导空格
+    
     cat <<-EOF
 +----------------------------------------------------------------------------------------------------+
 |  ██╗     ██╗█████████╗███████╗  ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗  ██╗  ██╗██╗████████╗ |
@@ -149,16 +151,16 @@ install_main() {
 |     ╚═══╝  ╚══╝       ╚══════╝  ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝    |
 +----------------------------------------------------------------------------------------------------+
 EOF
-    echo -e "${GREEN_BOLD}✅ 安装完成！${RESET} "
-    echo -e "${GREEN_BOLD}   现在你可以通过输入 ${YELLOW_BOLD}v${GREEN_BOLD} 或 ${YELLOW_BOLD}vsk${GREEN_BOLD} 命令来唤出管理菜单。${RESET}"
+    echo -e "${BOLD_GREEN}✅ 安装完成！${BOLD_WHITE} "
+    echo -e "${BOLD_GREEN}   现在你可以通过输入 ${BOLD_YELLOW}v${BOLD_GREEN} 或 ${BOLD_YELLOW}vsk${BOLD_GREEN} 命令来唤出管理菜单。${BOLD_WHITE}"
     echo ""
 }
 
 # ✅ 显示并确认用户协议。只负责询问并设置全局变量，不负责退出
 confirm_agreement() {
     clear
-    echo -e "${BLUE}欢迎使用 VpsScriptKit 脚本工具箱${RESET}"
-    echo -e "${YELLOW_BOLD}在继续安装之前，请先阅读并同意用户协议。${RESET}"
+    echo -e "${BLUE}欢迎使用 VpsScriptKit 脚本工具箱${BOLD_WHITE}"
+    echo -e "${BOLD_YELLOW}在继续安装之前，请先阅读并同意用户协议。${BOLD_WHITE}"
     echo "─────────────────────────────────────────────────────"
     # 您可以在这里替换成您的真实用户协议文本
 	echo "用户许可协议: https://"
@@ -176,7 +178,7 @@ confirm_agreement() {
     if [[ "$choice" == "y" ]]; then
         # 如果用户同意，将全局变量设置为 "true"
         AGREEMENT_ACCEPTED="true"
-        echo -e "${GREEN_BOLD}您已同意用户协议，安装将继续...${RESET}"
+        echo -e "${BOLD_GREEN}您已同意用户协议，安装将继续...${BOLD_WHITE}"
     fi
 }
 # --- 脚本执行入口 ---
@@ -193,4 +195,3 @@ fi
 
 # 调用主函数
 install_main
-# user_license_agreement
