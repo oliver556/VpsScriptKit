@@ -104,13 +104,16 @@ system_reinstall_menu() {
                 break_end no_wait ;;
             # Windows Server 2022
             44)
-                system_reinstall_main "Windows Server 2022";;
+                system_reinstall_main "Windows Server 2022"
+                break_end no_wait ;;
             # Windows Server 2019
             45)
-                system_reinstall_main "Windows Server 2019";;
+                system_reinstall_main "Windows Server 2019"
+                break_end no_wait ;;
             # Windows Server 2016
             46)
-                system_reinstall_main "Windows Server 2016";;
+                system_reinstall_main "Windows Server 2016"
+                break_end no_wait ;;
             
             # 返回主菜单
             0) break ;;

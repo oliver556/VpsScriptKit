@@ -43,7 +43,6 @@ hint_reboot() {
     reboot
 
     exit
-    ;;
 }
 
 ### === MollyLau 脚本安装逻辑 ① === ###
@@ -56,6 +55,7 @@ run_mollylau_install() {
     # echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
     echo -e "正在检查系统是否安装有必要环境..."
     sleep 2
+
     # 判断系统是否安装有 wget
     if ! command -v wget &> /dev/null; then
         echo "wget 未安装，正在安装..."
