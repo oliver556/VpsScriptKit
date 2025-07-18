@@ -7,7 +7,7 @@
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-source "$ROOT_DIR/shell_scripts/test/test.tool.sh"
+source "$ROOT_DIR/shell_scripts/test/tool.sh"
 
 ### === 测试脚本合集 主菜单 === ###
 test_menu() {

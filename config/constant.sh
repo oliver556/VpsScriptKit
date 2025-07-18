@@ -7,6 +7,8 @@
 # 创建日期: 2025-07-15
 # 许可证: MIT
 
+### === 全局地址代理 === ###
+GH_PROXY="https://github.viplee.top/"
 
 ### === 版本信息 === ###
 SCRIPT_NAME="vps_script_kit.sh"

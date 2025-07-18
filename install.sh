@@ -61,7 +61,7 @@ get_latest_release_url() {
 
 # 函数：下载并解压指定的 URL
 # @param $1: 要下载的压缩包 URL
-download_and_extract() {
+install_vsk_download_and_extract() {
     local tarball_url="$1"
 
     echo -e "${BOLD_BLUE}--> 正在下载并解压文件...${BOLD_WHITE}" >&2
@@ -126,7 +126,7 @@ install_main() {
     echo -e "--> 找到最新版本，准备从以下链接下载:\n    $latest_url"
 
     # 3. 调用函数下载并解压文件
-    download_and_extract "$latest_url"
+    install_vsk_download_and_extract "$latest_url"
 
     # 4. 设置权限
     echo -e "${BOLD_BLUE}--> 正在设置文件权限...${BOLD_WHITE}"

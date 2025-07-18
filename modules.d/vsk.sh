@@ -7,8 +7,8 @@
 # 创建日期：2025-07-17
 # 许可证：MIT
 
-source "$ROOT_DIR/shell_scripts/vsk/vsk_update.sh"
-source "$ROOT_DIR/shell_scripts/vsk/vsk_uninstall.sh"
+source "$ROOT_DIR/modules.d/vsk.d/update.sh"
+source "$ROOT_DIR/shell_scripts/vsk/ninstall.sh"
 
 ### === 系统工具 主菜单 === ###
 vsk_menu() {

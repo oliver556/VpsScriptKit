@@ -1,16 +1,17 @@
 #!/bin/bash
 
 ### === 脚本描述 === ###
-# 名称： uninstall.sh
-# 功能： 卸载脚本
+# 名称： update.sh
+# 功能： 更新脚本
 # 作者：
 # 创建日期：2025-07-15
 # 许可证：MIT
 
-INSTALL_DIR="/opt/VpsScriptKit"
+### === 导入更新脚本 === ###
+source "$ROOT_DIR/shell_scripts/vsk/uninstall.sh"
 
-### === 卸载脚本 主菜单 === ###
-vsk_uninstall_menu() {
+### === 主菜单 === ###
+vsk_update_menu() {
     while true; do
         clear
         echo -e "🔄 卸载 vsk 脚本"
@@ -22,15 +23,7 @@ vsk_uninstall_menu() {
         case "$choice" in
             [Yy])
                 clear
-                echo -e "${LIGHT_CYAN}🧹 正在清理卸载...${WHITE}"
-                rm -rf "$INSTALL_DIR"
-                rm -rf "/usr/local/bin/vsk"
-                rm -rf "/usr/local/bin/v"
-                sleep 1
-                echo ""
-                echo -e "${LIGHT_CYAN}✅ 脚本已卸载，江湖有缘再见！${WHITE}"
-                sleep 2
-                clear
+                vsk_uninstall_utils "yes"
                 break_end no_wait ;;
             [Nn])
                 clear

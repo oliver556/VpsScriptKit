@@ -1,0 +1,27 @@
+#!/bin/bash
+
+### === 脚本描述 === ###
+# 名称： time_zone.sh
+# 功能： 修改系统时区
+# 作者：
+# 创建日期：2025-07-18
+# 许可证：MIT
+
+set_system_time_zone_utils() {
+	local time_zone="$1"
+	if grep -q 'Alpine' /etc/issue; then
+		install tzdata
+		cp /usr/share/zoneinfo/${time_zone} /etc/localtime
+		hwclock --systohc
+	else
+		timedatectl set-timezone ${time_zone}
+	fi
+    sleep 4
+    echo "time_zone is: $time_zone"
+}
+
+### === 修改系统时区 主函数 === ###
+system_time_zone_main() {
+    local TIME_ZONE="$1"
+	set_system_time_zone_utils "$TIME_ZONE"
+}

@@ -10,9 +10,6 @@
 ### === 通用导入 === ###
 source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_lib.sh"
 
-### === 导入更新脚本 === ###
-source "$ROOT_DIR/modules.d/update.sh"
-
 ### === 模块目录 === ###
 MODULE_DIR="$ROOT_DIR/modules.d"
 
@@ -28,7 +25,7 @@ fi
 
 declare -A modules=(
   [1]="system.sh:system_menu"
-  [2]="docker.sh:docker_menu"
+  [3]="docker.sh:docker_menu"
   [8]="test.sh:test_menu"
   [00]="vsk.sh:vsk_menu"
 )
@@ -68,7 +65,8 @@ while true; do
     # 📋 菜单项
     printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
     printf "${LIGHT_CYAN}1. ${WHITE} 系统工具     ▶ \n"
-    printf "${LIGHT_CYAN}2. ${WHITE} Docker 管理  ▶ \n"
+    printf "${BOLD_GREY}2. ${WHITE} 基础工具     ▶ \n"
+    printf "${BOLD_GREY}3. ${WHITE} Docker 管理  ▶ \n"
     printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
     printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
     printf "${LIGHT_CYAN}00.${WHITE} 脚本工具 \n"
@@ -79,9 +77,15 @@ while true; do
     # 🔽 用户输入
     read -p "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" choice
 
-    if [[ "$choice" = "0" ]]; then
+    if [[ -z "$choice" ]]; then
+        # -z 判断字符串是否为空，如果为空则为 true
+        echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
+    elif [[ "$choice" = "0" ]]; then
+        clear
         echo
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
         echo -e "${BOLD_GREEN}感谢使用，再见！${WHITE}"
+        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
         sleep 1
         clear
         exit $EXIT_SUCCESS

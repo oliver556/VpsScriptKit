@@ -8,7 +8,7 @@
 # 许可证：MIT
 
 ### === 系统清理 === ###
-linux_clean_utils() {
+system_clean_utils() {
     clear
     echo -e "${BOLD_YELLOW}正在系统清理...${WHITE}"
     echo -e "${LIGHT_CYAN}--------------------------------${WHITE}"
@@ -88,5 +88,5 @@ linux_clean_utils() {
 
 ### === 主函数 === ###
 system_clean_main() {
-    linux_clean_utils
+    system_clean_utils
 }

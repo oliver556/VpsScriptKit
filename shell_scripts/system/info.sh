@@ -8,7 +8,7 @@
 # 许可证：MIT
 
 ### === 获取当前时区函数 === ###
-current_timezone() {
+system_info_current_timezone() {
 	if grep -q 'Alpine' /etc/issue; then
 	   date +"%Z %z"
 	else
@@ -17,7 +17,7 @@ current_timezone() {
 }
 
 ### === 获取网络状态 === ###
-output_status() {
+system_info_output_status() {
 	output=$(awk 'BEGIN { rx_total = 0; tx_total = 0 }
 		$1 ~ /^(eth|ens|enp|eno)[0-9]+/ {
 			rx_total += $2
@@ -86,7 +86,7 @@ system_info_utils() {
 
     # ==========================================================
 	# 获取系统网络状态
-	output_status
+	system_info_output_status
 	
     # ==========================================================
     # 网络算法
@@ -117,8 +117,9 @@ system_info_utils() {
 	# 城市
 	city=$(echo "$ipinfo" | grep 'city' | awk -F': ' '{print $2}' | tr -d '",')
 
-    # 时区 / 当前时间
-	timezone=$(current_timezone)
+    # 系统当前时区
+	timezone=$(system_info_current_timezone)
+	# 系统当前时间
 	current_time=$(date "+%Y-%m-%d %I:%M %p")
     
     # ==========================================================
@@ -126,7 +127,7 @@ system_info_utils() {
 	runtime=$(cat /proc/uptime | awk -F. '{run_days=int($1 / 86400);run_hours=int(($1 % 86400) / 3600);run_minutes=int(($1 % 3600) / 60); if (run_days > 0) printf("%d天 ", run_days); if (run_hours > 0) printf("%d时 ", run_hours); printf("%d分\n", run_minutes)}')
 }
 
-show_system_info() {
+system_info_show() {
 	clear
 
     echo -e "${BLUE}正在查询中，请稍后...${WHITE}"
@@ -178,5 +179,5 @@ show_system_info() {
 
 ### === 主函数 === ###
 system_info_main() {
-    show_system_info
+    system_info_show
 }

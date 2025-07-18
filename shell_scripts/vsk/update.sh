@@ -16,7 +16,7 @@ error_exit() {
 
 ## === 函数：下载并解压指定的 URL === ###
 # @param $1: 要下载的压缩包 URL
-download_and_extract() {
+vsk_update_download_and_extract() {
     local TARBALL_URL="$1"
     echo -e "${BOLD_BLUE}--> 正在下载更新包...${WHITE}" >&2
     
@@ -32,7 +32,7 @@ download_and_extract() {
 }
 
 ### === 函数：获取版本对比 === ###
-get_latest_version_tag() {
+vsk_update_get_latest_version_tag() {
     local LATEST_RELEASE_JSON
     LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
 
@@ -45,7 +45,7 @@ get_latest_version_tag() {
 }
 
 ### === 函数：获取下载链接 === ###
-get_latest_release_url() {
+vsk_update_get_latest_release_url() {
     # 获取完整的最新版本信息
     echo -e "${BOLD_BLUE}--> 正在获取下载链接...${WHITE}"
     local LATEST_RELEASE_JSON
@@ -64,18 +64,18 @@ get_latest_release_url() {
     fi
     
     echo -e "--> 准备从以下链接下载:\n    $LATEST_URL"
-    download_and_extract "$LATEST_URL"
+    vsk_update_download_and_extract "$LATEST_URL"
 }
 
 ### ===核心更新功能 === ###
 
 ## === 函数：更新脚本 === ###
-update_now() {
+vsk_update_now() {
     clear
     echo -e "${BOLD_GREEN}🚀 发现新版本，准备开始更新...${WHITE}"
     sleep 1
 
-    get_latest_release_url
+    vsk_update_get_latest_release_url
 
     # 3. 设置权限和链接
     echo -e "${BOLD_BLUE}--> 正在设置文件权限...${WHITE}"
@@ -97,7 +97,7 @@ update_now() {
 }
 
 # 函数：开启自动更新
-enable_auto_update() {
+vsk_update_enable_auto_update() {
     clear
     echo -e "${BOLD_BLUE}⚙️  正在配置自动更新...${WHITE}"
 
@@ -121,7 +121,7 @@ enable_auto_update() {
 }
 
 # 函数：关闭自动更新
-disable_auto_update() {
+vsk_update_disable_auto_update() {
     clear
     echo -e "${BOLD_BLUE}⚙️  正在关闭自动更新...${WHITE}"
 
@@ -139,47 +139,7 @@ disable_auto_update() {
     sleep 2
 }
 
-### === 更新脚本 主菜单 === ###
-vsk_update_menu() {
-    clear
-
-    while true; do
-        clear
-        title="🖥️  更新脚本"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_48}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        
-        # 获取最新版本号
-        local LATEST_SCRIPT_VERSION
-        LATEST_SCRIPT_VERSION=$(get_latest_version_tag)
-
-        if [[ "${SCRIPT_VERSION}" == "${LATEST_SCRIPT_VERSION}" ]]; then
-            echo -e "${BOLD_GREEN}✅ 您当前已是最新版本 ${SCRIPT_VERSION}。${WHITE}"
-        else 
-            echo -e "${BOLD_GREEN}🚀  发现新版本！"
-            echo -e "${LIGHT_CYAN}当前版本：${SCRIPT_VERSION}       最新版本：${YELLOW}${LATEST_SCRIPT_VERSION}${WHITE}"
-        fi
-
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}1. ${WHITE}现在更新            ${LIGHT_CYAN}2. ${WHITE}开启自动更新            ${LIGHT_CYAN}3. ${WHITE}关闭自动更新"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo ""
-        read -p "👉 请输入你的选择: " sys_choice
-
-        case "$sys_choice" in
-            1)
-                update_now
-                break_end no_wait ;;
-            2)
-                enable_auto_update ;;
-            3)
-                disable_auto_update ;;
-            0) break ;;
-            *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
-        esac
-    done
+### === 主函数 === ###
+vsk_update_main() {
+    vsk_update_now
 }
