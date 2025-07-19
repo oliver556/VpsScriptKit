@@ -171,7 +171,7 @@ confirm_agreement() {
     
     # 读取用户输入
     local choice
-    read -r -p "您是否同意以上条款？(y/n): " choice
+    read -rp "您是否同意以上条款？(y/n): " choice
     echo
 
     # 将输入转换为小写以便比较

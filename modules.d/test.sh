@@ -13,13 +13,9 @@ source "$ROOT_DIR/shell_scripts/test/tool.sh"
 test_menu() {
     while true; do
         clear
-        title="🧪  测试脚本合集"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_46}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
+        sub_menu_title "🧪  测试脚本合集"
 
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
 	    echo -e "${LIGHT_CYAN}常用检测"${WHITE}
         echo -e "${LIGHT_CYAN}1. ${WHITE}IP 质量测试"
         echo -e "${LIGHT_CYAN}2. ${WHITE}网络质量测试"
@@ -27,18 +23,18 @@ test_menu() {
         # echo -e "${LIGHT_CYAN}2. ${WHITE}ChatGPT 解锁检测"
         # echo -e "${LIGHT_CYAN}3. ${WHITE}Region 解锁检测"
         # echo -e "${LIGHT_CYAN}4. ${WHITE}yeahwu 流媒体解锁检测"
-        # echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        # print_echo_line_1
         # echo -e "${CYAN}网络线路测试"${WHITE}
         # echo -e "${LIGHT_CYAN}18. ${WHITE}NetQuality 网络质量检测 ${YELLOW}★${WHITE}"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${CYAN}综合测试"${WHITE}
+        print_echo_line_1
+        echo -e "${CYAN}综合测试""${WHITE}"
         echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
         echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             # IP 质量检测

@@ -24,10 +24,12 @@ fi
 # 格式： [菜单编号]="模块文件名:要调用的函数名"
 
 declare -A modules=(
-  [1]="system.sh:system_menu"
-  [3]="docker.sh:docker_menu"
-  [8]="test.sh:test_menu"
-  [00]="vsk.sh:vsk_menu"
+  [1]="system.sh:system_menu"      # 系统工具
+  [2]="base.sh:base_menu"          # 基础工具
+  [3]="advanced.sh:advanced_menu"  # 进阶工具
+  [4]="docker.sh:docker_menu"      # Docker 管理
+  [8]="test.sh:test_menu"          # 测试脚本合集
+  [99]="vsk.sh:vsk_menu"           # 脚本工具
 )
 
 ### === 动态加载所有在映射表中的模块 === ###
@@ -52,30 +54,25 @@ done
 
 while true; do
     clear
-    
-    # # 标题
-    title="${BOLD}🚀 一款全功能的 Linux 管理脚本！ | By Vskit | ${SCRIPT_VERSION}"
-    # 🔷 ASCII 标题框
-    printf "${LIGHT_CYAN}"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
-    printf "| %-${width_71}s |\n" "$title"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
 
+    main_menu_title "🚀 一款全功能的 Linux 管理脚本！ | By Vskit | ${SCRIPT_VERSION}"
+    print_echo_line_1
     echo -e "${LIGHT_CYAN}# == Tip: 命令行输入 ${YELLOW}v${WHITE} ${LIGHT_CYAN}可快速启动脚本 =======================#${WHITE}"
     # 📋 菜单项
-    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    print_echo_line_1
     printf "${LIGHT_CYAN}1. ${WHITE} 系统工具     ▶ \n"
-    printf "${BOLD_GREY}2. ${WHITE} 基础工具     ▶ \n"
-    printf "${BOLD_GREY}3. ${WHITE} Docker 管理  ▶ \n"
+    printf "${LIGHT_CYAN}2. ${WHITE} 基础工具     ▶ \n"
+    printf "${LIGHT_CYAN}3. ${WHITE} 进阶工具     ▶ \n"
+    printf "${LIGHT_CYAN}4. ${WHITE} Docker 管理  ▶ \n"
     printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
-    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
-    printf "${LIGHT_CYAN}00.${WHITE} 脚本工具 \n"
-    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    print_echo_line_1
+    printf "${LIGHT_CYAN}99.${WHITE} 脚本工具 \n"
+    print_echo_line_1
     printf "${LIGHT_CYAN}0. ${WHITE} 退出程序 \n"
-    printf "${LIGHT_CYAN}%s${WHITE}\n" "$(printf '─%.0s' $(seq 1 $((width_60+2))))"
+    print_echo_line_1
 
     # 🔽 用户输入
-    read -p "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" choice
+    read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" choice
 
     if [[ -z "$choice" ]]; then
         # -z 判断字符串是否为空，如果为空则为 true
@@ -83,9 +80,9 @@ while true; do
     elif [[ "$choice" = "0" ]]; then
         clear
         echo
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${BOLD_GREEN}感谢使用，再见！${WHITE}"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         sleep 1
         clear
         exit $EXIT_SUCCESS

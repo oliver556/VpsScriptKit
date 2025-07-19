@@ -11,7 +11,8 @@
 ### === 函数：通过向上查找 vps_script_kit.sh 文件来定位项目根目录 === ###
 find_root() {
     # 从当前脚本所在的目录开始查找
-    local dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local dir
+    dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # 循环向上遍历，直到根目录 /vps_script_kit 为止
     while [[ "$dir" != "/" ]]; do
         if [[ -f "$dir/vps_script_kit.sh" ]]; then

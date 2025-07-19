@@ -14,19 +14,15 @@ source "$ROOT_DIR/shell_scripts/vsk/ninstall.sh"
 vsk_menu() {
     while true; do
         clear
-        title="🖥️  脚本工具"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_48}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        sub_menu_title "🖥️  脚本工具"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}1. ${WHITE}脚本更新"
         echo -e "${LIGHT_CYAN}2. ${WHITE}脚本卸载"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             1)

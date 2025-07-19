@@ -95,6 +95,7 @@ system_info_utils() {
 
     # ==========================================================
     # 运营商
+	ipinfo=$(curl -s ipinfo.io)
 	isp_info=$(echo "$ipinfo" | grep 'org' | awk -F': ' '{print $2}' | tr -d '",')
 
     # DNS 地址
@@ -108,6 +109,9 @@ system_info_utils() {
     }
 
     ip_address
+
+	# 获取内网地址
+	internal_ip=$(ip -4 a | grep inet | awk '{print $2}' | grep -v 127.0.0.1)
     # ==========================================================
 
     # 地理位置
@@ -170,6 +174,8 @@ system_info_show() {
 		echo -e "${LIGHT_CYAN}IPv6地址:     ${WHITE}$ipv6_address"
 	fi
 	echo -e "${LIGHT_CYAN}DNS地址:      ${WHITE}$dns_addresses"
+	echo -e "${LIGHT_CYAN}内网地址:     ${WHITE}$internal_ip"
+	echo -e "${LIGHT_CYAN}-------------"
 	echo -e "${LIGHT_CYAN}地理位置:     ${WHITE}$country $city"
 	echo -e "${LIGHT_CYAN}系统时间:     ${WHITE}$timezone $current_time"
 	echo -e "${LIGHT_CYAN}-------------"

@@ -28,6 +28,7 @@ LIGHT_BLUE=$(tput setaf 12)     # 亮蓝色
 LIGHT_MAGENTA=$(tput setaf 13)  # 亮品红色
 LIGHT_RED=$(tput setaf 9)       # 亮红色
 LIGHT_WHITE=$(tput setaf 15)    # 亮白色
+LIGHT_GREY=$(tput setaf 245)    # 亮灰色
 BOLD_BLACK=$(tput bold)$(tput setaf 0)    # 加粗黑色
 BOLD_RED=$(tput bold)$(tput setaf 1)      # 加粗红色
 BOLD_GREEN=$(tput bold)$(tput setaf 2)    # 加粗绿色

@@ -10,19 +10,14 @@
 docker_menu() {
     while true; do
         clear
-        # 标题，补充一个docker 的 icons
-        title="🐳  Docker 管理"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_42}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo "${LIGHT_CYAN}1. ${WHITE}安装更新 Docker 环境"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        sub_menu_title "🐳  Docker 管理"
+        print_echo_line_1
+        echo "${BOLD_GREY}1. ${WHITE}安装更新 Docker 环境"
+        print_echo_line_1
+        echo "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             1)

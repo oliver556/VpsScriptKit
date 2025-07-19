@@ -26,34 +26,30 @@ source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
 system_menu() {
     while true; do
         clear
-        title="🖥️  系统工具"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_48}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        sub_menu_title "🖥️  系统工具"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}系统信息查询"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}2.  ${WHITE}系统更新             ${LIGHT_CYAN}3. ${WHITE}系统清理"
         echo -e "${BOLD_GREY}4.  ${WHITE}系统用户管理"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}修改登录密码         ${BOLD_GREY}12. ${WHITE}修改 SSH 端口"
         echo -e "${BOLD_GREY}13. ${WHITE}修改主机名           ${BOLD_GREY}14. ${WHITE}修改虚拟内存大小"
         echo -e "${LIGHT_CYAN}15. ${WHITE}修改系统时区"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优             "
         echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统             "
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             # 系统信息查询
             1)
                 system_info_main
-                break_end;;
+                break_end ;;
             # 系统更新
             2)
                 system_update_main
@@ -67,6 +63,7 @@ system_menu() {
                 break_end no_wait ;;
             # 修改登录密码
             11)
+                clear
                 echo -e "${BOLD_YELLOW}设置你的登录密码...${WHITE}"
                 passwd
                 echo -e "${BOLD_GREEN}密码修改成功！${WHITE}"

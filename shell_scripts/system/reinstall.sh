@@ -13,7 +13,7 @@
 system_reinstall_MollyLau() {
     local system_param="$1"
     wget --no-check-certificate -qO InstallNET.sh "${GH_PROXY}raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/InstallNET.sh" && chmod a+x InstallNET.sh
-    bash InstallNET.sh -${system_param}
+    bash InstallNET.sh -"${system_param}"
 }
 
 ### === bin456789 脚本 === ###
@@ -21,8 +21,8 @@ system_reinstall_MollyLau() {
 # @param $1: 脚本执行后缀补充 (e.g., "rocky")
 system_reinstall_bin456789() {
     local system_param="$1"
-    curl -O ${GH_PROXY}raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh
-    bash reinstall.sh ${system_param}
+    curl -O "${GH_PROXY}"raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh
+    bash reinstall.sh "${system_param}"
 }
 
 ### === 安装完成，提示重启 === ###
@@ -52,7 +52,7 @@ run_mollylau_install() {
     local system_version_name="$1"
     local system_param="$2"
 
-    # echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    # print_echo_line_1
     echo -e "正在检查系统是否安装有必要环境..."
     sleep 2
 
@@ -65,7 +65,7 @@ run_mollylau_install() {
 
     echo "正在为您准备 [MollyLau] DD 脚本..."
     echo "目标系统: ${system_version_name}"
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     sleep 2
 
     # 调试
@@ -92,10 +92,10 @@ run_bin456789_install() {
 
     sleep 2
 
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     echo "正在为您准备 [bin456789] DD 脚本..."
     echo "目标系统: ${system_version_name}"
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     sleep 2
 
     # 调试
@@ -129,15 +129,14 @@ start_reinstall_process() {
 
     # 显示最终确认信息
     echo -e "${LIGHT_CYAN}请最后确认您的安装选项:${WHITE}"
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     echo -e "${LIGHT_CYAN}- 系统版本:${WHITE} ${BOLD_RED}${system_version_name}${WHITE}"
     echo -e "${LIGHT_CYAN}- 初始用户:${WHITE} ${YELLOW}${user}${WHITE}"
     echo -e "${LIGHT_CYAN}- 初始密码:${WHITE} ${YELLOW}${pass}${WHITE}"
     echo -e "${LIGHT_CYAN}- 初始端口:${WHITE} ${YELLOW}${port}${WHITE}"
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     echo
     echo -e "${BOLD_RED}警告：这将清除目标服务器上的所有数据！请先复制好您的初始用户名、密码、端口，以免重装后无法连接。${WHITE}"
-    echo
 
     if ! ask_to_continue; then
         return
@@ -150,9 +149,9 @@ start_reinstall_process() {
 
     clear
 
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     echo -e "${LIGHT_CYAN}马上开始重装系统${WHITE}"
-    echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+    print_echo_line_1
     
     # 动态调用传入的安装函数名，并将系统名称作为参数传递给它
     ${install_function_name} "${system_version_name}" "${system_param}"
@@ -239,32 +238,32 @@ system_reinstall_selection() {
 
         "Windows 11")
             # 决策: Windows 11 使用 MollyLau 脚本
-            start_reinstall_process "Windows 11" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 11 -lang "cn"'
+            start_reinstall_process "Windows 11" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 11 -lang "cn"'
             ;;
         
         "Windows 10")
             # 决策: Windows 10 使用 MollyLau 脚本
-            start_reinstall_process "Windows 10" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 10 -lang "cn"'
+            start_reinstall_process "Windows 10" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 10 -lang "cn"'
             ;;
 
         "Windows 7")
             # 决策: Windows 7 使用 MollyLau 脚本
-            # start_reinstall_process "Windows 7" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 7 -lang "cn"'
+            # start_reinstall_process "Windows 7" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 7 -lang "cn"'
             ;;
 
         "Windows Server 2022")
             # 决策: Windows Server 2022 使用 MollyLau 脚本
-            start_reinstall_process "Windows Server 2022" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 2022 -lang "cn"'
+            start_reinstall_process "Windows Server 2022" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2022 -lang "cn"'
             ;;
 
         "Windows Server 2019")
             # 决策: Windows Server 2019 使用 MollyLau 脚本
-            start_reinstall_process "Windows Server 2019" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 2019 -lang "cn"'
+            start_reinstall_process "Windows Server 2019" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2019 -lang "cn"'
             ;;
 
         "Windows Server 2016")
             # 决策: Windows Server 2016 使用 MollyLau 脚本
-            start_reinstall_process "Windows Server 2016" "${user_name_2}" "${pass_2}" "${port_2}" "${func_1}" 'windows 2016 -lang "cn"'
+            start_reinstall_process "Windows Server 2016" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2016 -lang "cn"'
             ;;
 
         *)

@@ -15,32 +15,28 @@ source "$ROOT_DIR/shell_scripts/system/reinstall.sh"
 system_reinstall_menu() {
     while true; do
         clear
-        title="🖥️  一键重装系统"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_48}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
+        sub_menu_title "🖥️  一键重装系统"
         echo -e "${BOLD_RED}注意: 重装系统有风险失联，不放这心者慎用。重装预计花费15分钟，请提前备份数据。"
         echo -e "${GREY}感谢 MollyLau 大佬 和 bin456789 大佬 的脚本支持！${WHITE} "
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}Debian 12            ${LIGHT_CYAN}2.  ${WHITE}Debian 11 ${BOLD_YELLOW}★${WHITE}"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}Debian 10            ${LIGHT_CYAN}4.  ${WHITE}Debian 9"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}Ubuntu 24.04         ${LIGHT_CYAN}12. ${WHITE}Ubuntu 22.04 ${BOLD_YELLOW}★${WHITE}"
         echo -e "${LIGHT_CYAN}13. ${WHITE}Ubuntu 20.04         ${LIGHT_CYAN}14. ${WHITE}Ubuntu 18.04"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}21. ${WHITE}CentOS 10            ${LIGHT_CYAN}22. ${WHITE}CentOS 9"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}31. ${WHITE}Alpine Linux"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}41. ${WHITE}Windows 11           ${LIGHT_CYAN}42. ${WHITE}Windows 10"
         echo -e "${BOLD_GREY}43. ${WHITE}Windows 7            ${LIGHT_CYAN}44. ${WHITE}Windows Server 2022"
         echo -e "${LIGHT_CYAN}45. ${WHITE}Windows Server 2019  ${LIGHT_CYAN}46. ${WHITE}Windows Server 2016"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             # Debian 12

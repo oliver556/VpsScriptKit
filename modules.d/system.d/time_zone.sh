@@ -13,15 +13,11 @@ source "$ROOT_DIR/shell_scripts/system/time_zone.sh"
 
 ### === 修改系统时区 主菜单 === ###
 system_time_zone_menu() {
-    # is_user_root
+    is_user_root
 
     while true; do
         clear
-        title="🖥️  系统时间信息"
-        printf "${LIGHT_CYAN}"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        printf "| %-${width_48}s |\n" "$title"
-        printf "+%${width_40}s+\n" "" | tr ' ' '-'
+        sub_menu_title "🖥️  系统时间信息"
 
         # 系统当前时区
         timezone=$(system_info_current_timezone)
@@ -33,30 +29,30 @@ system_time_zone_menu() {
         # 显示系统当前时间
         echo -e "${LIGHT_CYAN}系统当前时间: ${WHITE}$current_time"
         echo -e "${LIGHT_CYAN}时区切换: ${WHITE}$current_time"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}亚洲"
         echo -e "${LIGHT_CYAN}1.  ${WHITE}中国上海  ${BOLD_YELLOW}★${WHITE}           ${LIGHT_CYAN}2.  ${WHITE}中国香港"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}日本东京              ${LIGHT_CYAN}4.  ${WHITE}韩国首尔"
         echo -e "${LIGHT_CYAN}5.  ${WHITE}新加坡                ${LIGHT_CYAN}6.  ${WHITE}印度加尔各答"
         echo -e "${LIGHT_CYAN}7.  ${WHITE}阿联酋迪拜            ${LIGHT_CYAN}8.  ${WHITE}澳大利亚悉尼"
         echo -e "${LIGHT_CYAN}9.  ${WHITE}泰国曼谷"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}欧洲"
         echo -e "${LIGHT_CYAN}11. ${WHITE}英国伦敦时间          ${LIGHT_CYAN}12. ${WHITE}法国巴黎时间"
         echo -e "${LIGHT_CYAN}13. ${WHITE}德国柏林时间          ${LIGHT_CYAN}14. ${WHITE}俄罗斯莫斯科时间"
         echo -e "${LIGHT_CYAN}15. ${WHITE}荷兰尤特赖赫特时间    ${LIGHT_CYAN}16. ${WHITE}西班牙马德里时间"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}美洲"
         echo -e "${LIGHT_CYAN}21. ${WHITE}美国西部时间          ${LIGHT_CYAN}22. ${WHITE}美国东部时间"
         echo -e "${LIGHT_CYAN}23. ${WHITE}加拿大时间            ${LIGHT_CYAN}24. ${WHITE}墨西哥时间"
         echo -e "${LIGHT_CYAN}25. ${WHITE}巴西时间              ${LIGHT_CYAN}26. ${WHITE}阿根廷时间"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}31. ${WHITE}UTC全球标准时间"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
-        echo -e "${LIGHT_CYAN}------------------------------------------${WHITE}"
+        print_echo_line_1
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        print_echo_line_1
         echo ""
-        read -p "👉 请输入你的选择: " sys_choice
+        read -r -p "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             1)
