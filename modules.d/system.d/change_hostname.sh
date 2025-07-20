@@ -7,6 +7,7 @@ change_hostname_utils() {
         current_hostname=$(hostname)
 
         # 打印当前主机名
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}当前主机名是: ${BOLD_YELLOW}$current_hostname${WHITE}"
         print_echo_line_1
 
@@ -36,11 +37,11 @@ change_hostname_utils() {
                 echo "::1             $new_hostname localhost localhost.localdomain ipv6-localhost ipv6-loopback" >> /etc/hosts
             fi
 
-            echo "主机名已更改为: $new_hostname"
-            send_stats "主机名已更改"
-            sleep 1
+            echo -e "${BOLD_GREEN}主机名已更改为: $new_hostname${WHITE}"
+            sleep 2
+            break
         else
-            echo "已退出，未更改主机名。"
+            echo -e "${BOLD_RED}已退出，未更改主机名。${WHITE}"
             break
         fi
     done
@@ -49,11 +50,9 @@ change_hostname_utils() {
 change_hostname_main() {
     clear
 
-    # if ! is_user_root; then
-    #     break_end
-    # fi
+    if ! is_user_root; then
+        break_end
+    fi
 
     change_hostname_utils
-    echo "1"
-    sleep 1
 }
