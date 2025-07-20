@@ -52,13 +52,39 @@ vskit() {
 is_user_root() {
     if [ "$EUID" -ne 0 ]; then
         echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${WHITE}"
-        echo -e  "${BOLD_YELLOW}请尝试使用 'sudo' 来执行。${WHITE}"
+        echo
+        echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${WHITE}"
 		# sleep 1
 		# break_end
 		# vskit
         exit "$EXIT_ERROR"
     fi
 }
+
+# 功能：检测主流 Linux 发行版类型
+# 返回：通过标准输出(echo)返回系统ID (ubuntu, centos等)
+#      如果无法识别，则返回空字符串，并在标准错误输出提示信息。
+check_system_type() {
+    local OS=""
+    if [ -f /etc/os-release ]; then
+        # 在子 shell 中执行 source，避免污染当前环境
+        OS=$(. /etc/os-release && echo "$ID")
+    fi
+
+    case "$OS" in
+        ubuntu|debian|centos)
+            # 将识别出的系统类型输出到标准输出
+            echo "$OS"
+            ;;
+        *)
+            # 将错误信息输出到标准错误，这样不会被命令替换捕获
+            echo "无法识别的系统: $OS" >&2
+            # 返回一个空字符串，表示未识别
+            echo ""
+            ;;
+    esac
+}
+
 
 # 主菜单标题函数
 main_menu_title() {
