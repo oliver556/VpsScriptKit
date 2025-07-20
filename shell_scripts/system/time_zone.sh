@@ -8,6 +8,7 @@
 # 许可证：MIT
 
 set_system_time_zone_utils() {
+	clear
 	local time_zone="$1"
 	if grep -q 'Alpine' /etc/issue; then
 		install tzdata
@@ -16,12 +17,17 @@ set_system_time_zone_utils() {
 	else
 		timedatectl set-timezone ${time_zone}
 	fi
-    sleep 4
-    echo "time_zone is: $time_zone"
+	echo
+    echo -e "${BOLD_GREEN}时区已经设置为: $time_zone${WHITE}"
+	sleep 1
 }
 
 ### === 修改系统时区 主函数 === ###
 system_time_zone_main() {
+	if ! is_user_root; then
+        break_end
+    fi
+
     local TIME_ZONE="$1"
 	set_system_time_zone_utils "$TIME_ZONE"
 }

@@ -31,7 +31,7 @@ system_time_zone_menu() {
         echo -e "${LIGHT_CYAN}时区切换: ${WHITE}$current_time"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}亚洲"
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}中国上海  ${BOLD_YELLOW}★${WHITE}           ${LIGHT_CYAN}2.  ${WHITE}中国香港"
+        echo -e "${LIGHT_CYAN}1.  ${WHITE}中国上海              ${LIGHT_CYAN}2.  ${WHITE}中国香港"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}日本东京              ${LIGHT_CYAN}4.  ${WHITE}韩国首尔"
         echo -e "${LIGHT_CYAN}5.  ${WHITE}新加坡                ${LIGHT_CYAN}6.  ${WHITE}印度加尔各答"
         echo -e "${LIGHT_CYAN}7.  ${WHITE}阿联酋迪拜            ${LIGHT_CYAN}8.  ${WHITE}澳大利亚悉尼"
@@ -57,7 +57,6 @@ system_time_zone_menu() {
         case "$sys_choice" in
             1)
                 system_time_zone_main "Asia/Shanghai"
-                sleep 5
                 break_end ;;
             2) 
                 system_time_zone_main "Asia/Hong_Kong" 

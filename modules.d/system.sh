@@ -25,6 +25,9 @@ source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
 ### === 导入修改主机名 === ###
 source "$ROOT_DIR/modules.d/system.d/change_hostname.sh"
 
+### === 导入修改 SSH 端口 === ###
+source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
+
 ### === 系统工具 主菜单 === ###
 system_menu() {
     while true; do
@@ -36,9 +39,12 @@ system_menu() {
         echo -e "${LIGHT_CYAN}2.  ${WHITE}系统更新             ${LIGHT_CYAN}3. ${WHITE}系统清理"
         echo -e "${BOLD_GREY}4.  ${WHITE}系统用户管理         ${LIGHT_CYAN}5. ${WHITE}开放所有端口"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}11. ${WHITE}修改登录密码         ${LIGHT_CYAN}12. ${WHITE}修改 SSH 端口"
+        echo -e "${LIGHT_CYAN}11. ${WHITE}修改登录密码         ${BOLD_GREY}12. ${WHITE}修改 SSH 端口"
         echo -e "${LIGHT_CYAN}13. ${WHITE}修改主机名           ${BOLD_GREY}14. ${WHITE}修改虚拟内存大小"
         echo -e "${LIGHT_CYAN}15. ${WHITE}修改系统时区"
+        print_echo_line_1
+        echo -e "${BOLD_GREY}21. ${WHITE}定时任务管理器       ${BOLD_GREY}22. ${WHITE}切换系统更新源"
+        echo -e "${BOLD_GREY}23. ${WHITE}待定                 ${BOLD_GREY}24. ${WHITE}待定"
         print_echo_line_1
         echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优             "
         echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统             "
