@@ -18,7 +18,7 @@ base_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}nano 文本编辑器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}31. ${WHITE}全部安装        ${LIGHT_CYAN}32. ${WHITE}全部卸载"
+        echo -e "${LIGHT_CYAN}31. ${WHITE}全部安装             ${LIGHT_CYAN}32. ${WHITE}全部卸载"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
         print_echo_line_1

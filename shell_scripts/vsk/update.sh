@@ -92,7 +92,6 @@ vsk_update_now() {
     sleep 2
 
     # 4. 重启脚本
-    # exec bash "$INSTALL_DIR/vps_script_kit.sh"
     vskit
 }
 

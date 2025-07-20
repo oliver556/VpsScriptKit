@@ -16,7 +16,7 @@ advanced_menu() {
         clear
         sub_menu_title "🖥️  进阶工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}SSL 证书管理           ${LIGHT_CYAN}2.  ${WHITE}暂未定"
+        echo -e "${LIGHT_CYAN}1.  ${WHITE}SSL 证书管理         ${LIGHT_CYAN}2.  ${WHITE}暂未定"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
         print_echo_line_1

@@ -268,19 +268,21 @@ _apply_ssl_certificate() {
     _issue_certificate "$domain" "$ca_server" || return 1
 
     # --- 步骤 5: 安装证书并设置自动续期 ---
-    # 调用负责安装的函数，传入它需要的参数
     _install_certificate  "$domain" "$email" "$ca_server" "$cert_path" || return 1
 
-    print_echo_line_1 "front_line" # 可以保留或移动
+    print_echo_line_1 "front_line"
     echo -e "${LIGHT_GREEN}✅ 所有证书申请和安装步骤已成功完成。${WHITE}"
-    print_echo_line_1 "back_line" # 可以保留或移动
+    print_echo_line_1 "back_line"
 }
 
 ### === 函数：证书申请交互 === ###
 get_ssl_interaction() {
     clear
     # 检查是否是 root 用户
-    # is_user_root || return 1
+    if ! is_user_root; then
+        break_end
+        return 1
+    fi
 
     print_echo_line_1
     echo -e "${BOLD_YELLOW}SSL 证书申请向导${WHITE}"
@@ -352,8 +354,8 @@ get_ssl_interaction() {
     local firewall_action=""
     
     echo -e "${LIGHT_CYAN}防火墙操作:${WHITE}"
-    echo -e "  ${LIGHT_CYAN}1) ${YELLOW}禁用防火墙 (推荐)${WHITE}"
-    echo -e "  ${LIGHT_CYAN}2) ${LIGHT_GREEN}允许 HTTP (80端口) 流量通过防火墙${WHITE}"
+    echo -e "  ${LIGHT_CYAN}1) ${WHITE}禁用防火墙 ${LIGHT_GREEN}(推荐)${WHITE}"
+    echo -e "  ${LIGHT_CYAN}2) ${WHITE}允许 HTTP (80端口) 流量通过防火墙${WHITE}"
     echo -e "  ${LIGHT_CYAN}3) ${WHITE}不做任何更改 (我已手动配置好)${WHITE}"
     read -rp "${LIGHT_CYAN}输入选项 [1-3] (默认为1): ${WHITE}" firewall_choice
 
@@ -387,7 +389,7 @@ get_ssl_interaction() {
         "allow_http")
             echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${LIGHT_GREEN}将放行 HTTP (80端口)${WHITE}"
             ;;
-        "") # 匹配 firewall_action 为空字符串的情况，即用户选择“不作更改”
+        "")
             echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${WHITE}不作更改${WHITE}"
             ;;
     esac
@@ -402,6 +404,7 @@ get_ssl_interaction() {
         _apply_ssl_certificate "$domain" "$email" "$ca_server" "$cron_time_setting"
 
     else
+        echo
         echo -e "${LIGHT_RED}🚫 操作已取消。${WHITE}"
     fi
 

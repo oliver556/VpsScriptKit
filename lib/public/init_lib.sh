@@ -64,3 +64,9 @@ source "$CONFIG_DIR/color.sh"
 source "$CONFIG_DIR/constant.sh"
 source "$LIB_DIR/public/public_lib.sh"
 
+### === 进阶用法 === ###
+source "$ROOT_DIR/shell_scripts/system/handle_args.sh"
+# 导入更新脚本
+source "$ROOT_DIR/shell_scripts/vsk/update.sh"
+# 导入卸载脚本
+source "$ROOT_DIR/shell_scripts/vsk/uninstall.sh"
