@@ -103,11 +103,11 @@ check_system_type() {
 main_menu_title() {
     local title="$1"
     _title="$title"
-    # 🔷 ASCII 标题框
+    # # 🔷 ASCII 标题框
     printf "${LIGHT_CYAN}"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
-    printf "| %-${width_71}s |\n" "$_title"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
+    printf "+%${width_60}s+\n" "" | tr ' ' '='
+    printf "# %-${width_71}s #\n" "${_title}"
+    printf "+%${width_60}s+\n" "" | tr ' ' '='
 }
 
 # 子菜单标题函数
@@ -116,11 +116,25 @@ sub_menu_title() {
     _title="$title"
     printf "${LIGHT_CYAN}"
     printf "+%${width_60}s+\n" "" | tr ' ' '-'
-    printf "| %-${width_68}s \n" "$_title"
+    printf "# %-${width_68}s \n" "${_title}"
     printf "+%${width_60}s+\n" "" | tr ' ' '-'
-    # printf "+%${width_40}s+\n" "" | tr ' ' '-'
-    # printf "| %-${width_48}s |\n" "$_title"
-    # printf "+%${width_40}s+\n" "" | tr ' ' '-'
+}
+
+gran_menu_title() {
+    local title="$1"
+    _title="$title"
+    # printf "${LIGHT_MAGENTA}"
+    # printf "%${width_20}s\n" "" | tr ' ' '-'
+    # printf "| %-${width_20}s \n" "$_title"
+    # printf "%${width_20}s\n" "" | tr ' ' '-'
+    if [[ "$2" == "front_line" ]]; then
+        echo -e "\n${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE}"
+    elif [[ "$2" == "back_line" ]]; then
+        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE} \n"
+    else
+        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE}"
+    fi
+    echo -e "${BOLD_YELLOW}${_title}${NC}"
 }
 
 # 打印 echo 分割线

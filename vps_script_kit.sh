@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 ### =================================================================================
 # @名称:         vps_script_kit.sh
 # @功能描述:     一个用于管理 VPS 的脚本工具。
@@ -35,6 +34,7 @@ declare -A modules=(
   [2]="base.sh:base_menu"          # 基础工具
   [3]="advanced.sh:advanced_menu"  # 进阶工具
   [4]="docker.sh:docker_menu"      # Docker 管理
+  [5]="node_building.sh:node_building_menu"  # 节点搭建脚本合集
   [8]="test.sh:test_menu"          # 测试脚本合集
   [99]="vsk.sh:vsk_menu"           # 脚本工具
 )
@@ -62,18 +62,20 @@ done
 while true; do
     clear
 
-    main_menu_title "🚀 一款全功能的 Linux 管理脚本！ | By Vskit | ${SCRIPT_VERSION}"
-    print_echo_line_1
-    echo -e "${LIGHT_CYAN}# == Tip: 命令行输入 ${YELLOW}v${WHITE} ${LIGHT_CYAN}可快速启动脚本 =======================#${WHITE}"
+    main_menu_title " 🚀 一款全功能的 Linux 管理脚本！    | ${SCRIPT_VERSION}"
+    # print_echo_line_1
+    # echo -e "${LIGHT_CYAN}# == Tip: 命令行输入 ${YELLOW}v${WHITE} ${LIGHT_CYAN}可快速启动脚本 =======================#${WHITE}"
+    echo -e "${LIGHT_YELLOW}# ──────────── Tip: 命令行输入 ${BOLD_GREEN}v${WHITE} ${LIGHT_YELLOW}可快速启动脚本 ──────────── #${WHITE}"
     # 📋 菜单项
     print_echo_line_1
     printf "${LIGHT_CYAN}1. ${WHITE} 系统工具     ▶ \n"
     printf "${LIGHT_CYAN}2. ${WHITE} 基础工具     ▶ \n"
     printf "${LIGHT_CYAN}3. ${WHITE} 进阶工具     ▶ \n"
     printf "${LIGHT_CYAN}4. ${WHITE} Docker 管理  ▶ \n"
-    printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}99.${WHITE} 脚本工具 \n"
+    printf "${LIGHT_CYAN}5. ${WHITE} 节点搭建脚本合集  ▶ \n"
+    printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
+    printf "${LIGHT_CYAN}99.${WHITE} 脚本工具 ▶\n"
     print_echo_line_1
     printf "${LIGHT_CYAN}0. ${WHITE} 退出程序 \n"
     print_echo_line_1

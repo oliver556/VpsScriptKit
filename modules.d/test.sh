@@ -14,20 +14,21 @@ test_menu() {
     while true; do
         clear
         sub_menu_title "🧪  测试脚本合集"
+        # main_menu_title "🧪  测试脚本合集"
 
-        print_echo_line_1
-	    echo -e "${LIGHT_CYAN}常用检测"${WHITE}
-        echo -e "${LIGHT_CYAN}1. ${WHITE}IP 质量测试"
-        echo -e "${LIGHT_CYAN}2. ${WHITE}网络质量测试"
-        echo -e "${LIGHT_CYAN}3. ${WHITE}回程路由"
+	    # echo -e "${LIGHT_CYAN}常用检测"${WHITE}
+        gran_menu_title "[A] 网络检测"
+        echo -e "${LIGHT_CYAN}1.  ${WHITE}IP 质量测试"
+        echo -e "${LIGHT_CYAN}2.  ${WHITE}网络质量测试"
+        echo -e "${LIGHT_CYAN}3.  ${WHITE}回程路由"
         # echo -e "${LIGHT_CYAN}2. ${WHITE}ChatGPT 解锁检测"
         # echo -e "${LIGHT_CYAN}3. ${WHITE}Region 解锁检测"
         # echo -e "${LIGHT_CYAN}4. ${WHITE}yeahwu 流媒体解锁检测"
         # print_echo_line_1
         # echo -e "${CYAN}网络线路测试"${WHITE}
         # echo -e "${LIGHT_CYAN}18. ${WHITE}NetQuality 网络质量检测 ${YELLOW}★${WHITE}"
-        print_echo_line_1
-        echo -e "${CYAN}综合测试""${WHITE}"
+        # print_echo_line_1
+        gran_menu_title "[B] 性能检测" "front_line"
         echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
         echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
         print_echo_line_1

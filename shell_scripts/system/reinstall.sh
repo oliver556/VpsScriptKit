@@ -26,14 +26,12 @@ system_reinstall_bin456789() {
 }
 
 ### === 安装完成，提示重启 === ###
-# @param $1: 倒计时秒数 (e.g., 3)
 hint_reboot() {
     echo -e "${LIGHT_CYAN}安装完成！系统 3 秒后自动重启...${WHITE}"
 
-    # 倒计时 3 秒，每秒输出一个数字
     for i in {3..1}; do
         echo -e "${LIGHT_CYAN}${i}...${WHITE}"
-        sleep 1  # 每次打印后暂停 1 秒
+        sleep 1
     done
 
     echo -e "${LIGHT_CYAN}重启中...${WHITE}"
@@ -52,11 +50,9 @@ run_mollylau_install() {
     local system_version_name="$1"
     local system_param="$2"
 
-    # print_echo_line_1
     echo -e "正在检查系统是否安装有必要环境..."
     sleep 2
 
-    # 判断系统是否安装有 wget
     if ! command -v wget &> /dev/null; then
         echo "wget 未安装，正在安装..."
         apt-get update
@@ -68,16 +64,11 @@ run_mollylau_install() {
     print_echo_line_1
     sleep 2
 
-    # 调试
-    # echo "执行: wget --no-check-certificate -qO InstallNET.sh \"${GH_PROXY}raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/InstallNET.sh\""
-    # echo "执行: chmod a+x InstallNET.sh"
-    # echo "执行: bash InstallNET.sh -${system_param}"
-
-    # 这里是实际的执行命令 (当前为注释状态)
+    # 执行脚本
     system_reinstall_MollyLau "${system_param}"
 
     sleep 2
-    # 安装完成，提示重启
+
     hint_reboot
 }
 
@@ -98,15 +89,11 @@ run_bin456789_install() {
     print_echo_line_1
     sleep 2
 
-    # 调试
-    # echo "执行: curl -O ${GH_PROXY}raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh"
-    # echo "执行: bash reinstall.sh ${system_param}"
-
-    # 这里是实际的执行命令 (当前为注释状态)
+    # 执行脚本
     system_reinstall_bin456789 "${system_param}"
 
     sleep 2
-    # 安装完成，提示重启
+
     hint_reboot
 }
 
@@ -181,93 +168,73 @@ system_reinstall_selection() {
 
     case "$system_selection" in
         "Debian 12")
-            # 决策: Debian 12 使用 MollyLau 脚本
             start_reinstall_process "Debian 12" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "debian 12"
             ;;
 
         "Debian 11")
-            # 决策: Debian 11 使用 MollyLau 脚本
             start_reinstall_process "Debian 11" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "debian 11"
             ;;
 
         "Debian 10")
-            # 决策: Debian 10 使用 MollyLau 脚本
             start_reinstall_process "Debian 10" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "debian 10"
             ;;
 
         "Debian 9")
-            # 决策: Debian 9 使用 MollyLau 脚本
             start_reinstall_process "Debian 9" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "debian 9"
             ;;
 
         "Ubuntu 24.04")
-            # 决策: Ubuntu 24.04 使用 MollyLau 脚本
             start_reinstall_process "Ubuntu 24.04" "ubuntu" "${pass_1}" "${port_1}" "${func_1}" "ubuntu 24.04"
             ;;
 
         "Ubuntu 22.04")
-            # 决策: Ubuntu 22.04 使用 bin456789 脚本 (示例)
             start_reinstall_process "Ubuntu ${port_1}.04" "ubuntu" "${pass_1}" "22" "${func_1}" "ubuntu 22.04"
             ;;
 
         "Ubuntu 20.04")
-            # 决策: Ubuntu 20.04 使用 MollyLau 脚本
             start_reinstall_process "Ubuntu 20.04" "ubuntu" "${pass_1}" "${port_1}" "${func_1}" "ubuntu 20.04"
             ;;
 
         "Ubuntu 18.04")
-            # 决策: Ubuntu 18.04 使用 MollyLau 脚本
             start_reinstall_process "Ubuntu 18.04" "ubuntu" "${pass_1}" "${port_1}" "${func_1}" "ubuntu 18.04"
             ;;
 
         "CentOS 10")
-            # 决策: CentOS 10 使用 MollyLau 脚本
             start_reinstall_process "CentOS 10" "${user_name_3}" "${pass_3}" "${port_3}" "${func_3}" "centos 10"
             ;;
 
         "CentOS 9")
-            # 决策: CentOS 9 使用 MollyLau 脚本
             start_reinstall_process "CentOS 9" "${user_name_3}" "${pass_3}" "${port_3}" "${func_3}" "centos 9"
             ;;
-            
-
+    
         "Alpine Linux")
-            # 决策: Alpine Linux 使用 MollyLau 脚本
             start_reinstall_process "Alpine Linux" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "alpine"
             ;;
 
         "Windows 11")
-            # 决策: Windows 11 使用 MollyLau 脚本
             start_reinstall_process "Windows 11" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 11 -lang "cn"'
             ;;
         
         "Windows 10")
-            # 决策: Windows 10 使用 MollyLau 脚本
             start_reinstall_process "Windows 10" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 10 -lang "cn"'
             ;;
 
         "Windows 7")
-            # 决策: Windows 7 使用 MollyLau 脚本
-            # start_reinstall_process "Windows 7" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 7 -lang "cn"'
             ;;
 
         "Windows Server 2022")
-            # 决策: Windows Server 2022 使用 MollyLau 脚本
             start_reinstall_process "Windows Server 2022" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2022 -lang "cn"'
             ;;
 
         "Windows Server 2019")
-            # 决策: Windows Server 2019 使用 MollyLau 脚本
             start_reinstall_process "Windows Server 2019" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2019 -lang "cn"'
             ;;
 
         "Windows Server 2016")
-            # 决策: Windows Server 2016 使用 MollyLau 脚本
             start_reinstall_process "Windows Server 2016" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 2016 -lang "cn"'
             ;;
 
         *)
-            # 默认分支: 处理所有不支持的系统
             echo -e "${BOLD_RED}错误: 暂不支持您选择的系统: '${system_selection}'${WHITE}"
             break_end no_wait
             ;;
