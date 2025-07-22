@@ -62,17 +62,21 @@ system_menu() {
                 break_end ;;
             # 系统更新
             2)
+                log_action "[system.sh]" "系统更新"
                 system_update_main
                 break_end no_wait ;;
             # 系统清理
             3)
+                log_action "[system.sh]" "系统清理"
                 system_clean_main
                 break_end no_wait ;;
             # 系统用户管理
             4)
+                log_action "[system.sh]" "系统用户管理"
                 break_end no_wait ;;
             # 开放所有端口
             5)
+                log_action "[system.sh]" "开放所有端口"
                 open_iptables
                 ;;
             # 修改登录密码
@@ -81,6 +85,7 @@ system_menu() {
                 echo -e "${BOLD_YELLOW}设置你的登录密码...${WHITE}"
                 passwd
                 echo -e "${BOLD_GREEN}密码修改成功！${WHITE}"
+                log_action "[system.sh]" "修改登录密码"
                 break_end no_wait ;;
             # 修改 SSH 端口
             12)
@@ -92,6 +97,7 @@ system_menu() {
                 break_end no_wait ;;
             # 修改虚拟内存大小
             14)
+                log_action "[system.sh]" "修改虚拟内存大小"
                 break_end no_wait ;;
             # 修改系统时区
             15)
@@ -99,6 +105,7 @@ system_menu() {
                 break_end no_wait ;;
             # 一条龙系统调优
             66)
+                log_action "[system.sh]" "一条龙系统调优"
                 break_end no_wait ;;
             # 一键重装安装
             99)

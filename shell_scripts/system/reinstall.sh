@@ -11,6 +11,7 @@
 ### GitHub 地址：https://github.com/leitbogioro/Tools
 # @param $1: 脚本执行后缀补充 (e.g., "debian 12")
 system_reinstall_MollyLau() {
+    log_action "[system.sh]" "一键重装系统"
     local system_param="$1"
     wget --no-check-certificate -qO InstallNET.sh "${GH_PROXY}raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/InstallNET.sh" && chmod a+x InstallNET.sh
     bash InstallNET.sh -"${system_param}"
@@ -20,6 +21,7 @@ system_reinstall_MollyLau() {
 ### GitHub 地址：https://github.com/bin456789/reinstall
 # @param $1: 脚本执行后缀补充 (e.g., "rocky")
 system_reinstall_bin456789() {
+    log_action "[system.sh]" "一键重装系统"
     local system_param="$1"
     curl -O "${GH_PROXY}"raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh
     bash reinstall.sh "${system_param}"
@@ -35,7 +37,7 @@ hint_reboot() {
     done
 
     echo -e "${LIGHT_CYAN}重启中...${WHITE}"
-    
+
     sleep 1
 
     reboot
@@ -139,7 +141,7 @@ start_reinstall_process() {
     print_echo_line_1
     echo -e "${LIGHT_CYAN}马上开始重装系统${WHITE}"
     print_echo_line_1
-    
+
     # 动态调用传入的安装函数名，并将系统名称作为参数传递给它
     ${install_function_name} "${system_version_name}" "${system_param}"
 }
@@ -206,7 +208,7 @@ system_reinstall_selection() {
         "CentOS 9")
             start_reinstall_process "CentOS 9" "${user_name_3}" "${pass_3}" "${port_3}" "${func_3}" "centos 9"
             ;;
-    
+
         "Alpine Linux")
             start_reinstall_process "Alpine Linux" "${user_name_1}" "${pass_1}" "${port_1}" "${func_1}" "alpine"
             ;;
@@ -214,7 +216,7 @@ system_reinstall_selection() {
         "Windows 11")
             start_reinstall_process "Windows 11" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 11 -lang "cn"'
             ;;
-        
+
         "Windows 10")
             start_reinstall_process "Windows 10" "${user_name_2}" "${pass_2}" "${port_2}" "${func_2}" 'windows 10 -lang "cn"'
             ;;

@@ -12,7 +12,7 @@ change_hostname_utils() {
         print_echo_line_1
 
         read -e -p "${LIGHT_CYAN}请输入新的主机名（输入0退出）: ${WHITE}" new_hostname
-        
+
         if [ -n "$new_hostname" ] && [ "$new_hostname" != "0" ]; then
             if [ -f /etc/alpine-release ]; then
                 # Alpine
@@ -38,6 +38,7 @@ change_hostname_utils() {
             fi
 
             echo -e "${BOLD_GREEN}主机名已更改为: $new_hostname${WHITE}"
+            log_action "[system.sh]" "修改主机名"
             sleep 2
             break
         else

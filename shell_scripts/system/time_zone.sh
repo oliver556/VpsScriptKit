@@ -18,7 +18,8 @@ set_system_time_zone_utils() {
 		timedatectl set-timezone ${time_zone}
 	fi
 	echo
-    echo -e "${BOLD_GREEN}时区已经设置为: $time_zone${WHITE}"
+  echo -e "${BOLD_GREEN}时区已经设置为: $time_zone${WHITE}"
+  log_action "[system.sh]" "修改系统时区"
 	sleep 1
 }
 
