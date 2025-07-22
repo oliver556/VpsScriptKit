@@ -18,6 +18,8 @@ base_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}nano 文本编辑器"
         print_echo_line_1
+        echo -e "${LIGHT_CYAN}21. ${WHITE}iPerf3 网络测试工具"
+        print_echo_line_1
         echo -e "${LIGHT_CYAN}31. ${WHITE}全部安装             ${LIGHT_CYAN}32. ${WHITE}全部卸载"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
@@ -57,6 +59,13 @@ base_menu() {
                 clear
                 nano -h
                 cd ~
+                break_end ;;
+            # iPerf3 网络测试工具
+            21)
+                clear
+                echo_info "正在安装 iPerf3 网络测试工具... \n "
+                apt install iperf3 -y
+                echo_success "\niPerf3 网络测试工具安装成功！"
                 break_end ;;
             # 全部安装
             31)
