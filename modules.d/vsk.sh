@@ -8,8 +8,8 @@
 # 许可证：MIT
 
 source "$ROOT_DIR/modules.d/vsk.d/update.sh"
-source "$ROOT_DIR/shell_scripts/vsk/ninstall.sh"
-source "$ROOT_DIR/modules.d/vsk_log.sh"
+source "$ROOT_DIR/modules.d/vsk.d/uninstall.sh"
+source "$ROOT_DIR/modules.d/vsk.d/vsk_log.sh"
 
 ### === 系统工具 主菜单 === ###
 vsk_menu() {
@@ -32,7 +32,7 @@ vsk_menu() {
                 break_end no_wait ;;
             2)
                 vsk_uninstall_menu
-                break_end no_wait ;;
+                break_end ;;
             3)
                 vsk_log_tool_menu
                 break_end no_wait ;;

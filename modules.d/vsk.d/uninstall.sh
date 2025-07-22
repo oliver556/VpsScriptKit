@@ -11,7 +11,7 @@
 source "$ROOT_DIR/shell_scripts/vsk/uninstall.sh"
 
 ### === 主菜单 === ###
-vsk_update_menu() {
+vsk_uninstall_menu() {
     while true; do
         clear
         echo -e "🔄 卸载 vsk 脚本"

@@ -95,7 +95,7 @@ while true; do
         print_echo_line_1
         sleep 1
         clear
-        exit $EXIT_SUCCESS
+        exit "$EXIT_SUCCESS"
     elif [[ -n "${modules[$choice]}" ]]; then
         IFS=":" read -r _ func _ <<< "${modules[$choice]}"
         "$func"

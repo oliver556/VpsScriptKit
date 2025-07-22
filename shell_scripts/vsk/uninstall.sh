@@ -13,6 +13,8 @@ vsk_uninstall_utils() {
     local Delete="$1"
     if [ "$Delete" == "yes" ]; then
         vsk_uninstall_yes
+        # 退出脚本
+        exit "$EXIT_SUCCESS"
     elif [ "$Delete" == "no" ]; then
         echo "不卸载"
     fi
