@@ -32,7 +32,7 @@ vsk_menu() {
                 break_end no_wait ;;
             2)
                 vsk_uninstall_menu
-                break_end ;;
+                ;;
             3)
                 vsk_log_tool_menu
                 break_end no_wait ;;

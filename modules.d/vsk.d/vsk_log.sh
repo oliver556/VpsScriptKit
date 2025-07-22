@@ -68,11 +68,11 @@ vsk_log_tool_menu() {
                 ;;
             3)
                 vsk_log_clear
-                break_end no_wait
+                break_end
                 ;;
             4)
                 vsk_log_export
-                break_end no_wait
+                break_end
                 ;;
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
