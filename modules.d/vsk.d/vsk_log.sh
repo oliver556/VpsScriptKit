@@ -23,7 +23,7 @@ vsk_log_filter_menu() {
         vsk_log_filter_modules
         
         print_echo_line_1
-        echo -e "  0  ) 返回上一级"
+        echo -e "0  ) 返回上一级"
         print_echo_line_1
         read -rp "👉 请输入选项编号来筛选日志: " choice
 

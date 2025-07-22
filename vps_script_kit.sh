@@ -24,6 +24,8 @@ source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_li
 ### === 模块目录 === ###
 MODULE_DIR="$ROOT_DIR/modules.d"
 
+handle_args "$@"
+
 log_action "Vps Script Kit 脚本 已启动。"
 
 ### === 模块映射表 === ###
@@ -63,8 +65,6 @@ while true; do
     clear
 
     main_menu_title " 🚀 一款全功能的 Linux 管理脚本！    | ${SCRIPT_VERSION}"
-    # print_echo_line_1
-    # echo -e "${LIGHT_CYAN}# == Tip: 命令行输入 ${YELLOW}v${WHITE} ${LIGHT_CYAN}可快速启动脚本 =======================#${WHITE}"
     echo -e "${LIGHT_YELLOW}# ──────────── Tip: 命令行输入 ${BOLD_GREEN}v${WHITE} ${LIGHT_YELLOW}可快速启动脚本 ──────────── #${WHITE}"
     # 📋 菜单项
     print_echo_line_1

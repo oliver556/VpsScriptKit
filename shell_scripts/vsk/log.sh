@@ -33,7 +33,7 @@ vsk_log_filter_modules() {
             # 从数组中解析出中文名和文件名
             IFS=":" read -r filename _ chinese_name <<< "${modules[$key]}"
             # 格式化输出，使其对齐美观
-            printf "  %-3s) %-20s (%s)\n" "$key" "$chinese_name" "$filename"
+            printf "%-3s) %-20s \n" "$key" "$chinese_name"
         fi
     done
 }
