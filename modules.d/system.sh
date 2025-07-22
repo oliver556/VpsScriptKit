@@ -57,6 +57,7 @@ system_menu() {
         case "$sys_choice" in
             # 系统信息查询
             1)
+                log_action "[system.sh]" "系统信息查询系统信息查询"
                 system_info_main
                 break_end ;;
             # 系统更新

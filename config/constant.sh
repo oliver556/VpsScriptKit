@@ -13,6 +13,9 @@ GH_PROXY="https://github.viplee.top/"
 ### === 版本信息 === ###
 SCRIPT_NAME="vps_script_kit.sh"
 
+### === 日志文件 === ###
+LOG_FILE="$LOG_DIR/vps_script_kit.log"
+
 ### === 退出状态码 === ###
 EXIT_SUCCESS=0
 EXIT_ERROR=1

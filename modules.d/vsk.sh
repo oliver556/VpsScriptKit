@@ -9,6 +9,7 @@
 
 source "$ROOT_DIR/modules.d/vsk.d/update.sh"
 source "$ROOT_DIR/shell_scripts/vsk/ninstall.sh"
+source "$ROOT_DIR/modules.d/vsk_log.sh"
 
 ### === 系统工具 主菜单 === ###
 vsk_menu() {
@@ -18,6 +19,7 @@ vsk_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1. ${WHITE}脚本更新"
         echo -e "${LIGHT_CYAN}2. ${WHITE}脚本卸载"
+        echo -e "${LIGHT_CYAN}3. ${WHITE}脚本操作日志"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
         print_echo_line_1
@@ -30,6 +32,9 @@ vsk_menu() {
                 break_end no_wait ;;
             2)
                 vsk_uninstall_menu
+                break_end no_wait ;;
+            3)
+                vsk_log_tool_menu
                 break_end no_wait ;;
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;

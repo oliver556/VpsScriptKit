@@ -187,3 +187,30 @@ echo_error() {
 echo_warning() {
     echo -e "${BOLD_YELLOW}$1${WHITE}" >&2
 }
+
+# 打印成功函数
+echo_success() {
+    echo -e "${BOLD_GREEN}$1${WHITE}"
+}
+
+# ✅ 更强大的通用日志函数
+# 用法1: log "普通消息"
+# 用法2: log "[模块名]" "来自该模块的消息"
+log_action() {
+  local tag=""
+  local message
+
+  # 如果第一个参数是 [tag] 格式，就把它作为标签
+  if [[ "$1" =~ ^\[.*\]$ ]]; then
+    tag=" $1" # 加个前导空格
+    shift    # 移除第一个参数（标签），剩下的就是消息
+  fi
+
+  message="$*" # 将剩下的所有参数作为消息
+  local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+
+  # 写入日志
+  echo "[$timestamp]${tag} $message" >> "$LOG_FILE"
+}
+
+export -f log_action

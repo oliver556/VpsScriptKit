@@ -24,26 +24,26 @@ source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_li
 ### === 模块目录 === ###
 MODULE_DIR="$ROOT_DIR/modules.d"
 
-handle_args "$1"
+log_action "Vps Script Kit 脚本 已启动。"
 
 ### === 模块映射表 === ###
 # 格式： [菜单编号]="模块文件名:要调用的函数名"
 
 declare -A modules=(
-  [1]="system.sh:system_menu"      # 系统工具
-  [2]="base.sh:base_menu"          # 基础工具
-  [3]="advanced.sh:advanced_menu"  # 进阶工具
-  [4]="docker.sh:docker_menu"      # Docker 管理
-  [5]="node_building.sh:node_building_menu"  # 节点搭建脚本合集
-  [8]="test.sh:test_menu"          # 测试脚本合集
-  [99]="vsk.sh:vsk_menu"           # 脚本工具
+  [1]="system.sh:system_menu:系统工具"
+  [2]="base.sh:base_menu:基础工具"
+  [3]="advanced.sh:advanced_menu:进阶工具"
+  [4]="docker.sh:docker_menu:Docker 管理"
+  [5]="node_building.sh:node_building_menu:节点搭建脚本合集"
+  [8]="test.sh:test_menu:测试脚本合集"
+  [99]="vsk.sh:vsk_menu:脚本工具"
 )
 
 ### === 动态加载所有在映射表中的模块 === ###
 # 这个循环只在脚本启动时运行一次
 
 for key in "${!modules[@]}"; do
-  IFS=":" read -r file func <<< "${modules[$key]}"
+  IFS=":" read -r file func _ <<< "${modules[$key]}"
   path="$MODULE_DIR/$file"
   if [[ -f "$path" ]]; then
     source "$path"
@@ -75,6 +75,7 @@ while true; do
     print_echo_line_1
     printf "${LIGHT_CYAN}5. ${WHITE} 节点搭建脚本合集  ▶ \n"
     printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
+    print_echo_line_1
     printf "${LIGHT_CYAN}99.${WHITE} 脚本工具 ▶\n"
     print_echo_line_1
     printf "${LIGHT_CYAN}0. ${WHITE} 退出程序 \n"
@@ -96,7 +97,7 @@ while true; do
         clear
         exit $EXIT_SUCCESS
     elif [[ -n "${modules[$choice]}" ]]; then
-        IFS=":" read -r _ func <<< "${modules[$choice]}"
+        IFS=":" read -r _ func _ <<< "${modules[$choice]}"
         "$func"
     else
         echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
