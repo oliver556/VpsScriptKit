@@ -38,6 +38,13 @@ BOLD_MAGENTA=$(tput bold)$(tput setaf 5)  # 加粗品红色
 BOLD_CYAN=$(tput bold)$(tput setaf 6)     # 加粗青色
 BOLD_WHITE=$(tput bold)$(tput setaf 7)    # 加粗白色
 BOLD_GREY=$(tput bold)$(tput setaf 8)     # 加粗灰色
+BOLD_LIGHT_CYAN=$(tput bold)$(tput setaf 14)     # 加粗亮青色
+BOLD_LIGHT_GREEN=$(tput bold)$(tput setaf 10)    # 加粗亮绿色
+BOLD_LIGHT_YELLOW=$(tput bold)$(tput setaf 11)   # 加粗亮黄色
+BOLD_LIGHT_BLUE=$(tput bold)$(tput setaf 12)     # 加粗亮蓝色
+BOLD_LIGHT_MAGENTA=$(tput bold)$(tput setaf 13)  # 加粗亮品红色
+BOLD_LIGHT_RED=$(tput bold)$(tput setaf 9)       # 加粗亮红色
+BOLD_LIGHT_WHITE=$(tput bold)$(tput setaf 15)    # 加粗亮白色
 
 # ==============================================================================
 # == 背景颜色

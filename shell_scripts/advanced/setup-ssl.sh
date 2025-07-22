@@ -159,12 +159,15 @@ _install_certificate() {
         --key-file       "$cert_path/private.key" \
         --fullchain-file "$cert_path/fullchain.crt" \
         --server "$ca_server" \
-        --reloadcmd "echo '证书已为 $domain 自动续期。可在此处添加服务重启命令'"
+        --reloadcmd "echo '证书已为 $domain 自动续期。'"
+        # --reloadcmd "echo '证书已为 $domain 自动续期。可在此处添加服务重启命令'"
     then
-        echo -e "\n${LIGHT_GREEN}🎉 SSL 证书配置成功！${WHITE}"
-        echo -e "${LIGHT_CYAN}   - 证书路径: ${LIGHT_GREEN}$cert_path/fullchain.crt${WHITE}"
-        echo -e "${LIGHT_CYAN}   - 私钥路径: ${LIGHT_GREEN}$cert_path/private.key${WHITE}"
-        echo -e "${LIGHT_CYAN}   - acme.sh 已自动为您创建定时续期任务。${WHITE}"
+        echo_info "🎉 SSL 证书配置成功！"
+        echo_info "🔔 记得复制以下路径信息，用于后续配置。"
+        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path/fullchain.crt${WHITE}"
+        echo_info "   - 私钥路径: ${BOLD_LIGHT_GREEN}$cert_path/private.key${WHITE}"
+        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path${WHITE} ..."
+        echo_info "   - acme.sh 已自动为您创建定时续期任务。"
     else
         log_error "❌ 证书安装步骤失败。"
         return 1
@@ -271,7 +274,7 @@ _apply_ssl_certificate() {
     _install_certificate  "$domain" "$email" "$ca_server" "$cert_path" || return 1
 
     print_echo_line_1 "front_line"
-    echo -e "${LIGHT_GREEN}✅ 所有证书申请和安装步骤已成功完成。${WHITE}"
+    echo -e "${BOLD_LIGHT_GREEN}✅ 所有证书申请和安装步骤已成功完成。${WHITE}"
     print_echo_line_1 "back_line"
 }
 

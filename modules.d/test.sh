@@ -28,7 +28,7 @@ test_menu() {
         # echo -e "${CYAN}网络线路测试"${WHITE}
         # echo -e "${LIGHT_CYAN}18. ${WHITE}NetQuality 网络质量检测 ${YELLOW}★${WHITE}"
         # print_echo_line_1
-        gran_menu_title "[B] 性能检测" "front_line"
+        gran_menu_title "[B] 性能检测"
         echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
         echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
         print_echo_line_1

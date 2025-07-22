@@ -37,16 +37,16 @@ system_time_zone_menu() {
         echo -e "${LIGHT_CYAN}7.  ${WHITE}阿联酋迪拜            ${LIGHT_CYAN}8.  ${WHITE}澳大利亚悉尼"
         echo -e "${LIGHT_CYAN}9.  ${WHITE}泰国曼谷"
         # print_echo_line_1
-        gran_menu_title "[B] 欧洲" "front_line"
+        gran_menu_title "[B] 欧洲"
         echo -e "${LIGHT_CYAN}11. ${WHITE}英国伦敦时间          ${LIGHT_CYAN}12. ${WHITE}法国巴黎时间"
         echo -e "${LIGHT_CYAN}13. ${WHITE}德国柏林时间          ${LIGHT_CYAN}14. ${WHITE}俄罗斯莫斯科时间"
         echo -e "${LIGHT_CYAN}15. ${WHITE}荷兰尤特赖赫特时间    ${LIGHT_CYAN}16. ${WHITE}西班牙马德里时间"
         # print_echo_line_1
-        gran_menu_title "[C] 美洲" "front_line"
+        gran_menu_title "[C] 美洲"
         echo -e "${LIGHT_CYAN}21. ${WHITE}美国西部时间          ${LIGHT_CYAN}22. ${WHITE}美国东部时间"
         echo -e "${LIGHT_CYAN}23. ${WHITE}加拿大时间            ${LIGHT_CYAN}24. ${WHITE}墨西哥时间"
         echo -e "${LIGHT_CYAN}25. ${WHITE}巴西时间              ${LIGHT_CYAN}26. ${WHITE}阿根廷时间"
-        gran_menu_title "[D] 其他" "front_line"
+        gran_menu_title "[D] 其他"
         echo -e "${LIGHT_CYAN}31. ${WHITE}UTC全球标准时间"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
