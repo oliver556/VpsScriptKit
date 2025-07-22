@@ -23,6 +23,10 @@ set_node_building_utils() {
             install_x_ui
             break_end
             ;;
+        "tcp_tuning")
+            install_tcp_tuning
+            break_end
+            ;;
     esac
 }
 
@@ -38,6 +42,13 @@ install_x_ui() {
     clear
     echo -e "${BOLD_LIGHT_GREEN}正在安装新版 X-UI 面板一键脚本...${WHITE} \n "
 	bash <(curl -Ls https://raw.githubusercontent.com/oliver556/x-ui/main/install.sh)
+}
+
+### === TCP调优工具 主函数 === ###
+install_tcp_tuning() {
+    clear
+    echo -e "${BOLD_LIGHT_GREEN}正在安装 TCP 调优工具...${WHITE} \n "
+	wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh && chmod +x tool.sh && ./tool.sh
 }
 
 ### === 修改系统时区 主函数 === ###

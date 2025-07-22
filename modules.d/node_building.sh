@@ -19,8 +19,10 @@ node_building_menu() {
     while true; do
         clear
         sub_menu_title "🖥️  节点搭建脚本合集"
-        print_echo_line_1
+        gran_menu_title "[A] 节点面板"
         echo -e "${LIGHT_CYAN}1.  ${WHITE}伊朗版3X-UI面板一键脚本 ${BOLD_YELLOW}★${WHITE}      ${LIGHT_CYAN}2.  ${WHITE}新版X-UI面板一键脚本"
+        gran_menu_title "[B] 节点工具"
+        echo -e "${LIGHT_CYAN}11.  ${WHITE}TCP调优工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
         print_echo_line_1
@@ -35,6 +37,10 @@ node_building_menu() {
             # 新版X-UI面板一键脚本
             2)
                 node_building_main "x_ui"
+                break_end no_wait;;
+            # TCP调优工具
+            11)
+                node_building_main "tcp_tuning"
                 break_end no_wait;;
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
