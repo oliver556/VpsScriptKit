@@ -47,7 +47,7 @@ system_menu() {
         echo -e "${BOLD_GREY}23. ${WHITE}待定                 ${BOLD_GREY}24. ${WHITE}待定"
         print_echo_line_1
         echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优             "
-        echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统             "
+        echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统 ▶            "
         print_echo_line_1
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
         print_echo_line_1

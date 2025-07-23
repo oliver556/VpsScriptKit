@@ -38,9 +38,9 @@ break_end() {
 ask_to_continue() {
     echo # 保持界面美观
     echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认操作，按其它任意键返回。"
-    echo 
+    echo
     read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" user_choice
-    
+
     case "$user_choice" in
       y|Y)
         return 0  # 返回 0, 代表“成功/继续”
@@ -70,7 +70,7 @@ is_user_root() {
 		return 1
 		# break_end
 		# vskit
-        # exit "$EXIT_ERROR" 
+        # exit "$EXIT_ERROR"
 	fi
 }
 
@@ -96,6 +96,48 @@ check_system_type() {
             echo ""
             ;;
     esac
+}
+
+#
+# 函数: get_os_type
+# 功能: 检测当前 Linux 发行版类型。
+# 输出:
+#   - "debian_like" (适用于 Ubuntu, Debian)
+#   - "rhel_like"   (适用于 CentOS, RHEL, Fedora)
+#   - "unsupported" (适用于其他不支持的系统)
+#
+get_os_type() {
+    # 检查 /etc/os-release 文件是否存在
+    if [ -f /etc/os-release ]; then
+        # 加载文件中的变量 (如 ID, ID_LIKE)
+        . /etc/os-release
+
+        case "$ID" in
+            ubuntu|debian)
+                echo "debian_like"
+                ;;
+            centos|rhel|fedora)
+                echo "rhel_like"
+                ;;
+            *)
+                # 如果主 ID 不匹配，可以检查 ID_LIKE 字段
+                case "$ID_LIKE" in
+                    debian)
+                        echo "debian_like"
+                        ;;
+                    rhel|fedora)
+                        echo "rhel_like"
+                        ;;
+                    *)
+                        echo "unsupported"
+                        ;;
+                esac
+                ;;
+        esac
+    else
+        # 如果 /etc/os-release 文件不存在，则无法确定系统
+        echo "unknown"
+    fi
 }
 
 

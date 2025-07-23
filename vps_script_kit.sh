@@ -36,7 +36,7 @@ declare -A modules=(
   [2]="base.sh:base_menu:基础工具"
   [3]="advanced.sh:advanced_menu:进阶工具"
   [4]="docker.sh:docker_menu:Docker 管理"
-  [5]="node_building.sh:node_building_menu:节点搭建脚本合集"
+  [9]="node_building.sh:node_building_menu:节点搭建脚本"
   [8]="test.sh:test_menu:测试脚本合集"
   [99]="vsk.sh:vsk_menu:脚本工具"
 )
@@ -73,8 +73,8 @@ while true; do
     printf "${LIGHT_CYAN}3. ${WHITE} 进阶工具     ▶ \n"
     printf "${LIGHT_CYAN}4. ${WHITE} Docker 管理  ▶ \n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}5. ${WHITE} 节点搭建脚本合集  ▶ \n"
     printf "${LIGHT_CYAN}8. ${WHITE} 测试脚本合集 ▶ \n"
+    printf "${LIGHT_CYAN}9. ${WHITE} 节点搭建脚本 ▶ \n"
     print_echo_line_1
     printf "${LIGHT_CYAN}99.${WHITE} 脚本工具 ▶\n"
     print_echo_line_1

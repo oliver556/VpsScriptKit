@@ -26,7 +26,7 @@ vsk_log_view() {
 vsk_log_filter_modules() {
     # 动态生成菜单选项
     # 我们需要一个有序的列表来保证显示顺序和主菜单一致
-    local menu_order=(1 2 3 4 5 8 99)
+    local menu_order=(1 2 3 4 8 9 99)
     for key in "${menu_order[@]}"; do
         # 检查该选项是否存在于 modules 数组中
         if [[ -n "${modules[$key]}" ]]; then
@@ -42,7 +42,7 @@ vsk_log_filter_modules() {
 vsk_log_filter() {
     clear
     IFS=":" read -r filename _ _ <<< "${modules[$choice]}"
-    
+
     echo -e "\n📋 ${LIGHT_CYAN}筛选模块 ${BOLD_GREEN}[$filename]${WHITE} ${LIGHT_CYAN}的日志（最多显示最新的 100 条）：${WHITE}"
     if [ -f "$LOG_FILE" ] && [ -s "$LOG_FILE" ]; then
         grep --color=auto "\[$filename\]" "$LOG_FILE" | tail -n 100
@@ -75,10 +75,10 @@ vsk_log_export() {
     if [ -f "$LOG_FILE" ] && [ -s "$LOG_FILE" ]; then
         # 1. 定义一个带有唯一时间戳的文件名
         local backup_name="vps_script_kit_$(date +%Y%m%d_%H%M%S).log"
-        
+
         # 2. 将日志文件复制到当前用户的家目录 (~)
         cp "$LOG_FILE" ~/"$backup_name"
-        
+
         # 3. 给出清晰、可操作的提示信息
         echo_success "✅ 日志副本已成功导出！"
         echo -e "   ${BOLD_CYAN}文件位置: ${BOLD_GREEN}$(realpath ~/"$backup_name")${WHITE}" # realpath 会显示绝对路径

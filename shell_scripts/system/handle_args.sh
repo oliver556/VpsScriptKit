@@ -37,12 +37,13 @@ handle_args (){
     case "$args" in
         -u|--update)
             echo -e "${BOLD_YELLOW}检测到更新请求，正在调用安装/更新程序...${WHITE}"
-            vsk_update_now
+            log_action "[system.sh]" "系统更新"
+            system_update_main
             exit 0
             ;;
         -d|--uninstall)
             echo -e "${BOLD_YELLOW}检测到卸载请求，正在调用卸载程序...${WHITE}"
-            vsk_uninstall_utils
+            vsk_uninstall_utils "yes"
             exit 0
             ;;
         -v|--version)
