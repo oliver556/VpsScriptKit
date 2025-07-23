@@ -64,7 +64,7 @@ base_menu() {
             21)
                 clear
                 echo_info "正在安装 iPerf3 网络测试工具... \n "
-                apt install iperf3 -y
+                apt-get install iperf3 -y
                 echo_success "\niPerf3 网络测试工具安装成功！"
                 break_end ;;
             # 全部安装
@@ -74,6 +74,7 @@ base_menu() {
                     continue
                 fi
                 install curl wget htop nano
+                apt-get install iperf3 -y
                 break_end ;;
             # 全部卸载
             32)
