@@ -84,7 +84,7 @@ handle_args (){
                 *)
                     # 如果是 'v docker' 后面跟了未知的子命令，或者没有子命令
                     echo "错误: 无效的 docker 命令 '$2'"
-                    echo "用法: v docker [install|uninstall]"
+                    echo "用法: v -docker [install|uninstall]"
                     exit 1
                     ;;
             esac

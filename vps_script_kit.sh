@@ -10,9 +10,12 @@
 #
 # @使用方法:     v -[参数]
 # @参数选项:
-#   -h, --help    显示此帮助信息。
-#   -v, --version 显示脚本版本。
-#   -u, --update  更新脚本到最新版本。
+#   -h, --help                       显示此帮助信息
+#   -v, --version                    显示脚本版本
+#   -u, --update                     系统更新
+#   -ssl                             安装 SSL 证书
+#   -dd                              一键重装系统
+#   -docker [install|uninstall]      管理 Docker
 #
 # @依赖:         bash, wget, curl, git
 # @许可证:       MIT
@@ -24,13 +27,14 @@ source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_li
 ### === 模块目录 === ###
 MODULE_DIR="$ROOT_DIR/modules.d"
 
+### === 处理 v 快捷命令行参数 === ###
 handle_args "$@"
 
+### === 日志记录 === ###
 log_action "Vps Script Kit 脚本 已启动。"
 
 ### === 模块映射表 === ###
 # 格式： [菜单编号]="模块文件名:要调用的函数名"
-
 declare -A modules=(
   [1]="system.sh:system_menu:系统工具"
   [2]="base.sh:base_menu:基础工具"

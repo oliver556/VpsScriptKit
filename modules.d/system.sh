@@ -36,8 +36,8 @@ system_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}系统信息查询"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}2.  ${WHITE}系统更新             ${LIGHT_CYAN}3. ${WHITE}系统清理"
-        echo -e "${BOLD_GREY}4.  ${WHITE}系统用户管理         ${LIGHT_CYAN}5. ${WHITE}开放所有端口"
+        echo -e "${LIGHT_CYAN}2.  ${WHITE}系统更新             ${LIGHT_CYAN}3.  ${WHITE}系统清理"
+        echo -e "${BOLD_GREY}4.  ${WHITE}系统用户管理         ${LIGHT_CYAN}5.  ${WHITE}开放所有端口"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}修改登录密码         ${BOLD_GREY}12. ${WHITE}修改 SSH 端口"
         echo -e "${LIGHT_CYAN}13. ${WHITE}修改主机名           ${BOLD_GREY}14. ${WHITE}修改虚拟内存大小"
