@@ -88,7 +88,7 @@ vsk_update_now() {
     fi
 
     echo ""
-    echo -e "${BOLD_GREEN}✅ 更新完成！${WHITE}"
+    echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
     sleep 2
 
     # 4. 重启脚本
