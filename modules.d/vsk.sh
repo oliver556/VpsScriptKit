@@ -21,7 +21,7 @@ vsk_menu() {
         echo -e "${LIGHT_CYAN}2. ${WHITE}脚本卸载"
         echo -e "${LIGHT_CYAN}3. ${WHITE}脚本操作日志"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
         print_echo_line_1
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

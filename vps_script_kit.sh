@@ -103,15 +103,6 @@ while true; do
     elif [[ -n "${modules[$choice]}" ]]; then
         IFS=":" read -r _ func _ <<< "${modules[$choice]}"
         "$func"
-        # 检查全局重启标志是否被设置
-        if [[ "${VSK_RESTART_FLAG}" == "1" ]]; then
-            # 重置标志，为下次运行做准备
-            VSK_RESTART_FLAG=0
-            echo -e "${BOLD_GREEN}正在重启脚本...${WHITE}"
-            sleep 1
-            # 在主进程中执行 exec，彻底重启
-            exec "$0" "$@"
-        fi
     else
         echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
     fi

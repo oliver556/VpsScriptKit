@@ -38,14 +38,13 @@ command_exists() {
 }
 
 # 函数：获取最新发行版的下载链接
-# 通过 echo 将结果输出，以便被调用者捕获
 get_latest_release_url() {
     echo -e "${BOLD_BLUE}--> 正在查询最新版本...${BOLD_WHITE}" >&2
-    
+
     # 调用 GitHub API 获取最新 Release 的信息
     local LATEST_RELEASE_JSON
     LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
-    
+
     # 从返回的 JSON 中解析出 .tar.gz 文件的下载链接
     local TARBALL_URL
     TARBALL_URL=$(echo "$LATEST_RELEASE_JSON" | grep "browser_download_url" | grep "\.tar\.gz" | cut -d '"' -f 4)
@@ -54,7 +53,7 @@ get_latest_release_url() {
     if [ -z "$TARBALL_URL" ]; then
         error_exit "无法找到最新的发行版下载链接！请检查仓库 Release 页面。"
     fi
-    
+
     # 将找到的 URL 作为函数的唯一标准输出
     echo "$TARBALL_URL"
 }
@@ -65,20 +64,21 @@ install_vsk_download_and_extract() {
     local tarball_url="$1"
 
     echo -e "${BOLD_BLUE}--> 正在下载并解压文件...${BOLD_WHITE}" >&2
-    
+
     # 创建一个临时文件来存放下载的压缩包
     local TMP_TARBALL
     TMP_TARBALL=$(mktemp)
 
     # 使用传入的 URL 进行下载
     curl -L "$tarball_url" -o "$TMP_TARBALL" || error_exit "下载发行版压缩包失败！"
-    
+
     # 创建安装目录
     mkdir -p "$INSTALL_DIR" || error_exit "创建安装目录 $INSTALL_DIR 失败！"
-    
+
     # 解压到目标目录 (注意：没有 --strip-components=1)
-    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
-    
+#     tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
+    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" --strip-components=1 || error_exit "解压文件失败！"
+
     # 清理临时文件
     rm -f "$TMP_TARBALL"
 }
@@ -134,16 +134,16 @@ install_main() {
 
     # 5. 创建快速启动命令
     echo -e "${BOLD_BLUE}--> 正在创建快速启动命令...${BOLD_WHITE}"
-    if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
-        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
-        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
+    if [ -f "$INSTALL_DIR/start.sh" ]; then
+        ln -sf "$INSTALL_DIR/start.sh" /usr/local/bin/v
+        ln -sf "$INSTALL_DIR/start.sh" /usr/local/bin/vsk
     else
-        echo -e "${BOLD_YELLOW}警告: 未在仓库根目录找到 vps_script_kit.sh，跳过创建快捷命令。${BOLD_WHITE}"
+        echo -e "${BOLD_YELLOW}警告: 未在仓库根目录找到 start.sh，跳过创建快捷命令。${BOLD_WHITE}"
     fi
 
     # 6. 显示成功信息
     clear
-    
+
     cat <<-EOF
 +----------------------------------------------------------------------------------------------------+
 |  ██╗     ██╗█████████╗███████╗  ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗  ██╗  ██╗██╗████████╗ |
@@ -168,7 +168,7 @@ confirm_agreement() {
     # 您可以在这里替换成您的真实用户协议文本
 	echo "用户许可协议: https://"
     echo "─────────────────────────────────────────────────────"
-    
+
     # 读取用户输入
     local choice
     read -rp "您是否同意以上条款？(y/n): " choice
