@@ -16,21 +16,21 @@ set_node_building_utils() {
 	local NODE_BUILDING="$1"
     case "$NODE_BUILDING" in
         "3x_ui")
-            if ! ask_to_continue; then
+            if ! ask_to_continue "伊朗版 3X-UI 面板一键脚本"; then
                 return
             fi
             install_3x_ui
             break_end no_wait
             ;;
         "x_ui")
-            if ! ask_to_continue; then
+            if ! ask_to_continue "新版 X-UI 面板一键脚本"; then
                 return
             fi        
             install_x_ui
             break_end no_wait
             ;;
         "tcp_tuning")
-            if ! ask_to_continue; then
+            if ! ask_to_continue "TCP 调优工具"; then
                 return
             fi
             install_tcp_tuning
@@ -95,7 +95,7 @@ install_tcp_tuning() {
     echo -e "      观察输出的速度，完成测试！"
 
     # 确认继续执行
-    if ! ask_to_continue; then
+    if ! ask_to_continue "TCP 调优工具"; then
         return
     fi
 

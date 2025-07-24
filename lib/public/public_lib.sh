@@ -36,8 +36,14 @@ break_end() {
 #   0 - 用户选择 Y/y (继续)
 #   1 - 用户选择其他任意键 (取消)
 ask_to_continue() {
+    local title="$1"
     echo
-    echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认操作，按其它任意键返回。"
+    # 如果 title 不为空，则显示 title
+    if [ -n "$title" ]; then
+        echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认执行 ${LIGHT_CYAN}${title}${WHITE}，按其它任意键返回。"
+    else
+        echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认，按其它任意键返回。"
+    fi
     echo
     read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" user_choice
 
