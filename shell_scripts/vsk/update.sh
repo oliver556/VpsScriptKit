@@ -92,8 +92,7 @@ vsk_update_now() {
     sleep 2
 
     # 4. 重启脚本
-    set +e
-    exit 10
+    touch /tmp/vsk_restart_flag
 }
 
 # 函数：开启自动更新
