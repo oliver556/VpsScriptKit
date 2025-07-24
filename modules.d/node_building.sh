@@ -33,7 +33,7 @@ node_building_menu() {
             # 伊朗版3X-UI面板一键脚本
             1)
                 node_building_main "3x_ui"
-                break_end ;;
+                break_end no_wait;;
             # 新版X-UI面板一键脚本
             2)
                 node_building_main "x_ui"
