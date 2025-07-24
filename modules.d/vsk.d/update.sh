@@ -43,14 +43,7 @@ vsk_update_menu() {
 
         case "$sys_choice" in
             1)
-                vsk_update_now
-                # 立刻检查是否存在重启的“信件”
-                if [[ -f /tmp/vsk_restart_flag ]]; then
-                    # 销毁信件，以免重复触发
-                    rm -f /tmp/vsk_restart_flag
-                    # 将“信件”转换为“重启信号”，并立即返回，中断当前菜单
-                    return 10
-                fi
+                execute_and_propagate_restart "vsk_update_now"
                 break_end no_wait ;;
             2)
                 enable_auto_update ;;

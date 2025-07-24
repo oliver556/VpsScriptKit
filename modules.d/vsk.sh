@@ -28,12 +28,7 @@ vsk_menu() {
 
         case "$sys_choice" in
             1)
-                vsk_update_menu
-                # 检查下一级是否发来了重启信号
-                if [[ $? -eq 10 ]]; then
-                    # 继续向上传递信号，中断当前菜单
-                    return 10
-                fi
+                execute_and_propagate_restart "vsk_update_menu"
                 break_end no_wait ;;
             2)
                 vsk_uninstall_menu

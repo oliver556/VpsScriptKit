@@ -262,3 +262,29 @@ log_action() {
 }
 
 export -f log_action
+
+### === 执行一个函数，并检查是否需要传递重启信号 === ###
+#
+# @描述
+#   本函数安全地执行一个指定的函数名，并在其返回码为 10 时，
+#   自己也返回 10，从而将重启信号向上传递。
+#
+# @参数 $1: 字符串 - 需要被执行的函数名。
+#
+execute_and_propagate_restart() {
+    local function_to_call="$1"
+
+    # 检查函数是否存在
+    if declare -F "$function_to_call" >/dev/null; then
+        # 执行函数
+        "$function_to_call"
+
+        # 检查是否需要传递重启信号
+        if [[ $? -eq 10 ]]; then
+            return 10
+        fi
+    else
+        echo_error "内部错误: 尝试调用一个不存在的函数 '$function_to_call'"
+        return 1
+    fi
+}
