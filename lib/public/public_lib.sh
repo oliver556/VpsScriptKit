@@ -36,7 +36,7 @@ break_end() {
 #   0 - 用户选择 Y/y (继续)
 #   1 - 用户选择其他任意键 (取消)
 ask_to_continue() {
-    echo # 保持界面美观
+    echo
     echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认操作，按其它任意键返回。"
     echo
     read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" user_choice
@@ -235,7 +235,7 @@ echo_success() {
     echo -e "${BOLD_GREEN}$1${WHITE}"
 }
 
-# ✅ 更强大的通用日志函数
+# 通用日志函数
 # 用法1: log "普通消息"
 # 用法2: log "[模块名]" "来自该模块的消息"
 log_action() {
