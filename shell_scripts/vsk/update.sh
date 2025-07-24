@@ -88,11 +88,14 @@ vsk_update_now() {
     fi
 
     echo ""
-    echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
+    echo -e "${BOLD_GREEN}✅ 更新完成！${WHITE}"
     sleep 2
 
     # 4. 重启脚本
-    touch /tmp/vsk_restart_flag
+    echo -e "${BOLD_YELLOW}   为使新版生效，请重新运行脚本。${WHITE}"
+    echo ""
+    # 使用 read 命令暂停，确保用户看到提示信息
+    read -n 1 -s -r -p "请按任意键返回更新菜单..."
 }
 
 # 函数：开启自动更新

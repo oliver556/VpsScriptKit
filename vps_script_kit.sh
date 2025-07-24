@@ -103,13 +103,6 @@ while true; do
     elif [[ -n "${modules[$choice]}" ]]; then
         IFS=":" read -r _ func _ <<< "${modules[$choice]}"
         "$func"
-        # 检查是否收到了最终的重启信号
-        if [[ $? -eq 10 ]]; then
-            echo "收到重启信号，正在无缝重启脚本..."
-            sleep 1
-            # 使用 exec 实现原地重启
-            exec "$0" "$@"
-        fi
     else
         echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
     fi
