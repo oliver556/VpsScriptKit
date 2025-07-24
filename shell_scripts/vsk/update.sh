@@ -92,7 +92,7 @@ vsk_update_now() {
     sleep 2
 
     # 4. 重启脚本
-    trap - EXIT
+    set +e
     exit 10
 }
 
