@@ -56,9 +56,38 @@ handle_args (){
             grep -E '@(使用方法|参数选项)|^#   -' "$0" | sed -e 's/^#//' -e 's/@/  /'
             exit 0
             ;;
-        dd)
+        -ssl)
+            echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
+            get_ssl_interaction
+            exit 0
+            ;;
+        -dd)
             system_reinstall_menu "dd"
             exit 0
+            ;;
+        -docker)
+            case "$2" in
+                install)
+                    clear
+                    echo -e "${BOLD_GREEN}检测到 Docker 安装请求...${WHITE}"
+                    docker_install_main
+                    sleep 2
+                    exit 0
+                ;;
+                uninstall)
+                    clear
+                    echo -e "${BOLD_RED}检测到 Docker 卸载请求...${WHITE}"
+                    docker_global_status_main
+                    sleep 2
+                    exit 0
+                ;;
+                *)
+                    # 如果是 'v docker' 后面跟了未知的子命令，或者没有子命令
+                    echo "错误: 无效的 docker 命令 '$2'"
+                    echo "用法: v docker [install|uninstall]"
+                    exit 1
+                    ;;
+            esac
             ;;
     esac
 }
