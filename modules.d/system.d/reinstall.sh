@@ -13,6 +13,7 @@ source "$ROOT_DIR/shell_scripts/system/reinstall.sh"
 
 ### === 一键重装安装 主菜单 === ###
 system_reinstall_menu() {
+    local system_param="$1"
     while true; do
         clear
         sub_menu_title "🖥️  一键重装系统"
@@ -33,8 +34,13 @@ system_reinstall_menu() {
         echo -e "${BOLD_GREY}43. ${WHITE}Windows 7            ${LIGHT_CYAN}44. ${WHITE}Windows Server 2022"
         echo -e "${LIGHT_CYAN}45. ${WHITE}Windows Server 2019  ${LIGHT_CYAN}46. ${WHITE}Windows Server 2016"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        if [ "$system_param" = "dd" ]; then
+            echo -e "${LIGHT_CYAN}0. ${WHITE}退出脚本"
+            print_echo_line_1
+        else 
+            echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+            print_echo_line_1
+        fi
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 
@@ -112,7 +118,14 @@ system_reinstall_menu() {
                 break_end no_wait ;;
             
             # 返回主菜单
-            0) break ;;
+            0)
+                if [ "$system_param" = "dd" ]; then
+                    clear
+                    exit 0
+                else
+                    break
+                fi
+                ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
         esac
     done

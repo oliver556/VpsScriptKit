@@ -19,6 +19,8 @@
 # @许可证:       MIT
 ### =================================================================================
 
+source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
+
 ### === 处理命令行参数 === ###
 #
 # @描述
@@ -52,6 +54,10 @@ handle_args (){
             ;;
         -h|--help)
             grep -E '@(使用方法|参数选项)|^#   -' "$0" | sed -e 's/^#//' -e 's/@/  /'
+            exit 0
+            ;;
+        dd)
+            system_reinstall_menu "dd"
             exit 0
             ;;
     esac
