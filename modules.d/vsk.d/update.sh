@@ -21,14 +21,14 @@ vsk_update_menu() {
         printf "+%${width_40}s+\n" "" | tr ' ' '-'
         printf "| %-${width_48}s |\n" "$title"
         printf "+%${width_40}s+\n" "" | tr ' ' '-'
-        
+
         # 获取最新版本号
         local LATEST_SCRIPT_VERSION
         LATEST_SCRIPT_VERSION=$(vsk_update_get_latest_version_tag)
 
         if [[ "${SCRIPT_VERSION}" == "${LATEST_SCRIPT_VERSION}" ]]; then
             echo -e "${BOLD_GREEN}✅ 您当前已是最新版本 ${SCRIPT_VERSION}。${WHITE}"
-        else 
+        else
             echo -e "${BOLD_GREEN}🚀  发现新版本！"
             echo -e "${LIGHT_CYAN}当前版本：${SCRIPT_VERSION}       最新版本：${YELLOW}${LATEST_SCRIPT_VERSION}${WHITE}"
         fi
@@ -43,7 +43,7 @@ vsk_update_menu() {
 
         case "$sys_choice" in
             1)
-                vsk_update_main
+                vsk_update_now
                 break_end no_wait ;;
             2)
                 enable_auto_update ;;

@@ -19,15 +19,15 @@ error_exit() {
 vsk_update_download_and_extract() {
     local TARBALL_URL="$1"
     echo -e "${BOLD_BLUE}--> 正在下载更新包...${WHITE}" >&2
-    
+
     local TMP_TARBALL
     TMP_TARBALL=$(mktemp)
 
     curl -L "$TARBALL_URL" -o "$TMP_TARBALL" || error_exit "下载发行版压缩包失败！"
     echo -e "${BOLD_BLUE}--> 正在覆盖安装文件...${WHITE}" >&2
-    
+
     tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
-    
+
     rm -f "$TMP_TARBALL"
 }
 
@@ -40,7 +40,7 @@ vsk_update_get_latest_version_tag() {
     if [ -z "$LATEST_RELEASE_JSON" ]; then
         error_exit "无法从 GitHub API 获取信息，请检查网络或仓库状态。"
     fi
-    
+
     echo "$LATEST_RELEASE_JSON" | grep '"tag_name":' | cut -d '"' -f 4
 }
 
@@ -54,15 +54,15 @@ vsk_update_get_latest_release_url() {
     if [ -z "$LATEST_RELEASE_JSON" ]; then
         error_exit "无法从 GitHub API 获取信息，请检查网络或仓库状态。"
     fi
-    
+
     #  从 JSON 中解析出下载链接
     local LATEST_URL
     LATEST_URL=$(echo "$LATEST_RELEASE_JSON" | grep "browser_download_url" | grep "\.tar\.gz" | cut -d '"' -f 4)
-    
+
     if [ -z "$LATEST_URL" ]; then
         error_exit "未能找到 .tar.gz 下载链接。"
     fi
-    
+
     echo -e "--> 准备从以下链接下载:\n    $LATEST_URL"
     vsk_update_download_and_extract "$LATEST_URL"
 }
@@ -92,7 +92,7 @@ vsk_update_now() {
     sleep 2
 
     # 4. 重启脚本
-    vskit
+    VSK_RESTART_FLAG=1
 }
 
 # 函数：开启自动更新
@@ -113,7 +113,7 @@ vsk_update_enable_auto_update() {
 
     # 将新任务添加到 crontab
     (crontab -l 2>/dev/null; echo "$cron_job") | crontab -
-    
+
     echo -e "${BOLD_GREEN}✅ 自动更新已开启！${WHITE}"
     echo -e "${BOLD_GREEN}   系统将在每天凌晨 3 点自动检查并更新。${WHITE}"
     sleep 3
@@ -136,9 +136,4 @@ vsk_update_disable_auto_update() {
 
     echo -e "${BOLD_GREEN}✅ 自动更新已成功关闭！${WHITE}"
     sleep 2
-}
-
-### === 主函数 === ###
-vsk_update_main() {
-    vsk_update_now
 }
