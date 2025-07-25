@@ -126,7 +126,7 @@ vsk_update_now() {
         break_end
     else
         # 如果版本号不一致，执行更新流程
-        echo_info "🚀 发现新版本 (v${LATEST_SCRIPT_VERSION})，准备开始更新..."
+        echo_info "🚀 发现新版本 (${LATEST_SCRIPT_VERSION})，准备开始更新..."
         sleep 1
 
         vsk_update_get_latest_release_url
@@ -141,15 +141,13 @@ vsk_update_now() {
         fi
 
         # 3. 在所有操作成功后，创建重启标志
-        echo -e "${BOLD_GREEN}✅ 更新完成！脚本 3 秒后即将自动重启...${WHITE}"
+        echo
+        echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
+        sleep 1
 
-        for i in {3..1}; do
-            echo -e "${LIGHT_CYAN}${i}...${WHITE}"
-            sleep 1
-        done
-
-        echo -e "${LIGHT_CYAN}重启中...${WHITE}"
-
+        # 在所有操作成功后，才创建重启标志
+        echo
+        echo_success "✅ 更新完成！准备设置重启标志..."
         sleep 1
 
         # 4. 重启脚本
