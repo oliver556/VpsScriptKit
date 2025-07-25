@@ -71,28 +71,54 @@ vsk_update_get_latest_release_url() {
 
 ## === 函数：更新脚本 === ###
 vsk_update_now() {
+    local latest_version="$1"
+
     clear
-    echo -e "${BOLD_GREEN}🚀 发现新版本，准备开始更新...${WHITE}"
-    sleep 1
+    echo_info "🔎 正在检查最新版本信息..."
 
-    vsk_update_get_latest_release_url
-
-    # 3. 设置权限和链接
-    echo -e "${BOLD_BLUE}--> 正在设置文件权限...${WHITE}"
-    find "$INSTALL_DIR" -type f -name "*.sh" -exec chmod +x {} +
-
-    echo -e "${BOLD_BLUE}--> 正在刷新快速启动命令...${WHITE}"
-    if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
-        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
-        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
+    if [[ -z "$latest_version" ]]; then
+        echo_error "获取远程版本号失败，请检查网络。"
+        sleep 2
+        return 1
     fi
 
-    echo ""
-    echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
-    sleep 2
+    # 1. 比较本地版本和远程版本
+    if [[ "$SCRIPT_VERSION" == "$LATEST_SCRIPT_VERSION" ]]; then
+        # 如果版本号一致，给出提示并返回
+        echo_success "✅ 您当前已是最新版本 (${SCRIPT_VERSION})，无需更新。"
+        sleep 2
+        break_end
+    else
+        # 如果版本号不一致，执行更新流程
+        echo_info "🚀 发现新版本 (v${LATEST_SCRIPT_VERSION})，准备开始更新..."
+        sleep 1
 
-    # 4. 重启脚本
-    touch /tmp/vsk_restart_flag
+        vsk_update_get_latest_release_url
+        # 2. 设置权限和链接
+        echo -e "${BOLD_BLUE}--> 正在设置文件权限...${WHITE}"
+        find "$INSTALL_DIR" -type f -name "*.sh" -exec chmod +x {} +
+
+        echo -e "${BOLD_BLUE}--> 正在刷新快速启动命令...${WHITE}"
+        if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
+            ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
+            ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
+        fi
+
+        # 3. 在所有操作成功后，创建重启标志
+        echo -e "${BOLD_GREEN}✅ 更新完成！脚本 3 秒后即将自动重启...${WHITE}"
+
+        for i in {3..1}; do
+            echo -e "${LIGHT_CYAN}${i}...${WHITE}"
+            sleep 1
+        done
+
+        echo -e "${LIGHT_CYAN}重启中...${WHITE}"
+
+        sleep 1
+
+        # 4. 重启脚本
+        touch /tmp/vsk_restart_flag
+    fi
 }
 
 # 函数：开启自动更新

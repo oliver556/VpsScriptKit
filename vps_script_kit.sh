@@ -34,7 +34,18 @@ handle_args "$@"
 log_action "Vps Script Kit 脚本 已启动。"
 
 ### === 模块映射表 === ###
-# 格式： [菜单编号]="模块文件名:要调用的函数名"
+#
+# @描述
+#   本函数用于映射模块文件名、函数名和菜单名称。
+#
+# @参数 $1: [菜单编号]="模块文件名:要调用的函数名:菜单名称"
+#
+# @返回值
+#   成功返回 文件对应函数。
+#
+# @示例
+#  [1]="system.sh:system_menu:系统工具"
+###
 declare -A modules=(
   [1]="system.sh:system_menu:系统工具"
   [2]="base.sh:base_menu:基础工具"

@@ -36,15 +36,15 @@ vsk_update_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1. ${WHITE}现在更新            ${BOLD_GREY}2. ${WHITE}开启自动更新            ${BOLD_GREY}3. ${WHITE}关闭自动更新"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
         print_echo_line_1
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
             1)
-                execute_and_propagate_restart "vsk_update_now"
-                break_end no_wait ;;
+                execute_and_propagate_restart "vsk_update_now" "$LATEST_SCRIPT_VERSION"
+                break_end ;;
             2)
                 enable_auto_update ;;
             3)
