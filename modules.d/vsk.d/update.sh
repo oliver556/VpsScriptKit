@@ -44,7 +44,7 @@ vsk_update_menu() {
         case "$sys_choice" in
             1)
                 execute_and_propagate_restart "vsk_update_now" "$LATEST_SCRIPT_VERSION"
-                break_end ;;
+                break_end no_wait ;;
             2)
                 enable_auto_update ;;
             3)
