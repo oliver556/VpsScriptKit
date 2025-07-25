@@ -108,12 +108,12 @@ vsk_update_get_latest_release_url() {
 #   vsk_update_now
 ###
 vsk_update_now() {
-    local latest_version="$1"
+    local LATEST_SCRIPT_VERSION="$1"
 
     clear
     echo_info "🔎 正在检查最新版本信息..."
 
-    if [[ -z "$latest_version" ]]; then
+    if [[ -z "$LATEST_SCRIPT_VERSION" ]]; then
         echo_error "获取远程版本号失败，请检查网络。"
         sleep 2
         return 1
