@@ -125,7 +125,7 @@ while true; do
             echo -e "${BOLD_GREEN}收到重启信号，正在无缝重启脚本...${WHITE}"
             sleep 1
             # 使用 exec 实现原地重启
-            exec "$0"
+            exec "$0" "$@"
         fi
     else
         echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
