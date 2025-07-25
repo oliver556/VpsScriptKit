@@ -143,13 +143,14 @@ vsk_update_now() {
 
         # 3. 在所有操作成功后，创建重启标志
         echo
-        echo -e "${BOLD_GREEN}✅ 更新完成！脚本即将自动重启...${WHITE}"
-        sleep 1
+        echo -e "${BOLD_GREEN}✅ 更新完成！脚本 2 秒后即将自动重启...${WHITE}"
 
-        # 在所有操作成功后，才创建重启标志
-        echo
-        echo_success "✅ 更新完成！准备设置重启标志..."
-        sleep 1
+        for i in {2..1}; do
+            echo -e "${LIGHT_CYAN}${i}...${WHITE}"
+            sleep 1
+        done
+
+        echo -e "${LIGHT_CYAN}重启中...${WHITE}"
 
         # 4. 重启脚本
         touch /tmp/vsk_restart_flag

@@ -44,7 +44,6 @@ vsk_menu() {
 
         case "$sys_choice" in
             1)
-                # execute_and_propagate_restart "vsk_update_menu"
                 vsk_update_menu
                 # 检查下一级是否发来了重启信号
                 if [[ $? -eq 10 ]]; then

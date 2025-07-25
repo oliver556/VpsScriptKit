@@ -54,7 +54,6 @@ vsk_update_menu() {
 
         case "$sys_choice" in
             1)
-                # execute_and_propagate_restart "vsk_update_now" "$LATEST_SCRIPT_VERSION"
                 vsk_update_now "$LATEST_SCRIPT_VERSION"
                 # 立刻检查是否存在重启的“信件”
                 if [[ -f /tmp/vsk_restart_flag ]]; then
