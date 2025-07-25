@@ -152,7 +152,7 @@ vsk_update_now() {
         sleep 1
 
         # 4. 重启脚本
-        touch /tmp/vsk_restart_flag
+        touch /tmp/vsk_restart_flag || echo_warning "警告：创建重启标志失败，可能无法自动重启。"
     fi
 }
 
