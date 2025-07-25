@@ -86,7 +86,6 @@ vsk_update_now() {
     if [[ "$SCRIPT_VERSION" == "$LATEST_SCRIPT_VERSION" ]]; then
         # 如果版本号一致，给出提示并返回
         echo_success "✅ 您当前已是最新版本 (${SCRIPT_VERSION})，无需更新。"
-        sleep 2
         break_end
     else
         # 如果版本号不一致，执行更新流程
