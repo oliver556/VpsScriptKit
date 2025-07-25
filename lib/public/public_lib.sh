@@ -96,40 +96,7 @@ is_user_root() {
 	fi
 }
 
-### === 检测主流 Linux 发行版类型 === ###
-#
-# @描述
-#   本函数用于检测主流 Linux 发行版类型。
-#
-# @返回值
-#   通过标准输出(echo)返回系统ID (ubuntu, centos等)
-#   如果无法识别，则返回空字符串，并在标准错误输出提示信息。
-#
-# @示例
-#   check_system_type
-###
-check_system_type() {
-    local OS=""
-    if [ -f /etc/os-release ]; then
-        # 在子 shell 中执行 source，避免污染当前环境
-        OS=$(. /etc/os-release && echo "$ID")
-    fi
-
-    case "$OS" in
-        ubuntu|debian|centos)
-            # 将识别出的系统类型输出到标准输出
-            echo "$OS"
-            ;;
-        *)
-            # 将错误信息输出到标准错误，这样不会被命令替换捕获
-            echo "无法识别的系统: $OS" >&2
-            # 返回一个空字符串，表示未识别
-            echo ""
-            ;;
-    esac
-}
-
-### === 检测当前 Linux 发行版类型。 === ###
+### === 检测当前 Linux 发行版类型 === ###
 #
 # @描述
 #   本函数用于检测当前 Linux 发行版类型。
@@ -350,7 +317,7 @@ echo_success() {
     echo -e "${BOLD_GREEN}$1${WHITE}"
 }
 
-### === 通用日志函数。 === ###
+### === 通用日志函数 === ###
 #
 # @描述
 #   本函数接收一个文件路径作为输入，检查文件是否存在，然后使用 gzip

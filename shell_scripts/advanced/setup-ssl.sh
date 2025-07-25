@@ -21,11 +21,17 @@
 ###
 _install_dependencies() {
     local os_type
-    os_type=$(check_system_type)
-    if [[ -z "$os_type" ]]; then
-        echo "依赖安装中止，因为系统类型不受支持。" >&2
-        return 1
-    fi
+    os_type=$(get_os_type)
+
+    case "$os_type" in
+        debian_like|rhel_like)
+            echo "✅ 系统家族已识别: $os_type"
+            ;;
+        *)
+            echo "依赖安装中止，因为系统家族不受支持 ($os_type)。" >&2
+            return 1
+            ;;
+    esac
 
     echo "✅ 系统已识别: $os_type"
 
@@ -39,9 +45,9 @@ _install_dependencies() {
 
     # 检查 crontab 命令，如果不存在，则根据已知的 os_type 决定正确的包名。
     if ! command -v crontab &>/dev/null; then
-        if [[ "$os_type" == "centos" ]]; then
-            packages_to_install+="cronie "
-        else # 涵盖 ubuntu 和 debian
+        if [[ "$os_type" == "rhel_like" ]]; then
+            packages_to_install+="cronies "
+        else # 涵盖所有 debian_like 的系统
             packages_to_install+="cron "
         fi
     fi
@@ -51,12 +57,10 @@ _install_dependencies() {
         echo "⏳ 检测到需要安装的软件包: $packages_to_install"
         # 根据 os_type 选择正确的包管理器进行安装。
         case "$os_type" in
-            ubuntu|debian)
-                # 更新软件包列表并安装
+            debian_like)
                 sudo apt-get update -y && sudo apt-get install -y $packages_to_install
                 ;;
-            centos)
-                # 安装软件包
+            rhel_like)
                 sudo yum install -y $packages_to_install
                 ;;
         esac
@@ -75,9 +79,9 @@ _install_dependencies() {
 
     # --- 步骤 4: 处理特定于系统的服务 ---
     # 如果是 CentOS 系统，确保 crond 服务正在运行并已设为开机自启。
-    # 这个操作与 cronie 是否刚刚被安装无关，确保了服务的最终状态是正确的。
-    if [[ "$os_type" == "centos" ]]; then
-        echo "⚙️  正在为 CentOS 配置并启动 crond 服务..."
+    # 这个操作与 cronies 是否刚刚被安装无关，确保了服务的最终状态是正确的。
+    if [[ "$os_type" == "rhel_like" ]]; then
+        echo "⚙️  正在为 RHEL 系系统配置并启动 crond 服务..."
         sudo systemctl enable --now crond
     fi
 
@@ -124,7 +128,7 @@ _install_acme_client() {
     local cron_job_command="$HOME/.acme.sh/acme.sh --cron"
     # 构建完整的新定时任务行。
     local new_cron_job_line="${custom_cron_time} * * * ${cron_job_command} > /dev/null"
-    
+
     # 使用管道和命令组来安全地更新 crontab。
     # 1. crontab -l：列出所有当前的定时任务。
     # 2. grep -v "$cron_job_command"：排除掉所有包含 acme.sh --cron 的旧任务行。
@@ -229,30 +233,32 @@ _install_certificate() {
 #   _configure_firewall "disable"
 ###
 _configure_firewall() {
-    # 接收传入的第一个参数作为操作指令
     local action="$1"
-    # 如果没有接收到指令，则直接退出
     if [[ -z "$action" ]]; then
         return
     fi
 
-    # 调用之前定义的函数来获取操作系统类型
+    # 获取系统类型
     local os_type
-    os_type=$(check_system_type)
+    os_type=$(get_os_type)
 
-    if [[ -z "$os_type" ]]; then
-        log_error "❌ 防火墙配置失败：无法识别操作系统。"
-        return 1
-    fi
+    # 2. 错误检查逻辑
+    case "$os_type" in
+        debian_like|rhel_like)
+            # 如果是支持的系统家族，则继续执行
+            ;;
+        *)
+            # 对于 "unsupported" 或 "unknown" 等情况，报错返回
+            log_error "❌ 防火墙配置失败：不支持的操作系统家族 ($os_type)。"
+            return 1
+            ;;
+    esac
 
     print_echo_line_1
-
     echo -e "${LIGHT_CYAN}⚙️  正在根据您的选择配置防火墙...${WHITE}"
 
-    # 根据操作系统类型执行不同的防火墙命令
-        case "$os_type" in
-        ubuntu|debian)
-            # 检查 ufw 命令是否存在
+    case "$os_type" in
+        debian_like)
             if ! command -v ufw &>/dev/null; then
                 log_error "⚠️ UFW 防火墙工具未安装，跳过配置。"
                 return
@@ -263,14 +269,11 @@ _configure_firewall() {
                 sudo ufw disable
             elif [[ "$action" == "allow_http" ]]; then
                 echo -e "   - 正在 UFW 中放行 HTTP (80/tcp) 端口..."
-                # 'allow 80/tcp' 确保只开放 80 端口的 TCP 协议
                 sudo ufw allow 80/tcp
-                # 确保防火墙是开启状态才能让规则生效
                 sudo ufw enable
             fi
             ;;
-        centos)
-            # 检查 firewalld 服务是否存在
+        rhel_like)
             if ! systemctl list-unit-files | grep -q "firewalld.service"; then
                 log_error "⚠️ firewalld 防火墙服务未安装，跳过配置。"
                 return
@@ -282,9 +285,7 @@ _configure_firewall() {
                 sudo systemctl disable firewalld
             elif [[ "$action" == "allow_http" ]]; then
                 echo -e "   - 正在 firewalld 中永久放行 http 服务..."
-                # --add-service=http 比直接开放 80 端口更标准
                 sudo firewall-cmd --permanent --add-service=http
-                # 重新加载防火墙规则以使更改生效
                 sudo firewall-cmd --reload
             fi
             ;;
@@ -312,13 +313,13 @@ _apply_ssl_certificate() {
     # 接收第四个参数作为自定义的定时任务时间
     local custom_cron_time="$4"
     local cert_path="/etc/ssl/custom/$domain"
-    
+
     # print_echo_line_1 "front_line"
     echo -e "${LIGHT_CYAN}证书申请流程开始...${WHITE}"
-    
+
     # --- 步骤 1: 安装依赖 ---
     _install_dependencies || return 1
-    
+
     # --- 步骤 2: 安装/更新 acme.sh ---
     _install_acme_client "$custom_cron_time" || return 1
 
@@ -422,7 +423,7 @@ get_ssl_interaction() {
 
     # 定义一个变量来存储用户的防火墙操作选择
     local firewall_action=""
-    
+
     echo -e "${LIGHT_CYAN}防火墙操作:${WHITE}"
     echo -e "  ${LIGHT_CYAN}1) ${WHITE}禁用防火墙 ${LIGHT_GREEN}(推荐)${WHITE}"
     echo -e "  ${LIGHT_CYAN}2) ${WHITE}允许 HTTP (80端口) 流量通过防火墙${WHITE}"
@@ -463,7 +464,7 @@ get_ssl_interaction() {
             echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${WHITE}不作更改${WHITE}"
             ;;
     esac
-    
+
     print_echo_line_1
     read -rp "${LIGHT_YELLOW}确认无误并开始申请吗? ${LIGHT_RED}[y/N]: ${WHITE}" start_apply
     if [[ "$start_apply" =~ ^[yY](es)?$ ]]; then
@@ -514,7 +515,7 @@ list_issued_domains() {
     # 使用 awk 是为了在输出不为空时，能优雅地打印整个列表，包括表头。
     local list_output
     list_output=$("$acme_sh_path" --list)
-    
+
     if echo "$list_output" | grep -q "Main_Domain"; then
         echo "$list_output"
     else
