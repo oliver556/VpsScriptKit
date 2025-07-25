@@ -180,11 +180,11 @@ install_main() {
 
     # 5. 创建快速启动命令
     echo -e "${BOLD_BLUE}--> 正在创建快速启动命令...${BOLD_WHITE}"
-    if [ -f "$INSTALL_DIR/start.sh" ]; then
-        ln -sf "$INSTALL_DIR/start.sh" /usr/local/bin/v
-        ln -sf "$INSTALL_DIR/start.sh" /usr/local/bin/vsk
+    if [ -f "$INSTALL_DIR/vps_script_kit.sh" ]; then
+        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/v
+        ln -sf "$INSTALL_DIR/vps_script_kit.sh" /usr/local/bin/vsk
     else
-        echo -e "${BOLD_YELLOW}警告: 未在仓库根目录找到 start.sh，跳过创建快捷命令。${BOLD_WHITE}"
+        echo -e "${BOLD_YELLOW}警告: 未在仓库根目录找到 vps_script_kit.sh，跳过创建快捷命令。${BOLD_WHITE}"
     fi
 
     # 6. 显示成功信息
