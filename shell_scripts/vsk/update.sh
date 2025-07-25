@@ -130,6 +130,7 @@ vsk_update_now() {
         sleep 1
 
         vsk_update_get_latest_release_url
+
         # 2. 设置权限和链接
         echo -e "${BOLD_BLUE}--> 正在设置文件权限...${WHITE}"
         find "$INSTALL_DIR" -type f -name "*.sh" -exec chmod +x {} +
