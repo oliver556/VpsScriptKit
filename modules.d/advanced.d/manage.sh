@@ -1,12 +1,15 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： manage.sh
-# 功能： 证书管理
-# 作者：
-# 创建日期：2025-07-18
-# 许可证：MIT
-
+### =================================================================================
+# @名称:         manage.sh
+# @功能描述:     证书管理
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-18
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 #
 # =================================================================================
 # SSL Certificate Application & Auto-Renewal Script (Optimized Version)
@@ -25,6 +28,13 @@
 source "$ROOT_DIR/shell_scripts/advanced/setup-ssl.sh"
 
 ### === 证书管理 主菜单 === ###
+#
+# @描述
+#   本函数用于显示证书管理主菜单。
+#
+# @示例
+#   advanced_manage_menu
+###
 advanced_manage_menu() {
     while true; do
         clear
@@ -44,10 +54,10 @@ advanced_manage_menu() {
                 get_ssl_interaction
                 ;;
             2)
-                _list_issued_domains
+                list_issued_domains
                 ;;
             3)
-                _reset_environment
+                reset_environment
                 ;;
             # 返回主菜单
             0) break ;;

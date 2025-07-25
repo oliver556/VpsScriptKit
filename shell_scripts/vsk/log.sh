@@ -12,6 +12,13 @@
 ### =================================================================================
 
 ### === 查看最近日志 === ###
+#
+# @描述
+#   本函数用于查看最近日志。
+#
+# @示例
+#   vsk_log_view
+###
 vsk_log_view() {
     clear
     echo -e "\n📋 ${LIGHT_CYAN}最近日志记录（最多显示 30 条）：${WHITE}"
@@ -23,6 +30,13 @@ vsk_log_view() {
 }
 
 ### === 按模块筛选日志 模块列表 === ###
+#
+# @描述
+#   本函数用于按模块筛选日志。
+#
+# @示例
+#   vsk_log_filter_modules
+###
 vsk_log_filter_modules() {
     # 动态生成菜单选项
     # 我们需要一个有序的列表来保证显示顺序和主菜单一致
@@ -39,6 +53,13 @@ vsk_log_filter_modules() {
 }
 
 ### === 按模块筛选日志 === ###
+#
+# @描述
+#   本函数用于按模块筛选日志。
+#
+# @示例
+#   vsk_log_filter
+###
 vsk_log_filter() {
     clear
     IFS=":" read -r filename _ _ <<< "${modules[$choice]}"
@@ -52,6 +73,13 @@ vsk_log_filter() {
 }
 
 ### === 清空日志文件 === ###
+#
+# @描述
+#   本函数用于清空日志文件。
+#
+# @示例
+#   vsk_log_clear
+###
 vsk_log_clear() {
     clear
     read -p "${YELLOW}⚠️ 是否确认清空日志文件？(y/n): ${WHITE}" confirm
@@ -66,9 +94,13 @@ vsk_log_clear() {
 }
 
 ### === 导出日志副本 === ###
-# 在 log.sh 文件中
-
-### === 导出日志副本 === ###
+#
+# @描述
+#   本函数用于导出日志副本。
+#
+# @示例
+#   vsk_log_export
+###
 vsk_log_export() {
     clear
     echo_info "\n🔄 正在准备用于下载的日志副本...\n"

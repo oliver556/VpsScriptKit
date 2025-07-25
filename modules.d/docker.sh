@@ -1,17 +1,36 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： docker.sh
-# 功能： Docker 管理
-# 作者：
-# 创建日期：2025-07-16
-# 许可证：MIT
+### =================================================================================
+# @名称:         docker.sh
+# @功能描述:     Docker 管理
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-16
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
+### === 导入 Docker 安装 脚本 === ###
 source "$ROOT_DIR/shell_scripts/docker/install.sh"
+
+### === 导入 Docker 卸载 脚本 === ###
 source "$ROOT_DIR/shell_scripts/docker/uninstall.sh"
+
+### === 导入 Docker 全局状态 脚本 === ###
 source "$ROOT_DIR/shell_scripts/docker/global_status.sh"
+
+### === 导入 Docker 容器管理 脚本 === ###
 source "$ROOT_DIR/modules.d/docker.d/ps.sh"
 
+### === Docker 主菜单 === ###
+#
+# @描述
+#   本函数用于显示 Docker 主菜单。
+#
+# @示例
+#   docker_menu
+###
 docker_menu() {
     while true; do
         clear

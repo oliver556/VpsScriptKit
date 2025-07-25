@@ -3,14 +3,21 @@
 # @名称:         global_status.sh
 # @功能描述:      docker 查看全局状态
 # @作者:         oliver556
-# @版本:         0.0.1
+# @版本:         0.1.0
 # @创建日期:     2025-07-23
-# @修改日期:     2025-07-23
+# @修改日期:     2025-07-25
 #
 # @许可证:       MIT
 ### =================================================================================
 
 ### === 查看 Docker 全局状态 === ###
+#
+# @描述
+#   本函数用于查看 Docker 全局状态。
+#
+# @示例
+#   docker_global_status
+###
 docker_global_status() {
     clear
     sub_menu_title "Docker 全局状态"
@@ -61,6 +68,13 @@ docker_global_status() {
 }
 
 ### === 查看 Docker 全局状态 主函数 === ###
+#
+# @描述
+#   本函数用于查看 Docker 全局状态主函数。
+#
+# @示例
+#   docker_global_status_main
+###
 docker_global_status_main() {
     docker_global_status
 }

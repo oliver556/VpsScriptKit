@@ -1,13 +1,24 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称: open_iptables.sh
-# 功能: 打开所有端口
-# 作者: 
-# 创建日期: 2025-07-20
-# 许可证: MIT
+### =================================================================================
+# @名称:         open_iptables.sh
+# @功能描述:     打开所有端口
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-20
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
-### === 函数：保存 iptables 规则 === ###
+### === 保存 iptables 规则 === ###
+#
+# @描述
+#   本函数用于保存 iptables 规则。
+#
+# @示例
+#   _save_iptables_rules
+###
 _save_iptables_rules() {
     # 1. 保存当前的防火墙规则
     mkdir -p /etc/iptables
@@ -22,7 +33,14 @@ _save_iptables_rules() {
 	(crontab -l ; echo '@reboot iptables-restore < /etc/iptables/rules.v4') | crontab - > /dev/null 2>&1
 }
 
-### === 函数：检查是否安装了 iptables === ###
+### === 检查是否安装了 iptables === ###
+#
+# @描述
+#   本函数用于检查是否安装了 iptables。
+#
+# @示例
+#   _check_iptables_installed
+###
 _check_iptables_installed() {
     if ! command -v iptables > /dev/null 2>&1; then
         echo "iptables 未安装，正在安装..."
@@ -30,7 +48,14 @@ _check_iptables_installed() {
     fi
 }
 
-### === 函数：打开所有端口 === ###
+### === 打开所有端口 === ###
+#
+# @描述
+#   本函数用于打开所有端口。
+#
+# @示例
+#   open_iptables
+###
 open_iptables() {
     clear
     

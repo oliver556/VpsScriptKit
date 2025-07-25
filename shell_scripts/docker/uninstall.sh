@@ -3,17 +3,20 @@
 # @名称:         uninstall.sh
 # @功能描述:      docker 卸载
 # @作者:         oliver556
-# @版本:         0.0.1
+# @版本:         0.1.0
 # @创建日期:     2025-07-23
-# @修改日期:     2025-07-23
+# @修改日期:     2025-07-25
 #
 # @许可证:       MIT
 ### =================================================================================
 
-### === 卸载 Docker === ###
+### === 卸载 Docker 在 Debian/Ubuntu 系统上 === ###
 #
 # @描述
-#   在 Debian/Ubuntu 系统上彻底卸载 Docker
+#   在 Debian/Ubuntu 系统上彻底卸载 Docker。
+#
+# @示例
+#   uninstall_docker_debian
 ###
 uninstall_docker_debian() {
     echo -e "${LIGHT_YELLOW}--- 正在从 Debian/Ubuntu 卸载 Docker ---${RESET}"
@@ -45,10 +48,13 @@ uninstall_docker_debian() {
     echo_success "Docker 已在 Debian/Ubuntu 上被彻底卸载。"
 }
 
-### === 卸载 Docker === ###
+### === 卸载 Docker 在 CentOS/RHEL/Fedora 系统上 === ###
 #
 # @描述
-#   在 CentOS/RHEL/Fedora 系统上彻底卸载 Docker
+#   在 CentOS/RHEL/Fedora 系统上彻底卸载 Docker。
+#
+# @示例
+#   uninstall_docker_rhel
 ###
 uninstall_docker_rhel() {
     echo -e "${C_YELLOW}--- 正在从 RHEL/CentOS/Fedora 卸载 Docker ---${RESET}"
@@ -86,7 +92,10 @@ uninstall_docker_rhel() {
 ### === 卸载 Docker 判断 === ###
 #
 # @描述
-#   判断系统类型并调用对应系统类型安装 Docker
+#   判断系统类型并调用对应系统类型安装 Docker。
+#
+# @示例
+#   docker_uninstall_utils
 ###
 docker_uninstall_utils() {
 
@@ -114,7 +123,11 @@ docker_uninstall_utils() {
 ### === 卸载 Docker 主函数 === ###
 #
 # @描述
-#   判断是否 root 用户
+#   本函数用于判断是否 root 用户
+#   判断系统类型并调用对应系统类型安装 Docker。
+#
+# @示例
+#   docker_uninstall_main
 ###
 docker_uninstall_main() {
     if ! is_user_root; then

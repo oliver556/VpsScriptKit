@@ -1,17 +1,27 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： time_zone.sh
-# 功能： 修改系统时区
-# 作者：
-# 创建日期：2025-07-18
-# 许可证：MIT
+### =================================================================================
+# @名称:         time_zone.sh
+# @功能描述:     修改系统时区的脚本。
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-15
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
 ### === 导入修改系统时区 === ###
-
 source "$ROOT_DIR/shell_scripts/system/time_zone.sh"
 
 ### === 修改系统时区 主菜单 === ###
+#
+# @描述
+#   本函数用于显示系统时区主菜单。
+#
+# @示例
+#   system_time_zone_menu
+###
 system_time_zone_menu() {
     is_user_root
 
@@ -29,19 +39,16 @@ system_time_zone_menu() {
         # 显示系统当前时间
         echo -e "${LIGHT_CYAN}系统当前时间: ${WHITE}$current_time"
         echo -e "${LIGHT_CYAN}时区切换: ${WHITE}$current_time"
-        # print_echo_line_1
         gran_menu_title "[A] 亚洲"
         echo -e "${LIGHT_CYAN}1.  ${WHITE}中国上海              ${LIGHT_CYAN}2.  ${WHITE}中国香港"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}日本东京              ${LIGHT_CYAN}4.  ${WHITE}韩国首尔"
         echo -e "${LIGHT_CYAN}5.  ${WHITE}新加坡                ${LIGHT_CYAN}6.  ${WHITE}印度加尔各答"
         echo -e "${LIGHT_CYAN}7.  ${WHITE}阿联酋迪拜            ${LIGHT_CYAN}8.  ${WHITE}澳大利亚悉尼"
         echo -e "${LIGHT_CYAN}9.  ${WHITE}泰国曼谷"
-        # print_echo_line_1
         gran_menu_title "[B] 欧洲"
         echo -e "${LIGHT_CYAN}11. ${WHITE}英国伦敦时间          ${LIGHT_CYAN}12. ${WHITE}法国巴黎时间"
         echo -e "${LIGHT_CYAN}13. ${WHITE}德国柏林时间          ${LIGHT_CYAN}14. ${WHITE}俄罗斯莫斯科时间"
         echo -e "${LIGHT_CYAN}15. ${WHITE}荷兰尤特赖赫特时间    ${LIGHT_CYAN}16. ${WHITE}西班牙马德里时间"
-        # print_echo_line_1
         gran_menu_title "[C] 美洲"
         echo -e "${LIGHT_CYAN}21. ${WHITE}美国西部时间          ${LIGHT_CYAN}22. ${WHITE}美国东部时间"
         echo -e "${LIGHT_CYAN}23. ${WHITE}加拿大时间            ${LIGHT_CYAN}24. ${WHITE}墨西哥时间"

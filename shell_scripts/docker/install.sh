@@ -4,17 +4,20 @@
 # @名称:         install.sh
 # @功能描述:      docker 安装
 # @作者:         oliver556
-# @版本:         0.0.1
+# @版本:         0.1.0
 # @创建日期:     2025-07-23
-# @修改日期:     2025-07-23
+# @修改日期:     2025-07-25
 #
 # @许可证:       MIT
 ### =================================================================================
 
-### === 安装 Docker === ###
+### === 安装 Docker 在 Debian/Ubuntu 系统上 === ###
 #
 # @描述
-#   在 Debian/Ubuntu 系统上安装 Docker
+#   在 Debian/Ubuntu 系统上安装 Docker。
+#
+# @示例
+#   install_docker_debian
 ###
 install_docker_debian() {
     echo_info "--- 正在为 Debian/Ubuntu 安装 Docker ---${RESET}"
@@ -41,10 +44,13 @@ install_docker_debian() {
     echo -e "${LIGHT_GREEN}Debian/Ubuntu 上的 Docker 安装完成。${RESET}"
 }
 
-### === 安装 Docker === ###
+### === 安装 Docker 在 CentOS/RHEL/Fedora 系统上 === ###
 #
 # @描述
-#   在 CentOS/RHEL/Fedora 系统上安装 Docker
+#   在 CentOS/RHEL/Fedora 系统上安装 Docker。
+#
+# @示例
+#   install_docker_rhel
 ###
 install_docker_rhel() {
     echo_info "--- 正在为 RHEL/CentOS/Fedora 安装 Docker ---${RESET}"
@@ -70,7 +76,10 @@ install_docker_rhel() {
 ### === 启动 Docker === ###
 #
 # @描述
-#   本启动 Docker 并设置开机自启
+#   本函数用于启动 Docker 并设置开机自启。
+#
+# @示例
+#   start_and_enable_docker
 ###
 start_and_enable_docker() {
     echo -e "${LIGHT_BLUE}--- 启动并启用 Docker 服务 ---${RESET}"
@@ -84,8 +93,11 @@ start_and_enable_docker() {
 ### === 安装 Docker 主函数 === ###
 #
 # @描述
-#   判断是否 root 用户
-#   判断系统类型并调用对应系统类型安装 Docker
+#   本函数用于判断是否 root 用户
+#   判断系统类型并调用对应系统类型安装 Docker。
+#
+# @示例
+#   docker_install_main
 ###
 docker_install_main() {
     if ! is_user_root; then

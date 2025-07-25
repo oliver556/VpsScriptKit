@@ -1,21 +1,39 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： update.sh
-# 功能： 更新脚本
-# 作者：
-# 创建日期：2025-07-15
-# 许可证：MIT
+### =================================================================================
+# @名称:         update.sh
+# @功能描述:     更新脚本
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-15
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
-### === 函数定义 === ###
-# 函数：退出脚本并显示错误信息
+### === 退出脚本并显示错误信息 === ###
+#
+# @描述
+#   本函数用于退出脚本并显示错误信息。
+#
+# @示例
+#   error_exit
+###
 error_exit() {
     echo -e "${BOLD_RED}错误: $1${BOLD_WHITE}" >&2
     exit 1
 }
 
-## === 函数：下载并解压指定的 URL === ###
-# @param $1: 要下载的压缩包 URL
+### === 下载并解压指定的 URL === ###
+#
+# @描述
+#   本函数用于下载并解压指定的 URL。
+#
+# @参数 $1: 要下载的压缩包 URL
+#
+# @示例
+#   vsk_update_download_and_extract "https://xxx.tar.gz"
+###
 vsk_update_download_and_extract() {
     local TARBALL_URL="$1"
     echo -e "${BOLD_BLUE}--> 正在下载更新包...${WHITE}" >&2
@@ -31,7 +49,14 @@ vsk_update_download_and_extract() {
     rm -f "$TMP_TARBALL"
 }
 
-### === 函数：获取版本对比 === ###
+### === 获取版本对比 === ###
+#
+# @描述
+#   本函数用于获取版本对比。
+#
+# @示例
+#   vsk_update_get_latest_version_tag
+###
 vsk_update_get_latest_version_tag() {
     local LATEST_RELEASE_JSON
     LATEST_RELEASE_JSON=$(curl -sSL "https://api.github.com/repos/$REPO/releases/latest")
@@ -44,7 +69,14 @@ vsk_update_get_latest_version_tag() {
     echo "$LATEST_RELEASE_JSON" | grep '"tag_name":' | cut -d '"' -f 4
 }
 
-### === 函数：获取下载链接 === ###
+### === 获取下载链接 === ###
+#
+# @描述
+#   本函数用于获取下载链接。
+#
+# @示例
+#   vsk_update_get_latest_release_url
+###
 vsk_update_get_latest_release_url() {
     # 获取完整的最新版本信息
     echo -e "${BOLD_BLUE}--> 正在获取下载链接...${WHITE}"
@@ -67,9 +99,14 @@ vsk_update_get_latest_release_url() {
     vsk_update_download_and_extract "$LATEST_URL"
 }
 
-### ===核心更新功能 === ###
-
-## === 函数：更新脚本 === ###
+### === 更新脚本 === ###
+#
+# @描述
+#   本函数用于更新脚本。
+#
+# @示例
+#   vsk_update_now
+###
 vsk_update_now() {
     local latest_version="$1"
 
@@ -120,7 +157,14 @@ vsk_update_now() {
     fi
 }
 
-# 函数：开启自动更新
+### === 开启自动更新 === ###
+#
+# @描述
+#   本函数用于开启自动更新。
+#
+# @示例
+#   vsk_update_enable_auto_update
+###
 vsk_update_enable_auto_update() {
     clear
     echo -e "${BOLD_BLUE}⚙️  正在配置自动更新...${WHITE}"
@@ -144,7 +188,14 @@ vsk_update_enable_auto_update() {
     sleep 3
 }
 
-# 函数：关闭自动更新
+### === 关闭自动更新 === ###
+#
+# @描述
+#   本函数用于关闭自动更新。
+#
+# @示例
+#   vsk_update_disable_auto_update
+###
 vsk_update_disable_auto_update() {
     clear
     echo -e "${BOLD_BLUE}⚙️  正在关闭自动更新...${WHITE}"

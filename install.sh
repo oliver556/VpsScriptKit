@@ -3,20 +3,22 @@
 # 当任何命令失败时立即退出脚本
 set -e
 
-### === 脚本描述 === ###
-# 名称： install.sh
-# 功能： 安装 VpsScriptKit 脚本
-# 作者： YourName
-# 创建日期：2025-07-15
-# 许可证：MIT
+### =================================================================================
+# @名称:         install.sh
+# @功能描述:     一个用于安装 VpsScriptKit 脚本。
+# @作者:         oliver556
+# @版本:         1.0.0
+# @创建日期:     2025-07-15
+# @修改日期:     2025-07-25
+#
+# @依赖:         curl
+# @许可证:       MIT
+### =================================================================================
 
 ### === 配置 === ###
-# 安装目录
-INSTALL_DIR="/opt/VpsScriptKit"
-# 仓库地址
-REPO="oliver556/VpsScriptKit"
-# 用户许可协议同意
-AGREEMENT_ACCEPTED="false"
+INSTALL_DIR="/opt/VpsScriptKit"  # 安装目录
+REPO="oliver556/VpsScriptKit"    # 仓库地址
+AGREEMENT_ACCEPTED="false"       # 用户许可协议同意
 
 ### === 颜色定义 === ###
 BOLD_WHITE=$(tput bold)$(tput setaf 7)    # 加粗白色
@@ -25,19 +27,50 @@ BOLD_GREEN=$(tput bold)$(tput setaf 2)    # 加粗绿色
 BOLD_YELLOW=$(tput bold)$(tput setaf 3)   # 加粗黄色
 BOLD_BLUE=$(tput bold)$(tput setaf 4)     # 加粗蓝色
 
-### === 函数定义 === ###
-# 函数：退出脚本并显示错误信息
+
+### === 退出脚本并显示错误信息 === ###
+#
+# @描述
+#   本函数用于退出脚本并显示错误信息。
+#
+# @参数 $1: 字符串 - 错误信息。
+#
+# @返回值
+#   成功返回 0。
+#
+# @示例
+#   error_exit "错误信息"
+###
 error_exit() {
     echo -e "${BOLD_RED}错误: $1${BOLD_WHITE}" >&2
     exit 1
 }
 
-# 函数：检查命令是否存在
+### === 检查命令是否存在 === ###
+#
+# @描述
+#   本函数用于检查命令是否存在。
+#
+# @参数 $1: 字符串 - 命令名称。
+#
+# @示例
+#   command_exists "curl"
+###
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# 函数：获取最新发行版的下载链接
+### === 获取最新发行版的下载链接 === ###
+#
+# @描述
+#   本函数用于获取最新发行版的下载链接。
+#
+# @返回值
+#   成功返回 url 下载地址。
+#
+# @示例
+#   get_latest_release_url
+###
 get_latest_release_url() {
     echo -e "${BOLD_BLUE}--> 正在查询最新版本...${BOLD_WHITE}" >&2
 
@@ -58,8 +91,16 @@ get_latest_release_url() {
     echo "$TARBALL_URL"
 }
 
-# 函数：下载并解压指定的 URL
-# @param $1: 要下载的压缩包 URL
+### === 下载并解压指定的 URL === ###
+#
+# @描述
+#   本函数用于下载并解压指定的 URL。
+#
+# @参数 $1: 字符串 - 要下载的压缩包 URL。
+#
+# @示例
+#   install_vsk_download_and_extract "https://xxx.com/xxx.tar.gz"
+###
 install_vsk_download_and_extract() {
     local tarball_url="$1"
 
@@ -76,15 +117,20 @@ install_vsk_download_and_extract() {
     mkdir -p "$INSTALL_DIR" || error_exit "创建安装目录 $INSTALL_DIR 失败！"
 
     # 解压到目标目录 (注意：没有 --strip-components=1)
-#     tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
-    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" --strip-components=1 || error_exit "解压文件失败！"
+    tar -xzf "$TMP_TARBALL" -C "$INSTALL_DIR" || error_exit "解压文件失败！"
 
     # 清理临时文件
     rm -f "$TMP_TARBALL"
 }
 
-
-# --- 主安装函数 ---
+### === 主安装函数 === ###
+#
+# @描述
+#   本函数用于主安装函数。
+#
+# @示例
+#   install_main
+###
 install_main() {
     clear
 
@@ -104,8 +150,8 @@ install_main() {
     fi
 
     echo
+
     # 清理旧版本
-    # 如果存在旧版本，则清理
     if [ -d "$INSTALL_DIR" ]; then
         echo -e "${CYAN}🧹 正在清理旧版本...${BOLD_WHITE}"
         rm -rf "$INSTALL_DIR"
@@ -159,7 +205,14 @@ EOF
     echo ""
 }
 
-# ✅ 显示并确认用户协议。只负责询问并设置全局变量，不负责退出
+### === 显示并确认用户协议。只负责询问并设置全局变量，不负责退出 === ###
+#
+# @描述
+#   本函数用于显示并确认用户协议。只负责询问并设置全局变量，不负责退出。
+#
+# @示例
+#   confirm_agreement
+###
 confirm_agreement() {
     clear
     echo -e "${BLUE}欢迎使用 VpsScriptKit 脚本工具箱${BOLD_WHITE}"
@@ -184,7 +237,11 @@ confirm_agreement() {
         echo -e "${BOLD_GREEN}您已同意用户协议，安装将继续...${BOLD_WHITE}"
     fi
 }
-# --- 脚本执行入口 ---
+
+# ==================================================
+# 脚本执行入口
+# ==================================================
+# 该安装脚本需要使用 root 权限运行，并且需要依赖 curl 命令。
 
 # 检查 root 权限
 if [ "$(id -u)" -ne 0 ]; then

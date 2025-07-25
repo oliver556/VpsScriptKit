@@ -1,13 +1,27 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： system_info.sh
-# 功能： 系统信息查询
-# 作者：
-# 创建日期：
-# 许可证：MIT
+### =================================================================================
+# @名称:         system_info.sh
+# @功能描述:     一个用于系统信息查询的脚本。
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-15
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
 ### === 获取当前时区函数 === ###
+#
+# @描述
+#   本函数用于获取当前时区。
+#
+# @返回值
+#   成功返回时区。
+#
+# @示例
+#   system_info_current_timezone
+###
 system_info_current_timezone() {
 	if grep -q 'Alpine' /etc/issue; then
 	   date +"%Z %z"
@@ -17,6 +31,16 @@ system_info_current_timezone() {
 }
 
 ### === 获取网络状态 === ###
+#
+# @描述
+#   本函数用于获取网络状态。
+#
+# @返回值
+#   成功返回 网络状态。
+#
+# @示例
+#   system_info_output_status
+###
 system_info_output_status() {
 	output=$(awk 'BEGIN { rx_total = 0; tx_total = 0 }
 		$1 ~ /^(eth|ens|enp|eno)[0-9]+/ {
@@ -43,6 +67,16 @@ system_info_output_status() {
 }
 
 ### === 系统信息查询 === ###
+#
+# @描述
+#   本函数用于系统信息查询。
+#
+# @返回值
+#   成功返回 系统信息。
+#
+# @示例
+#   system_info_utils
+###
 system_info_utils() {
     # ==========================================================
     # 主机名
@@ -131,6 +165,17 @@ system_info_utils() {
 	runtime=$(cat /proc/uptime | awk -F. '{run_days=int($1 / 86400);run_hours=int(($1 % 86400) / 3600);run_minutes=int(($1 % 3600) / 60); if (run_days > 0) printf("%d天 ", run_days); if (run_hours > 0) printf("%d时 ", run_hours); printf("%d分\n", run_minutes)}')
 }
 
+### === 系统信息查询 显示 === ###
+#
+# @描述
+#   本函数用于系统信息查询显示。
+#
+# @返回值
+#   成功返回 系统信息。
+#
+# @示例
+#   system_info_show
+###
 system_info_show() {
 	clear
 
@@ -183,7 +228,17 @@ system_info_show() {
 	echo
 }
 
-### === 主函数 === ###
+### === 系统信息查询 主函数 === ###
+#
+# @描述
+#   本函数用于系统信息查询主函数。
+#
+# @返回值
+#   成功返回 系统信息。
+#
+# @示例
+#   system_info_main
+###
 system_info_main() {
     system_info_show
 }

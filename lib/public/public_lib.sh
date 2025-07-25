@@ -3,7 +3,7 @@
 ### =================================================================================
 # @名称:         public_lib.sh
 # @功能描述:     公共函数库
-# @作者:         Vskit (vskit@vskit.com)
+# @作者:         oliver556
 # @版本:         0.0.1
 # @创建日期:     2025-07-15
 # @修改日期:     2025-07-20
@@ -11,8 +11,7 @@
 # @许可证:       MIT
 ### =================================================================================
 
-### === 函数 === ###
-# 提示用户按任意键继续
+### === 提示用户按任意键继续 === ###
 #
 # @描述
 #   提示用户按任意键继续
@@ -31,10 +30,19 @@ break_end() {
     clear
 }
 
-# 函数: 询问用户是否继续
-# 返回值:
+### === 询问用户是否继续 === ###
+#
+# @描述
+#   本函数用于询问用户是否继续。
+#
+# @返回值
+#   成功返回 0。
 #   0 - 用户选择 Y/y (继续)
 #   1 - 用户选择其他任意键 (取消)
+#
+# @示例
+#   _compress_file "/tmp/db_backup.sql"
+###
 ask_to_continue() {
     local title="$1"
     echo
@@ -59,30 +67,47 @@ ask_to_continue() {
     esac
 }
 
-# 快速启动脚本
+### === 快速启动脚本 === ###
+#
+# @描述
+#   本函数用于快速启动脚本。
+#
+# @示例
+#   vskit
 vskit() {
     clear
 	cd ~
 	bash v
 }
 
-# 判断当前用户是否为 root 用户
-# 修改成返回 true 或 false
+### === 判断当前用户是否为 root 用户 === ###
+#
+# @描述
+#   本函数用于判断当前用户是否为 root 用户。
+#
+# @示例
+#   is_user_root
 is_user_root() {
     if [ "$EUID" -ne 0 ]; then
         echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${WHITE}"
         echo
         echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${WHITE}"
 		return 1
-		# break_end
-		# vskit
-        # exit "$EXIT_ERROR"
 	fi
 }
 
-# 功能：检测主流 Linux 发行版类型
-# 返回：通过标准输出(echo)返回系统ID (ubuntu, centos等)
-#      如果无法识别，则返回空字符串，并在标准错误输出提示信息。
+### === 检测主流 Linux 发行版类型 === ###
+#
+# @描述
+#   本函数用于检测主流 Linux 发行版类型。
+#
+# @返回值
+#   通过标准输出(echo)返回系统ID (ubuntu, centos等)
+#   如果无法识别，则返回空字符串，并在标准错误输出提示信息。
+#
+# @示例
+#   check_system_type
+###
 check_system_type() {
     local OS=""
     if [ -f /etc/os-release ]; then
@@ -104,14 +129,19 @@ check_system_type() {
     esac
 }
 
+### === 检测当前 Linux 发行版类型。 === ###
 #
-# 函数: get_os_type
-# 功能: 检测当前 Linux 发行版类型。
-# 输出:
+# @描述
+#   本函数用于检测当前 Linux 发行版类型。
+#
+# @返回值
 #   - "debian_like" (适用于 Ubuntu, Debian)
 #   - "rhel_like"   (适用于 CentOS, RHEL, Fedora)
 #   - "unsupported" (适用于其他不支持的系统)
 #
+# @示例
+#   get_os_type
+###
 get_os_type() {
     # 检查 /etc/os-release 文件是否存在
     if [ -f /etc/os-release ]; then
@@ -147,7 +177,13 @@ get_os_type() {
 }
 
 
-# 主菜单标题函数
+### === 主菜单标题函数 === ###
+#
+# @描述
+#   本函数用于打印主菜单标题。
+#
+# @示例
+#   main_menu_title
 main_menu_title() {
     local title="$1"
     _title="$title"
@@ -158,7 +194,13 @@ main_menu_title() {
     printf "+%${width_60}s+\n" "" | tr ' ' '='
 }
 
-# 子菜单标题函数
+### === 子菜单标题函数 === ###
+#
+# @描述
+#   本函数用于打印子菜单标题。
+#
+# @示例
+#   sub_menu_title
 sub_menu_title() {
     local title="$1"
     _title="$title"
@@ -168,6 +210,13 @@ sub_menu_title() {
     printf "+%${width_60}s+\n" "" | tr ' ' '-'
 }
 
+### === 分割线标题函数 === ###
+#
+# @描述
+#   本函数用于打印分割线标题。
+#
+# @示例
+#   gran_menu_title
 gran_menu_title() {
     local title="$1"
     _title="$title"
@@ -185,8 +234,16 @@ gran_menu_title() {
     echo -e "${BOLD_YELLOW}${_title}${NC}"
 }
 
-# 打印 echo 分割线
-# @param $1 前边换行符
+### === 打印 echo 分割线 === ###
+#
+# @描述
+#   本函数用于打印 echo 分割线。
+#
+# @参数 $1: 前边换行符
+#
+# @示例
+#   print_echo_line_1
+###
 print_echo_line_1() {
     if [[ "$1" == "front_line" ]]; then
         echo -e "\n${LIGHT_CYAN}──────────────────────────────────────────────────────────────${WHITE}"
@@ -197,53 +254,118 @@ print_echo_line_1() {
     fi
 }
 
-# 打印 echo 分割线
+### === 打印 echo 分割线 === ###
+#
+# @描述
+#   本函数用于打印 echo 分割线。
+#
+# @示例
+#   print_echo_line_2
+###
 print_echo_line_2() {
     echo -e "${LIGHT_CYAN}--------------------------------------------------------------${WHITE}"
 }
 
-
-# 打印信息函数
-# 用法: log_info "这是一条信息"
+### === 打印信息函数 === ###
+#
+# @描述
+#   本函数用于打印信息。
+#
+# @示例
+#   log_info
+###
 log_info() {
     echo -e "${BOLD_BLUE}INFO: $1${WHITE}"
 }
 
-# 打印错误函数
-# 用法: log_error "这是一个错误"
+### === 打印错误函数 === ###
+#
+# @描述
+#   本函数用于打印错误。
+#
+# @示例
+#   log_error
+###
 log_error() {
     echo -e "${BOLD_RED}ERROR: $1${WHITE}" >&2
 }
 
-# 打印警告函数
-# 用法: log_warning "这是一个警告"
+### === 打印警告函数 === ###
+#
+# @描述
+#   本函数用于打印警告。
+#
+# @示例
+#   log_warning
+###
 log_warning() {
     echo -e "${BOLD_YELLOW}WARNING: $1${WHITE}" >&2
 }
 
-# 打印信息函数
+### === 打印信息函数 === ###
+#
+# @描述
+#   本函数用于打印信息。
+#
+# @示例
+#   echo_info
+###
 echo_info() {
     echo -e "${BOLD_BLUE}$1${WHITE}"
 }
 
-# 打印错误函数
+### === 打印错误函数 === ###
+#
+# @描述
+#   本函数用于打印错误。
+#
+# @示例
+#   echo_error
+###
 echo_error() {
     echo -e "${BOLD_RED}$1${WHITE}" >&2
 }
 
-# 打印警告函数
+### === 打印警告函数 === ###
+#
+# @描述
+#   本函数用于打印警告。
+#
+# @示例
+#   echo_warning
+###
 echo_warning() {
     echo -e "${BOLD_YELLOW}$1${WHITE}" >&2
 }
 
-# 打印成功函数
+### === 打印成功函数 === ###
+#
+# @描述
+#   本函数用于打印成功。
+#
+# @示例
+#   echo_success
+###
 echo_success() {
     echo -e "${BOLD_GREEN}$1${WHITE}"
 }
 
-# 通用日志函数
-# 用法1: log "普通消息"
-# 用法2: log "[模块名]" "来自该模块的消息"
+### === 通用日志函数。 === ###
+#
+# @描述
+#   本函数接收一个文件路径作为输入，检查文件是否存在，然后使用 gzip
+#   进行压缩。成功压缩后，源文件将被删除。
+#
+# @参数 $1: 标签
+# @参数 $2: 消息
+#
+# @用法
+#   - 用法1: log "普通消息"
+#   - 用法2: log "[模块名]" "来自该模块的消息"
+#
+# @示例
+#   log_action "模块名" "来自该模块的消息"
+###
 log_action() {
   local tag=""
   local message
@@ -273,6 +395,9 @@ export -f log_action
 # @参数 $1: 字符串 - 需要被执行的函数名。
 # @参数 $2...: (可选) - 要传递给目标函数的所有参数。
 #
+# @示例
+#   execute_and_propagate_restart "函数名" "参数1" "参数2" ...
+###
 execute_and_propagate_restart() {
     # 1. 要调用的函数名
     local function_to_call="$1"

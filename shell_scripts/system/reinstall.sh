@@ -1,15 +1,31 @@
 #!/bin/bash
 
-### === 脚本描述 === ###
-# 名称： reinstall.sh
-# 功能： 一键重装系统
-# 作者：
-# 创建日期：
-# 许可证：MIT
+### =================================================================================
+# @名称:         reinstall.sh
+# @功能描述:     一键重装系统
+# @作者:         oliver556
+# @版本:         0.1.0
+# @创建日期:     2025-07-25
+# @修改日期:     2025-07-25
+#
+# @许可证:       MIT
+### =================================================================================
 
 ### === MollyLau 脚本 === ###
-### GitHub 地址：https://github.com/leitbogioro/Tools
-# @param $1: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @描述
+#   本函数用于安装 MollyLau 脚本。
+#
+# @参数 $1: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @返回值
+#   成功返回 0。
+#
+# @GitHub 地址：https://github.com/leitbogioro/Tools
+#
+# @示例
+#   system_reinstall_MollyLau "debian 12"
+###
 system_reinstall_MollyLau() {
     log_action "[system.sh]" "一键重装系统"
     local system_param="$1"
@@ -18,8 +34,20 @@ system_reinstall_MollyLau() {
 }
 
 ### === bin456789 脚本 === ###
-### GitHub 地址：https://github.com/bin456789/reinstall
-# @param $1: 脚本执行后缀补充 (e.g., "rocky")
+#
+# @描述
+#   本函数用于安装 MollyLau 脚本。
+#
+# @参数 $1: 脚本执行后缀补充 (e.g., "rocky")
+#
+# @返回值
+#   成功返回 0。
+#
+# @GitHub 地址：https://github.com/bin456789/reinstall
+#
+# @示例
+#   system_reinstall_MollyLau "debian 12"
+###
 system_reinstall_bin456789() {
     log_action "[system.sh]" "一键重装系统"
     local system_param="$1"
@@ -28,6 +56,13 @@ system_reinstall_bin456789() {
 }
 
 ### === 安装完成，提示重启 === ###
+#
+# @描述
+#   本函数用于提示用户重启系统。
+#
+# @示例
+#   hint_reboot
+###
 hint_reboot() {
     echo -e "${LIGHT_CYAN}安装完成！系统 3 秒后自动重启...${WHITE}"
 
@@ -46,8 +81,16 @@ hint_reboot() {
 }
 
 ### === MollyLau 脚本安装逻辑 ① === ###
-# @param $1: 系统版本全名 (e.g., "Debian 12")
-# @param $2: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @描述
+#   本函数用于安装 MollyLau 脚本。
+#
+# @参数 $1: 系统版本全名 (e.g., "Debian 12")
+# @参数 $2: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @示例
+#   run_mollylau_install "Debian 12" "debian 12"
+###
 run_mollylau_install() {
     local system_version_name="$1"
     local system_param="$2"
@@ -75,8 +118,16 @@ run_mollylau_install() {
 }
 
 ### === bin456789 脚本安装逻辑 ② === ###
-# @param $1: 系统版本全名 (e.g., "Debian 12")
-# @param $2: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @描述
+#   本函数用于安装 bin456789 脚本。
+#
+# @参数 $1: 系统版本全名 (e.g., "Debian 12")
+# @参数 $2: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @示例
+#   run_bin456789_install "Debian 12" "debian 12"
+###
 run_bin456789_install() {
     local system_version_name="$1"
     local system_param="$2"
@@ -100,14 +151,20 @@ run_bin456789_install() {
 }
 
 ### === 通用流程函数 === ###
-# 此函数负责与用户交互，并在确认后调用指定的安装函数。
 #
-# @param $1: 系统版本全名 (e.g., "Debian 12")
-# @param $2: 初始用户名
-# @param $3: 初始密码
-# @param $4: 初始端口
-# @param $5: 需要调用的安装函数名 (e.g., "run_mollylau_install")
-# @param $6: 脚本执行后缀补充 (e.g., "debian 12")
+# @描述
+#   此函数负责与用户交互，并在确认后调用指定的安装函数。
+#
+# @参数 $1: 系统版本全名 (e.g., "Debian 12")
+# @参数 $2: 初始用户名
+# @参数 $3: 初始密码
+# @参数 $4: 初始端口
+# @参数 $5: 需要调用的安装函数名 (e.g., "run_mollylau_install")
+# @参数 $6: 脚本执行后缀补充 (e.g., "debian 12")
+#
+# @示例
+#   start_reinstall_process "Debian 12" "root" "123456" "22" "run_mollylau_install" "debian 12"
+###
 start_reinstall_process() {
     local system_version_name="$1"
     local user="$2"
@@ -147,7 +204,13 @@ start_reinstall_process() {
 }
 
 ### === 选择系统 === ###
-# @param $1: 系统全名 (e.g., "debian 12")
+#
+# @描述
+#   本函数用于选择系统。
+#
+# @参数 $1: 系统全名 (e.g., "debian 12")
+#
+# @示例
 system_reinstall_selection() {
     clear
 
@@ -244,6 +307,15 @@ system_reinstall_selection() {
 }
 
 ### === 一键重装系统 主函数 === ###
+#
+# @描述
+#   本函数用于一键重装系统。
+#
+# @参数 $1: 系统全名 (e.g., "debian 12")
+#
+# @示例
+#   system_reinstall_main "debian 12"
+###
 system_reinstall_main() {
     local system_selection_iput="$1"
     system_reinstall_selection "$system_selection_iput"
