@@ -22,7 +22,7 @@
 base_menu() {
     while true; do
         clear
-        sub_menu_title "🖥️  基础工具"
+        sub_menu_title "🛠️  基础工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}curl 下载工具        ${LIGHT_CYAN}2.  ${WHITE}wget 下载工具"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}htop 系统监控工具"
@@ -32,9 +32,9 @@ base_menu() {
         echo -e "${LIGHT_CYAN}21. ${WHITE}iPerf3 网络测试工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}31. ${WHITE}全部安装             ${LIGHT_CYAN}32. ${WHITE}全部卸载"
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

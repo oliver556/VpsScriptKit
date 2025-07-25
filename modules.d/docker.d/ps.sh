@@ -36,9 +36,9 @@ docker_ps_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${WHITE}进入指定容器      ${LIGHT_CYAN}12. ${WHITE}查看容器日志"
         echo -e "${LIGHT_CYAN}13. ${WHITE}查看容器网络      ${LIGHT_CYAN}14. ${WHITE}查看容器占用"
-        print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " MAIN_OPTION
 
@@ -80,7 +80,7 @@ docker_ps_menu() {
                         *)
                             echo "无效的选择，请输入 Y 或 N。"
                             ;;
-                    esac 
+                    esac
                 ;;
             9)
                 docker restart $(docker ps -q)

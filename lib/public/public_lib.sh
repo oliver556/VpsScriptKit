@@ -172,9 +172,9 @@ sub_menu_title() {
     local title="$1"
     _title="$title"
     printf "${LIGHT_CYAN}"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
+    printf "+%${width_60}s+\n" "" | tr ' ' '='
     printf "# %-${width_68}s \n" "${_title}"
-    printf "+%${width_60}s+\n" "" | tr ' ' '-'
+    printf "+%${width_60}s+\n" "" | tr ' ' '='
 }
 
 ### === 分割线标题函数 === ###
@@ -201,7 +201,7 @@ gran_menu_title() {
     echo -e "${BOLD_YELLOW}${_title}${NC}"
 }
 
-### === 打印 echo 分割线 === ###
+### === echo 分割线 1=== ###
 #
 # @描述
 #   本函数用于打印 echo 分割线。
@@ -221,7 +221,7 @@ print_echo_line_1() {
     fi
 }
 
-### === 打印 echo 分割线 === ###
+### === echo 分割线 2=== ###
 #
 # @描述
 #   本函数用于打印 echo 分割线。
@@ -231,6 +231,18 @@ print_echo_line_1() {
 ###
 print_echo_line_2() {
     echo -e "${LIGHT_CYAN}--------------------------------------------------------------${WHITE}"
+}
+
+### === echo 分割线 3=== ###
+#
+# @描述
+#   本函数用于打印 echo 分割线。
+#
+# @示例
+#   print_echo_line_3
+###
+print_echo_line_3() {
+    echo -e "${LIGHT_CYAN}==============================================================${WHITE}"
 }
 
 ### === 打印信息函数 === ###

@@ -55,9 +55,9 @@ system_time_zone_menu() {
         echo -e "${LIGHT_CYAN}25. ${WHITE}巴西时间              ${LIGHT_CYAN}26. ${WHITE}阿根廷时间"
         gran_menu_title "[D] 其他"
         echo -e "${LIGHT_CYAN}31. ${WHITE}UTC全球标准时间"
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 
@@ -65,68 +65,68 @@ system_time_zone_menu() {
             1)
                 system_time_zone_main "Asia/Shanghai"
                 break_end ;;
-            2) 
-                system_time_zone_main "Asia/Hong_Kong" 
+            2)
+                system_time_zone_main "Asia/Hong_Kong"
                 break_end ;;
-            3) 
-                system_time_zone_main "Asia/Tokyo" 
+            3)
+                system_time_zone_main "Asia/Tokyo"
                 break_end ;;
-            4) 
-                system_time_zone_main "Asia/Seoul" 
+            4)
+                system_time_zone_main "Asia/Seoul"
                 break_end ;;
-            5) 
-                system_time_zone_main "Asia/Singapore" 
+            5)
+                system_time_zone_main "Asia/Singapore"
                 break_end ;;
-            6) 
-                system_time_zone_main "Asia/Kolkata" 
+            6)
+                system_time_zone_main "Asia/Kolkata"
                 break_end ;;
-            7) 
-                system_time_zone_main "Asia/Dubai" 
+            7)
+                system_time_zone_main "Asia/Dubai"
                 break_end ;;
-            8) 
-                system_time_zone_main "Australia/Sydney" 
+            8)
+                system_time_zone_main "Australia/Sydney"
                 break_end ;;
-            9) 
-                system_time_zone_main "Asia/Bangkok" 
+            9)
+                system_time_zone_main "Asia/Bangkok"
                 break_end ;;
-            11) 
-                system_time_zone_main "Europe/London" 
+            11)
+                system_time_zone_main "Europe/London"
                 break_end ;;
-            12) 
-                system_time_zone_main "Europe/Paris" 
+            12)
+                system_time_zone_main "Europe/Paris"
                 break_end ;;
-            13) 
-                system_time_zone_main "Europe/Berlin" 
+            13)
+                system_time_zone_main "Europe/Berlin"
                 break_end ;;
-            14) 
-                system_time_zone_main "Europe/Moscow" 
+            14)
+                system_time_zone_main "Europe/Moscow"
                 break_end ;;
-            15) 
-                system_time_zone_main "Europe/Amsterdam" 
+            15)
+                system_time_zone_main "Europe/Amsterdam"
                 break_end ;;
-            16) 
-                system_time_zone_main "Europe/Madrid" 
+            16)
+                system_time_zone_main "Europe/Madrid"
                 break_end ;;
-            21) 
-                system_time_zone_main "America/Los_Angeles" 
+            21)
+                system_time_zone_main "America/Los_Angeles"
                 break_end ;;
-            22) 
-                system_time_zone_main "America/New_York" 
+            22)
+                system_time_zone_main "America/New_York"
                 break_end ;;
-            23) 
-                system_time_zone_main "America/Vancouver" 
+            23)
+                system_time_zone_main "America/Vancouver"
                 break_end ;;
-            24) 
-                system_time_zone_main "America/Mexico_City" 
+            24)
+                system_time_zone_main "America/Mexico_City"
                 break_end ;;
-            25) 
-                system_time_zone_main "America/Sao_Paulo" 
+            25)
+                system_time_zone_main "America/Sao_Paulo"
                 break_end ;;
-            26) 
-                system_time_zone_main "America/Argentina/Buenos_Aires" 
+            26)
+                system_time_zone_main "America/Argentina/Buenos_Aires"
                 break_end ;;
-            31) 
-                system_time_zone_main "UTC" 
+            31)
+                system_time_zone_main "UTC"
                 break_end ;;
             # 返回主菜单
             0) break ;;

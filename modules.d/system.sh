@@ -41,7 +41,7 @@ source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
 system_menu() {
     while true; do
         clear
-        sub_menu_title "🖥️  系统工具"
+        sub_menu_title "⚙️  系统工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}系统信息查询"
         print_echo_line_1
@@ -55,11 +55,11 @@ system_menu() {
         echo -e "${BOLD_GREY}21. ${WHITE}定时任务管理器       ${BOLD_GREY}22. ${WHITE}切换系统更新源"
         echo -e "${BOLD_GREY}23. ${WHITE}待定                 ${BOLD_GREY}24. ${WHITE}待定"
         print_echo_line_1
-        echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优             "
-        echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统 ▶            "
-        print_echo_line_1
+        echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优"
+        echo -e "${LIGHT_CYAN}99. ${WHITE}一键重装系统 ▶"
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

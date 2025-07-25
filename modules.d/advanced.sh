@@ -25,12 +25,12 @@ source "$ROOT_DIR/modules.d/advanced.d/manage.sh"
 advanced_menu() {
     while true; do
         clear
-        sub_menu_title "🖥️  进阶工具"
+        sub_menu_title "🚀  进阶工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1.  ${WHITE}SSL 证书管理         ${LIGHT_CYAN}2.  ${WHITE}暂未定"
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 
@@ -38,7 +38,7 @@ advanced_menu() {
             1)
                 advanced_manage_menu
                 break_end no_wait;;
-            
+
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
         esac

@@ -43,9 +43,9 @@ advanced_manage_menu() {
         echo -e "${LIGHT_CYAN}1.  ${WHITE}申请 SSL 证书"
         echo -e "${LIGHT_CYAN}2.  ${WHITE}查看已申请的域名"
         echo -e "${LIGHT_CYAN}3.  ${WHITE}重置环境（清除申请记录并重新部署）"
-        print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
+        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " MAIN_OPTION
 

@@ -43,9 +43,9 @@ test_menu() {
         gran_menu_title "[B] 性能检测"
         echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
         echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 
@@ -62,7 +62,7 @@ test_menu() {
                 echo "🚀 正在运行 NetQuality 网络质量检测..."
                 bash <(curl -sL Check.Place) -N
                 ;;
-            
+
             # # ChatGPT 解锁检测
             # 2)
             #     clear

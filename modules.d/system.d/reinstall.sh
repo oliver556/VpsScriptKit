@@ -26,7 +26,7 @@ system_reinstall_menu() {
     local system_param="$1"
     while true; do
         clear
-        sub_menu_title "🖥️  一键重装系统"
+        sub_menu_title "⚙️  一键重装系统"
         echo -e "${BOLD_RED}注意: 重装系统有风险失联，不放这心者慎用。重装预计花费15分钟，请提前备份数据。"
         echo -e "${GREY}感谢 MollyLau 大佬 和 bin456789 大佬 的脚本支持！${WHITE} "
         print_echo_line_1
@@ -46,10 +46,10 @@ system_reinstall_menu() {
         print_echo_line_1
         if [ "$system_param" = "dd" ]; then
             echo -e "${LIGHT_CYAN}0. ${WHITE}退出脚本"
-            print_echo_line_1
-        else 
-            echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-            print_echo_line_1
+            print_echo_line_3
+        else
+            echo -e "${LIGHT_CYAN}0.  ${WHITE}返回上一级菜单"
+            print_echo_line_3
         fi
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
@@ -126,7 +126,7 @@ system_reinstall_menu() {
             46)
                 system_reinstall_main "Windows Server 2016"
                 break_end no_wait ;;
-            
+
             # 返回主菜单
             0)
                 if [ "$system_param" = "dd" ]; then

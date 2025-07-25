@@ -30,7 +30,7 @@ vsk_log_filter_menu() {
         print_echo_line_1
 
         vsk_log_filter_modules
-        
+
         print_echo_line_1
         echo -e "0  ) 返回上一级"
         print_echo_line_1
@@ -67,9 +67,9 @@ vsk_log_tool_menu() {
         echo -e "${LIGHT_CYAN}2. ${WHITE}按模块筛选日志"
         echo -e "${LIGHT_CYAN}3. ${WHITE}清空日志文件"
         echo -e "${LIGHT_CYAN}4. ${WHITE}导出日志副本"
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

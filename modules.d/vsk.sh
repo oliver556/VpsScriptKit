@@ -31,7 +31,7 @@ source "$ROOT_DIR/modules.d/vsk.d/vsk_log.sh"
 vsk_menu() {
     while true; do
         clear
-        sub_menu_title "🖥️  脚本工具"
+        sub_menu_title "🧰  脚本工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}1. ${WHITE}脚本更新"
         echo -e "${LIGHT_CYAN}2. ${WHITE}脚本卸载"
