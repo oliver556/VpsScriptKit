@@ -35,6 +35,9 @@ source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
 ### === 导入设置 root 用户密码 === ###
 source "$ROOT_DIR/shell_scripts/system/set_root_login.sh"
 
+### === 导入优化 DNS 地址 === ###
+source "$ROOT_DIR/modules.d/system.d/optimize_dns.sh"
+
 ### === 系统工具 主菜单 === ###
 #
 # @描述
@@ -49,7 +52,7 @@ system_menu() {
         echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统信息查询         ${LIGHT_CYAN}2.  ${LIGHT_WHITE}系统更新             ${LIGHT_CYAN}3.  ${LIGHT_WHITE}系统清理"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
-        echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${BOLD_GREY}8.  ${LIGHT_WHITE}优化DNS地址          ${BOLD_GREY}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
+        echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址          ${BOLD_GREY}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
         echo -e "${BOLD_GREY}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${LIGHT_WHITE}查看端口占用状态     ${BOLD_GREY}12. ${LIGHT_WHITE}修改虚拟内存大小"
         echo -e "${BOLD_GREY}13. ${LIGHT_WHITE}用户管理             ${BOLD_GREY}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
@@ -96,7 +99,6 @@ system_menu() {
             5)
                 log_action "[system.sh]" "开启ROOT密码登录"
                 if is_user_root; then
-                    # 如果检查通过 (是 root 用户)，则执行核心功能
                     set_root_login
                     break_end
                 else
@@ -118,8 +120,10 @@ system_menu() {
             # 优化DNS地址
             8)
                 log_action "[system.sh]" "优化DNS地址"
-                print_dev
-                break_end ;;
+                system_optimize_dns_menu
+                # print_dev
+                sleep 1
+                break_end no_wait;;
             # 禁用ROOT账户创建新账户
             9)
                 log_action "[system.sh]" "禁用ROOT账户创建新账户"

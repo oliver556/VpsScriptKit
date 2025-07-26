@@ -60,7 +60,7 @@ ask_to_continue() {
         return 0  # 返回 0, 代表“成功/继续”
         ;;
       *)
-        echo -e "\n${BOLD_YELLOW}操作已取消，正在返回...${LIGHT_WHITE}"
+        echo -e "\n${BOLD_YELLOW}操作已取消...${LIGHT_WHITE}"
         sleep 1
         return 1  # 返回 1, 代表“失败/取消”
         ;;
@@ -86,7 +86,10 @@ vskit() {
 #   本函数用于判断当前用户是否为 root 用户。
 #
 # @示例
-#   
+#   if is_user_root; then
+#       set_dns
+#   fi
+###
 is_user_root() {
     if [ "$EUID" -ne 0 ]; then
         clear
