@@ -50,7 +50,7 @@ system_menu() {
         echo -e "${BOLD_GREY}10. ${WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${WHITE}查看端口占用状态     ${BOLD_GREY}12. ${WHITE}修改虚拟内存大小"
         echo -e "${BOLD_GREY}13. ${WHITE}用户管理             ${BOLD_GREY}14. ${WHITE}用户/密码生成器"
         print_echo_line_1
-        echo -e "${BOLD_GREY}15. ${WHITE}修改主机名           ${BOLD_GREY}16. ${WHITE}修改系统时区         ${BOLD_GREY}17. ${WHITE}设置BBR3加速"
+        echo -e "${LIGHT_CYAN}15. ${WHITE}修改主机名           ${LIGHT_CYAN}16. ${WHITE}修改系统时区         ${BOLD_GREY}17. ${WHITE}设置BBR3加速"
         echo -e "${BOLD_GREY}18. ${WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${WHITE}iptables一键转发       ${BOLD_GREY}20. ${WHITE}NAT批量SSH连接测试"
         echo -e "${BOLD_GREY}21. ${WHITE}切换系统更新源       ${BOLD_GREY}22. ${WHITE}定时任务管理       ${BOLD_GREY}23. ${WHITE}ip开放端口扫描"
         print_echo_line_1
@@ -97,12 +97,13 @@ system_menu() {
             # 开放所有端口
             6)
                 log_action "[system.sh]" "开放所有端口"
-                open_iptables
-                ;;
+                # open_iptables
+                print_dev
+                break_end ;;
             # 修改SSH端口
             7)
                 log_action "[system.sh]" "修改SSH端口"
-                change_ssh_main
+                # change_ssh_main
                 print_dev
                 break_end ;;
             # 优化DNS地址
