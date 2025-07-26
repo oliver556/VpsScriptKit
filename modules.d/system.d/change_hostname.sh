@@ -27,10 +27,10 @@ change_hostname_utils() {
 
         # 打印当前主机名
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}当前主机名是: ${BOLD_YELLOW}$current_hostname${WHITE}"
+        echo -e "${LIGHT_CYAN}当前主机名是: ${BOLD_YELLOW}$current_hostname${LIGHT_WHITE}"
         print_echo_line_1
 
-        read -e -p "${LIGHT_CYAN}请输入新的主机名（输入0退出）: ${WHITE}" new_hostname
+        read -e -p "${LIGHT_CYAN}请输入新的主机名（输入0退出）: ${LIGHT_WHITE}" new_hostname
 
         if [ -n "$new_hostname" ] && [ "$new_hostname" != "0" ]; then
             if [ -f /etc/alpine-release ]; then
@@ -56,12 +56,12 @@ change_hostname_utils() {
                 echo "::1             $new_hostname localhost localhost.localdomain ipv6-localhost ipv6-loopback" >> /etc/hosts
             fi
 
-            echo -e "${BOLD_GREEN}主机名已更改为: $new_hostname${WHITE}"
+            echo -e "${BOLD_GREEN}主机名已更改为: $new_hostname${LIGHT_WHITE}"
             log_action "[system.sh]" "修改主机名"
             sleep 2
             break
         else
-            echo -e "${BOLD_RED}已退出，未更改主机名。${WHITE}"
+            echo -e "${BOLD_RED}已退出，未更改主机名。${LIGHT_WHITE}"
             break
         fi
     done

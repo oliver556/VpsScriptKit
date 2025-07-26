@@ -21,7 +21,7 @@
 ###
 break_end() {
     echo ""
-    echo -e "${GREEN}操作完成${WHITE}"
+    echo -e "${GREEN}操作完成${LIGHT_WHITE}"
     if [[ "$1" != "no_wait" ]]; then
         echo "按任意键继续..."
         read -n 1 -s -rp ""
@@ -48,19 +48,19 @@ ask_to_continue() {
     echo
     # 如果 title 不为空，则显示 title
     if [ -n "$title" ]; then
-        echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认执行 ${LIGHT_CYAN}${title}${WHITE}，按其它任意键返回。"
+        echo -e "按 ${BOLD_RED}(Y/y)${LIGHT_WHITE} 键确认执行 ${LIGHT_CYAN}${title}${LIGHT_WHITE}，按其它任意键返回。"
     else
-        echo -e "按 ${BOLD_RED}(Y/y)${WHITE} 键确认，按其它任意键返回。"
+        echo -e "按 ${BOLD_RED}(Y/y)${LIGHT_WHITE} 键确认，按其它任意键返回。"
     fi
     echo
-    read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" user_choice
+    read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${LIGHT_WHITE}")" user_choice
 
     case "$user_choice" in
       y|Y)
         return 0  # 返回 0, 代表“成功/继续”
         ;;
       *)
-        echo -e "\n${BOLD_YELLOW}操作已取消，正在返回...${WHITE}"
+        echo -e "\n${BOLD_YELLOW}操作已取消，正在返回...${LIGHT_WHITE}"
         sleep 1
         return 1  # 返回 1, 代表“失败/取消”
         ;;
@@ -86,12 +86,13 @@ vskit() {
 #   本函数用于判断当前用户是否为 root 用户。
 #
 # @示例
-#   is_user_root
+#   
 is_user_root() {
     if [ "$EUID" -ne 0 ]; then
-        echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${WHITE}"
+        clear
+        echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${LIGHT_WHITE}"
         echo
-        echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${WHITE}"
+        echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${LIGHT_WHITE}"
 		return 1
 	fi
 }
@@ -192,11 +193,11 @@ gran_menu_title() {
     # printf "| %-${width_20}s \n" "$_title"
     # printf "%${width_20}s\n" "" | tr ' ' '-'
     if [[ "$2" == "front_line" ]]; then
-        echo -e "\n${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE}"
+        echo -e "\n${BOLD_YELLOW}──────────────────────────────────────────────────────────────${LIGHT_WHITE}"
     elif [[ "$2" == "back_line" ]]; then
-        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE} \n"
+        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${LIGHT_WHITE} \n"
     else
-        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${WHITE}"
+        echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${LIGHT_WHITE}"
     fi
     echo -e "${BOLD_YELLOW}${_title}${NC}"
 }
@@ -213,11 +214,11 @@ gran_menu_title() {
 ###
 print_echo_line_1() {
     if [[ "$1" == "front_line" ]]; then
-        echo -e "\n${LIGHT_CYAN}──────────────────────────────────────────────────────────────${WHITE}"
+        echo -e "\n${LIGHT_CYAN}──────────────────────────────────────────────────────────────${LIGHT_WHITE}"
     elif [[ "$1" == "back_line" ]]; then
-        echo -e "${LIGHT_CYAN}──────────────────────────────────────────────────────────────${WHITE} \n"
+        echo -e "${LIGHT_CYAN}──────────────────────────────────────────────────────────────${LIGHT_WHITE} \n"
     else
-        echo -e "${LIGHT_CYAN}──────────────────────────────────────────────────────────────${WHITE}"
+        echo -e "${LIGHT_CYAN}──────────────────────────────────────────────────────────────${LIGHT_WHITE}"
     fi
 }
 
@@ -230,7 +231,7 @@ print_echo_line_1() {
 #   print_echo_line_2
 ###
 print_echo_line_2() {
-    echo -e "${LIGHT_CYAN}--------------------------------------------------------------${WHITE}"
+    echo -e "${LIGHT_CYAN}--------------------------------------------------------------${LIGHT_WHITE}"
 }
 
 ### === echo 分割线 3=== ###
@@ -242,7 +243,7 @@ print_echo_line_2() {
 #   print_echo_line_3
 ###
 print_echo_line_3() {
-    echo -e "${LIGHT_CYAN}==============================================================${WHITE}"
+    echo -e "${LIGHT_CYAN}==============================================================${LIGHT_WHITE}"
 }
 
 ### === 打印信息函数 === ###
@@ -254,7 +255,7 @@ print_echo_line_3() {
 #   log_info
 ###
 log_info() {
-    echo -e "${BOLD_BLUE}INFO: $1${WHITE}"
+    echo -e "${BOLD_BLUE}INFO: $1${LIGHT_WHITE}"
 }
 
 ### === 打印错误函数 === ###
@@ -266,7 +267,7 @@ log_info() {
 #   log_error
 ###
 log_error() {
-    echo -e "${BOLD_RED}ERROR: $1${WHITE}" >&2
+    echo -e "${BOLD_RED}ERROR: $1${LIGHT_WHITE}" >&2
 }
 
 ### === 打印警告函数 === ###
@@ -278,7 +279,7 @@ log_error() {
 #   log_warning
 ###
 log_warning() {
-    echo -e "${BOLD_YELLOW}WARNING: $1${WHITE}" >&2
+    echo -e "${BOLD_YELLOW}WARNING: $1${LIGHT_WHITE}" >&2
 }
 
 ### === 打印信息函数 === ###
@@ -290,7 +291,7 @@ log_warning() {
 #   echo_info
 ###
 echo_info() {
-    echo -e "${BOLD_BLUE}$1${WHITE}"
+    echo -e "${BOLD_BLUE}$1${LIGHT_WHITE}"
 }
 
 ### === 打印信息函数 === ###
@@ -302,7 +303,7 @@ echo_info() {
 #   echo_info
 ###
 echo_info_light() {
-    echo -e "${LIGHT_CYAN}$1${WHITE}"
+    echo -e "${LIGHT_CYAN}$1${LIGHT_WHITE}"
 }
 
 ### === 打印错误函数 === ###
@@ -314,7 +315,7 @@ echo_info_light() {
 #   echo_error
 ###
 echo_error() {
-    echo -e "${BOLD_RED}$1${WHITE}" >&2
+    echo -e "${BOLD_RED}$1${LIGHT_WHITE}" >&2
 }
 
 ### === 打印警告函数 === ###
@@ -326,7 +327,7 @@ echo_error() {
 #   echo_warning
 ###
 echo_warning() {
-    echo -e "${BOLD_YELLOW}$1${WHITE}" >&2
+    echo -e "${BOLD_YELLOW}$1${LIGHT_WHITE}" >&2
 }
 
 ### === 打印成功函数 === ###
@@ -338,7 +339,7 @@ echo_warning() {
 #   echo_success
 ###
 echo_success() {
-    echo -e "${BOLD_GREEN}$1${WHITE}"
+    echo -e "${BOLD_GREEN}$1${LIGHT_WHITE}"
 }
 
 ### === 通用日志函数 === ###
@@ -421,5 +422,5 @@ execute_and_propagate_restart() {
 ###
 print_dev() {
     clear
-    echo -e "${BOLD_YELLOW}该功能还在开发阶段，敬请期待...${WHITE}"
+    echo -e "${BOLD_YELLOW}该功能还在开发阶段，敬请期待...${LIGHT_WHITE}"
 }

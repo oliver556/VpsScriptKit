@@ -32,6 +32,9 @@ source "$ROOT_DIR/modules.d/system.d/change_hostname.sh"
 ### === 导入修改 SSH 端口 === ###
 source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
 
+### === 导入设置 root 用户密码 === ###
+source "$ROOT_DIR/shell_scripts/system/set_root_login.sh"
+
 ### === 系统工具 主菜单 === ###
 #
 # @描述
@@ -43,23 +46,23 @@ system_menu() {
         clear
         sub_menu_title "⚙️  系统工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}系统信息查询         ${LIGHT_CYAN}2.  ${WHITE}系统更新             ${LIGHT_CYAN}3.  ${WHITE}系统清理"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统信息查询         ${LIGHT_CYAN}2.  ${LIGHT_WHITE}系统更新             ${LIGHT_CYAN}3.  ${LIGHT_WHITE}系统清理"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}4.  ${WHITE}修改登录密码         ${BOLD_GREY}5.  ${WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${WHITE}开放所有端口"
-        echo -e "${BOLD_GREY}7.  ${WHITE}修改SSH端口          ${BOLD_GREY}8.  ${WHITE}优化DNS地址          ${BOLD_GREY}9.  ${WHITE}禁用ROOT账户创建新账户"
-        echo -e "${BOLD_GREY}10. ${WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${WHITE}查看端口占用状态     ${BOLD_GREY}12. ${WHITE}修改虚拟内存大小"
-        echo -e "${BOLD_GREY}13. ${WHITE}用户管理             ${BOLD_GREY}14. ${WHITE}用户/密码生成器"
+        echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
+        echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${BOLD_GREY}8.  ${LIGHT_WHITE}优化DNS地址          ${BOLD_GREY}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
+        echo -e "${BOLD_GREY}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${LIGHT_WHITE}查看端口占用状态     ${BOLD_GREY}12. ${LIGHT_WHITE}修改虚拟内存大小"
+        echo -e "${BOLD_GREY}13. ${LIGHT_WHITE}用户管理             ${BOLD_GREY}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}15. ${WHITE}修改主机名           ${LIGHT_CYAN}16. ${WHITE}修改系统时区         ${BOLD_GREY}17. ${WHITE}设置BBR3加速"
-        echo -e "${BOLD_GREY}18. ${WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${WHITE}iptables一键转发     ${BOLD_GREY}20. ${WHITE}NAT批量SSH连接测试"
-        echo -e "${BOLD_GREY}21. ${WHITE}切换系统更新源       ${BOLD_GREY}22. ${WHITE}定时任务管理         ${BOLD_GREY}23. ${WHITE}ip开放端口扫描"
+        echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${BOLD_GREY}17. ${LIGHT_WHITE}设置BBR3加速"
+        echo -e "${BOLD_GREY}18. ${LIGHT_WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${LIGHT_WHITE}iptables一键转发     ${BOLD_GREY}20. ${LIGHT_WHITE}NAT批量SSH连接测试"
+        echo -e "${BOLD_GREY}21. ${LIGHT_WHITE}切换系统更新源       ${BOLD_GREY}22. ${LIGHT_WHITE}定时任务管理         ${BOLD_GREY}23. ${LIGHT_WHITE}ip开放端口扫描"
         print_echo_line_1
-        echo -e "${BOLD_GREY}55. ${WHITE}设置脚本启动快捷键"
-        echo -e "${BOLD_GREY}66. ${WHITE}一条龙系统调优"
-        echo -e "${BOLD_GREY}98. ${WHITE}NAT小鸡一键重装系统"
-        echo -e "${LIGHT_RED}99. ${WHITE}一键重装系统 ▶"
+        echo -e "${BOLD_GREY}55. ${LIGHT_WHITE}设置脚本启动快捷键"
+        echo -e "${BOLD_GREY}66. ${LIGHT_WHITE}一条龙系统调优"
+        echo -e "${BOLD_GREY}98. ${LIGHT_WHITE}NAT小鸡一键重装系统"
+        echo -e "${LIGHT_RED}99. ${LIGHT_WHITE}一键重装系统 ▶"
         print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
@@ -84,16 +87,22 @@ system_menu() {
             4)
                 log_action "[system.sh]" "修改登录密码"
                 clear
-                echo -e "${BOLD_YELLOW}设置你的登录密码...${WHITE}"
+                echo -e "${BOLD_YELLOW}设置你的登录密码...${LIGHT_WHITE}"
                 passwd
-                echo -e "${BOLD_GREEN}密码修改成功！${WHITE}"
+                echo -e "${BOLD_GREEN}密码修改成功！${LIGHT_WHITE}"
                 log_action "[system.sh]" "修改登录密码"
                 break_end no_wait ;;
             # 开启ROOT密码登录
             5)
                 log_action "[system.sh]" "开启ROOT密码登录"
-                print_dev
-                break_end ;;
+                if is_user_root; then
+                    # 如果检查通过 (是 root 用户)，则执行核心功能
+                    set_root_login
+                    break_end
+                else
+                    break_end
+                fi
+                ;;
             # 开放所有端口
             6)
                 log_action "[system.sh]" "开放所有端口"

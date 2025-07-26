@@ -21,8 +21,8 @@
 ###
 system_clean_utils() {
     clear
-    echo -e "${BOLD_YELLOW}正在系统清理...${WHITE}"
-    echo -e "${LIGHT_CYAN}--------------------------------${WHITE}"
+    echo -e "${BOLD_YELLOW}正在系统清理...${LIGHT_WHITE}"
+    echo -e "${LIGHT_CYAN}--------------------------------${LIGHT_WHITE}"
     # Fedora, CentOS 8+, RHEL 8+
     if command -v dnf &>/dev/null; then
         rpm --rebuilddb                # 重建 RPM 数据库

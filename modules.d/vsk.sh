@@ -36,13 +36,13 @@ vsk_menu() {
         clear
         sub_menu_title "🧰  脚本工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}脚本更新"
-        echo -e "${LIGHT_CYAN}2.  ${WHITE}脚本卸载"
-        echo -e "${LIGHT_CYAN}3.  ${WHITE}脚本操作日志"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}脚本更新"
+        echo -e "${LIGHT_CYAN}2.  ${LIGHT_WHITE}脚本卸载"
+        echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}脚本操作日志"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}66. ${BOLD_GREEN}v${WHITE} 命令高级用法${WHITE}"
+        echo -e "${LIGHT_CYAN}66. ${BOLD_GREEN}v${LIGHT_WHITE} 命令高级用法${LIGHT_WHITE}"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_1
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

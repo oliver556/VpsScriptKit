@@ -28,23 +28,23 @@ test_menu() {
         sub_menu_title "🧪  测试脚本合集"
         # main_menu_title "🧪  测试脚本合集"
 
-	    # echo -e "${LIGHT_CYAN}常用检测"${WHITE}
+	    # echo -e "${LIGHT_CYAN}常用检测"${LIGHT_WHITE}
         gran_menu_title "[A] 网络检测"
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}IP 质量测试"
-        echo -e "${LIGHT_CYAN}2.  ${WHITE}网络质量测试"
-        echo -e "${LIGHT_CYAN}3.  ${WHITE}回程路由"
-        # echo -e "${LIGHT_CYAN}2. ${WHITE}ChatGPT 解锁检测"
-        # echo -e "${LIGHT_CYAN}3. ${WHITE}Region 解锁检测"
-        # echo -e "${LIGHT_CYAN}4. ${WHITE}yeahwu 流媒体解锁检测"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}IP 质量测试"
+        echo -e "${LIGHT_CYAN}2.  ${LIGHT_WHITE}网络质量测试"
+        echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}回程路由"
+        # echo -e "${LIGHT_CYAN}2. ${LIGHT_WHITE}ChatGPT 解锁检测"
+        # echo -e "${LIGHT_CYAN}3. ${LIGHT_WHITE}Region 解锁检测"
+        # echo -e "${LIGHT_CYAN}4. ${LIGHT_WHITE}yeahwu 流媒体解锁检测"
         # print_echo_line_1
-        # echo -e "${CYAN}网络线路测试"${WHITE}
-        # echo -e "${LIGHT_CYAN}18. ${WHITE}NetQuality 网络质量检测 ${YELLOW}★${WHITE}"
+        # echo -e "${CYAN}网络线路测试"${LIGHT_WHITE}
+        # echo -e "${LIGHT_CYAN}18. ${LIGHT_WHITE}NetQuality 网络质量检测 ${YELLOW}★${LIGHT_WHITE}"
         # print_echo_line_1
         gran_menu_title "[B] 性能检测"
-        echo -e "${LIGHT_CYAN}31. ${WHITE}bench 性能测试"
-        echo -e "${LIGHT_CYAN}32. ${WHITE}spiritysdx 融合怪测评"
+        echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}bench 性能测试"
+        echo -e "${LIGHT_CYAN}32. ${LIGHT_WHITE}spiritysdx 融合怪测评"
         print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

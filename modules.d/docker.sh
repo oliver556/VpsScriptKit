@@ -36,19 +36,19 @@ docker_menu() {
         clear
         sub_menu_title "🐳  Docker 管理"
         print_echo_line_1
-        echo "${LIGHT_CYAN}1.  ${WHITE}安装更新Docker环境  ${BOLD_YELLOW}★${WHITE}"
-        echo "${LIGHT_CYAN}2.  ${WHITE}查看Docker全局状态  ${BOLD_YELLOW}★${WHITE}"
+        echo "${LIGHT_CYAN}1.  ${LIGHT_WHITE}安装更新Docker环境  ${BOLD_YELLOW}★${LIGHT_WHITE}"
+        echo "${LIGHT_CYAN}2.  ${LIGHT_WHITE}查看Docker全局状态  ${BOLD_YELLOW}★${LIGHT_WHITE}"
         print_echo_line_1
-        echo "${LIGHT_CYAN}3.  ${WHITE}Docker容器管理 ▶"
-        echo "${BOLD_GREY}4.  ${WHITE}Docker镜像管理 ▶"
-        echo "${BOLD_GREY}5.  ${WHITE}Docker网络管理 ▶"
-        echo "${BOLD_GREY}6.  ${WHITE}Docker卷管理 ▶"
+        echo "${LIGHT_CYAN}3.  ${LIGHT_WHITE}Docker容器管理 ▶"
+        echo "${BOLD_GREY}4.  ${LIGHT_WHITE}Docker镜像管理 ▶"
+        echo "${BOLD_GREY}5.  ${LIGHT_WHITE}Docker网络管理 ▶"
+        echo "${BOLD_GREY}6.  ${LIGHT_WHITE}Docker卷管理 ▶"
         print_echo_line_1
-        echo "${BOLD_GREY}7.  ${WHITE}清除无用docker容器和镜像网络数据卷 ▶"
+        echo "${BOLD_GREY}7.  ${LIGHT_WHITE}清除无用docker容器和镜像网络数据卷 ▶"
         print_echo_line_1
-        echo "${LIGHT_CYAN}8.  ${WHITE}卸载Docker环境"
+        echo "${LIGHT_CYAN}8.  ${LIGHT_WHITE}卸载Docker环境"
         print_echo_line_1
-        echo "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_1
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

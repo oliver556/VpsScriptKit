@@ -56,7 +56,7 @@ handle_args (){
             exit 0
             ;;
         v|version)
-            echo "${BOLD_CYAN}${SCRIPT_VERSION}${WHITE}"
+            echo "${BOLD_CYAN}${SCRIPT_VERSION}${LIGHT_WHITE}"
             exit 0
             ;;
         #==========================================
@@ -69,7 +69,7 @@ handle_args (){
             uninstall "$@"
             ;;
         update|更新)
-            echo -e "${BOLD_YELLOW}检测到系统更新请求，正在调用系统更新程序...${WHITE}"
+            echo -e "${BOLD_YELLOW}检测到系统更新请求，正在调用系统更新程序...${LIGHT_WHITE}"
             log_action "[system.sh]" "系统更新"
             system_update_main
             exit 0
@@ -88,7 +88,7 @@ handle_args (){
             case "$1" in
                 "")
                     clear
-                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
+                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${LIGHT_WHITE}"
                     sleep 2
                     # 要删除的代码
                     exit 1
@@ -97,7 +97,7 @@ handle_args (){
 
                 ps)
                     clear
-                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
+                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${LIGHT_WHITE}"
                     ;;
 
                 *)
@@ -113,14 +113,14 @@ handle_args (){
             case "$1" in
                 install)
                     clear
-                    echo -e "${BOLD_GREEN}检测到 Docker 安装请求...${WHITE}"
+                    echo -e "${BOLD_GREEN}检测到 Docker 安装请求...${LIGHT_WHITE}"
                     docker_install_main
                     sleep 2
                     exit 0
                 ;;
                 uninstall)
                     clear
-                    echo -e "${BOLD_RED}检测到 Docker 卸载请求...${WHITE}"
+                    echo -e "${BOLD_RED}检测到 Docker 卸载请求...${LIGHT_WHITE}"
                     docker_global_status_main
                     sleep 2
                     exit 0

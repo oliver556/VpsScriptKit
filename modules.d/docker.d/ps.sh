@@ -27,17 +27,17 @@ docker_ps_menu() {
         docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
         gran_menu_title "[B] 容器操作" "front_line"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}创建新容器"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}创建新容器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}2.  ${WHITE}启动指定容器      ${LIGHT_CYAN}6.  ${WHITE}启动所有容器"
-        echo -e "${LIGHT_CYAN}3.  ${WHITE}停止指定容器      ${LIGHT_CYAN}7.  ${WHITE}停止所有容器"
-        echo -e "${LIGHT_CYAN}4.  ${WHITE}删除指定容器      ${LIGHT_CYAN}8.  ${WHITE}删除所有容器"
-        echo -e "${LIGHT_CYAN}5.  ${WHITE}重启指定容器      ${LIGHT_CYAN}9.  ${WHITE}重启所有容器"
+        echo -e "${LIGHT_CYAN}2.  ${LIGHT_WHITE}启动指定容器      ${LIGHT_CYAN}6.  ${LIGHT_WHITE}启动所有容器"
+        echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}停止指定容器      ${LIGHT_CYAN}7.  ${LIGHT_WHITE}停止所有容器"
+        echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}删除指定容器      ${LIGHT_CYAN}8.  ${LIGHT_WHITE}删除所有容器"
+        echo -e "${LIGHT_CYAN}5.  ${LIGHT_WHITE}重启指定容器      ${LIGHT_CYAN}9.  ${LIGHT_WHITE}重启所有容器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}11. ${WHITE}进入指定容器      ${LIGHT_CYAN}12. ${WHITE}查看容器日志"
-        echo -e "${LIGHT_CYAN}13. ${WHITE}查看容器网络      ${LIGHT_CYAN}14. ${WHITE}查看容器占用"
+        echo -e "${LIGHT_CYAN}11. ${LIGHT_WHITE}进入指定容器      ${LIGHT_CYAN}12. ${LIGHT_WHITE}查看容器日志"
+        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}查看容器网络      ${LIGHT_CYAN}14. ${LIGHT_WHITE}查看容器占用"
         print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
         print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " MAIN_OPTION

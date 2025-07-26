@@ -40,13 +40,13 @@ vsk_uninstall_utils() {
 #   vsk_uninstall_yes
 ###
 vsk_uninstall_yes() {
-    echo -e "${LIGHT_CYAN}🧹 正在清理卸载...${WHITE}"
+    echo -e "${LIGHT_CYAN}🧹 正在清理卸载...${LIGHT_WHITE}"
     rm -rf "$INSTALL_DIR"
     rm -rf "/usr/local/bin/vsk"
     rm -rf "/usr/local/bin/v"
     sleep 1
     echo ""
-    echo -e "${LIGHT_CYAN}✅ 脚本已卸载，江湖有缘再见！${WHITE}"
+    echo -e "${LIGHT_CYAN}✅ 脚本已卸载，江湖有缘再见！${LIGHT_WHITE}"
     sleep 2
     clear
 }

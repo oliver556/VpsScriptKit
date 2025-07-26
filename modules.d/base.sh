@@ -24,16 +24,16 @@ base_menu() {
         clear
         sub_menu_title "🛠️  基础工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}curl 下载工具        ${LIGHT_CYAN}2.  ${WHITE}wget 下载工具"
-        echo -e "${LIGHT_CYAN}3.  ${WHITE}htop 系统监控工具"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}curl 下载工具        ${LIGHT_CYAN}2.  ${LIGHT_WHITE}wget 下载工具"
+        echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}htop 系统监控工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}11. ${WHITE}nano 文本编辑器"
+        echo -e "${LIGHT_CYAN}11. ${LIGHT_WHITE}nano 文本编辑器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}21. ${WHITE}iPerf3 网络测试工具"
+        echo -e "${LIGHT_CYAN}21. ${LIGHT_WHITE}iPerf3 网络测试工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}31. ${WHITE}全部安装             ${LIGHT_CYAN}32. ${WHITE}全部卸载"
+        echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}全部安装             ${LIGHT_CYAN}32. ${LIGHT_WHITE}全部卸载"
         print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
@@ -44,7 +44,7 @@ base_menu() {
                 clear
                 install curl
                 clear
-                echo -e "${BOLD_GREEN}curl 下载工具安装成功！${WHITE}"
+                echo -e "${BOLD_GREEN}curl 下载工具安装成功！${LIGHT_WHITE}"
                 curl --help
                 break_end ;;
             # wget 下载工具
@@ -52,7 +52,7 @@ base_menu() {
                 clear
                 install wget
                 clear
-                echo -e "${BOLD_GREEN}wget 下载工具安装成功！${WHITE}"
+                echo -e "${BOLD_GREEN}wget 下载工具安装成功！${LIGHT_WHITE}"
                 wget --help
                 break_end ;;
             # htop 系统监控工具

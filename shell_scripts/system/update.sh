@@ -21,9 +21,9 @@
 ###
 system_update_utils() {
     clear
-	
-	echo -e "${LIGHT_CYAN}正在更新系统...${WHITE}"
-    echo -e "${LIGHT_CYAN}--------------------------------${WHITE}"
+
+	echo -e "${LIGHT_CYAN}正在更新系统...${LIGHT_WHITE}"
+    echo -e "${LIGHT_CYAN}--------------------------------${LIGHT_WHITE}"
 	sleep 1
 	# Fedora, CentOS 8+, RHEL 8+
 	if command -v dnf &>/dev/null; then

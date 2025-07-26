@@ -27,11 +27,11 @@ node_building_menu() {
         clear
         sub_menu_title "🏗️  节点搭建脚本合集"
         gran_menu_title "[A] 节点面板"
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}伊朗版3X-UI面板一键脚本 ${BOLD_YELLOW}★${WHITE}      ${LIGHT_CYAN}2.  ${WHITE}新版X-UI面板一键脚本"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}伊朗版3X-UI面板一键脚本 ${BOLD_YELLOW}★${LIGHT_WHITE}      ${LIGHT_CYAN}2.  ${LIGHT_WHITE}新版X-UI面板一键脚本"
         gran_menu_title "[B] 节点工具"
-        echo -e "${LIGHT_CYAN}11.  ${WHITE}TCP调优工具"
+        echo -e "${LIGHT_CYAN}11.  ${LIGHT_WHITE}TCP调优工具"
         print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
         print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

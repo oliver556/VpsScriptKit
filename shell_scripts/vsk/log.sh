@@ -21,7 +21,7 @@
 ###
 vsk_log_view() {
     clear
-    echo -e "\n📋 ${LIGHT_CYAN}最近日志记录（最多显示 30 条）：${WHITE}"
+    echo -e "\n📋 ${LIGHT_CYAN}最近日志记录（最多显示 30 条）：${LIGHT_WHITE}"
     if [ -f "$LOG_FILE" ] && [ -s "$LOG_FILE" ]; then
         tac "$LOG_FILE" | head -n 30
     else
@@ -64,7 +64,7 @@ vsk_log_filter() {
     clear
     IFS=":" read -r filename _ _ <<< "${modules[$choice]}"
 
-    echo -e "\n📋 ${LIGHT_CYAN}筛选模块 ${BOLD_GREEN}[$filename]${WHITE} ${LIGHT_CYAN}的日志（最多显示最新的 100 条）：${WHITE}"
+    echo -e "\n📋 ${LIGHT_CYAN}筛选模块 ${BOLD_GREEN}[$filename]${LIGHT_WHITE} ${LIGHT_CYAN}的日志（最多显示最新的 100 条）：${LIGHT_WHITE}"
     if [ -f "$LOG_FILE" ] && [ -s "$LOG_FILE" ]; then
         grep --color=auto "\[$filename\]" "$LOG_FILE" | tail -n 100
     else
@@ -82,7 +82,7 @@ vsk_log_filter() {
 ###
 vsk_log_clear() {
     clear
-    read -p "${YELLOW}⚠️ 是否确认清空日志文件？(y/n): ${WHITE}" confirm
+    read -p "${YELLOW}⚠️ 是否确认清空日志文件？(y/n): ${LIGHT_WHITE}" confirm
     if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
         > "$LOG_FILE"
         echo
@@ -113,9 +113,9 @@ vsk_log_export() {
 
         # 3. 给出清晰、可操作的提示信息
         echo_success "✅ 日志副本已成功导出！"
-        echo -e "   ${BOLD_CYAN}文件位置: ${BOLD_GREEN}$(realpath ~/"$backup_name")${WHITE}" # realpath 会显示绝对路径
+        echo -e "   ${BOLD_CYAN}文件位置: ${BOLD_GREEN}$(realpath ~/"$backup_name")${LIGHT_WHITE}" # realpath 会显示绝对路径
         echo ""
-        echo -e "${BOLD_YELLOW}您现在可以在您的本地电脑上，打开一个新的终端窗口，使用以下命令来下载它：${WHITE}"
+        echo -e "${BOLD_YELLOW}您现在可以在您的本地电脑上，打开一个新的终端窗口，使用以下命令来下载它：${LIGHT_WHITE}"
         # 假设用户名为 root，如果不是，用户需要自行替换
         echo_info "scp root@<您的服务器IP>:~/${backup_name} ."
 

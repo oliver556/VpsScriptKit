@@ -26,9 +26,9 @@ vsk_uninstall_menu() {
     while true; do
         clear
         echo -e "🔄 卸载 vsk 脚本"
-        echo -e "${LIGHT_CYAN}-------------${WHITE}"
+        echo -e "${LIGHT_CYAN}-------------${LIGHT_WHITE}"
         echo "将彻底卸载 VpsScriptKit 脚本，不影响你其他功能"
-        echo -e "${BLUE}-------------${WHITE}"
+        echo -e "${BLUE}-------------${LIGHT_WHITE}"
         read -e -p "确定继续吗？(Y/N): " choice
 
         case "$choice" in
@@ -38,12 +38,12 @@ vsk_uninstall_menu() {
                 break_end no_wait ;;
             [Nn])
                 clear
-                echo -e "${YELLOW_BOLD}已取消卸载。${WHITE}"
+                echo -e "${YELLOW_BOLD}已取消卸载。${LIGHT_WHITE}"
                 sleep 1
                 clear
                 break ;;
             *)
-                echo -e "${RED_BOLD}❌ 无效选项，请输入 Y 或 N。${WHITE}"
+                echo -e "${RED_BOLD}❌ 无效选项，请输入 Y 或 N。${LIGHT_WHITE}"
                 sleep 1
                 clear
                 break_end no_wait ;;

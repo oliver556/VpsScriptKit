@@ -88,32 +88,32 @@ while true; do
     clear
 
     main_menu_title "            🧰  一款全功能的 Linux 管理脚本！      ${SCRIPT_VERSION}"
-    echo -e "${LIGHT_YELLOW}#            💡  Tip: 命令行输入 ${BOLD_GREEN}v${WHITE} ${LIGHT_YELLOW}可快速启动脚本            #${WHITE}"
+    echo -e "${LIGHT_YELLOW}#            💡  Tip: 命令行输入 ${BOLD_GREEN}v${LIGHT_WHITE} ${LIGHT_YELLOW}可快速启动脚本            #${LIGHT_WHITE}"
     print_echo_line_1
-    printf "${LIGHT_CYAN}1.  ${WHITE}系统工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}2.  ${WHITE}基础工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}3.  ${WHITE}进阶工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}4.  ${WHITE}Docker 管理  ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统工具     ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}2.  ${LIGHT_WHITE}基础工具     ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}3.  ${LIGHT_WHITE}进阶工具     ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}4.  ${LIGHT_WHITE}Docker 管理  ▶                                           ${LIGHT_CYAN}#\n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}8.  ${WHITE}测试脚本合集 ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}9.  ${WHITE}节点搭建脚本 ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}8.  ${LIGHT_WHITE}测试脚本合集 ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}9.  ${LIGHT_WHITE}节点搭建脚本 ▶                                           ${LIGHT_CYAN}#\n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}99. ${WHITE}脚本工具 ▶                                               ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}99. ${LIGHT_WHITE}脚本工具 ▶                                               ${LIGHT_CYAN}#\n"
     print_echo_line_3
-    printf "${LIGHT_CYAN}0. ${WHITE} 退出程序                                                 ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}0. ${LIGHT_WHITE} 退出程序                                                 ${LIGHT_CYAN}#\n"
     print_echo_line_3
 
     # 🔽 用户输入
-    read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${WHITE}")" choice
+    read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${LIGHT_WHITE}")" choice
 
     if [[ -z "$choice" ]]; then
         # -z 判断字符串是否为空，如果为空则为 true
-        echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
+        echo -e "${YELLOW}❌ 无效选项，请重新输入。${LIGHT_WHITE}" && sleep 1
     elif [[ "$choice" = "0" ]]; then
         clear
         echo
         print_echo_line_1
-        echo -e "${BOLD_GREEN}感谢使用，再见！${WHITE}"
+        echo -e "${BOLD_GREEN}感谢使用，再见！${LIGHT_WHITE}"
         print_echo_line_1
         sleep 1
         clear
@@ -124,12 +124,12 @@ while true; do
         # 检查是否收到重启信号
         if [[ $? -eq 10 ]]; then
             print_echo_line_1
-            echo -e "${BOLD_GREEN}收到重启信号，正在无缝重启脚本...${WHITE}"
+            echo -e "${BOLD_GREEN}收到重启信号，正在无缝重启脚本...${LIGHT_WHITE}"
             sleep 1
             # 使用 exec 实现原地重启
             exec "$0" "$@"
         fi
     else
-        echo -e "${YELLOW}❌ 无效选项，请重新输入。${WHITE}" && sleep 1
+        echo -e "${YELLOW}❌ 无效选项，请重新输入。${LIGHT_WHITE}" && sleep 1
     fi
 done

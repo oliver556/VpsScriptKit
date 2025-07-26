@@ -38,16 +38,16 @@ vsk_update_menu() {
         LATEST_SCRIPT_VERSION=$(vsk_update_get_latest_version_tag)
 
         if [[ "${SCRIPT_VERSION}" == "${LATEST_SCRIPT_VERSION}" ]]; then
-            echo -e "${BOLD_GREEN}✅ 您当前已是最新版本 ${SCRIPT_VERSION}。${WHITE}"
+            echo -e "${BOLD_GREEN}✅ 您当前已是最新版本 ${SCRIPT_VERSION}。${LIGHT_WHITE}"
         else
             echo -e "${BOLD_GREEN}🚀  发现新版本！"
-            echo -e "${LIGHT_CYAN}当前版本：${SCRIPT_VERSION}       最新版本：${YELLOW}${LATEST_SCRIPT_VERSION}${WHITE}"
+            echo -e "${LIGHT_CYAN}当前版本：${SCRIPT_VERSION}       最新版本：${YELLOW}${LATEST_SCRIPT_VERSION}${LIGHT_WHITE}"
         fi
 
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1. ${WHITE}现在更新            ${BOLD_GREY}2. ${WHITE}开启自动更新            ${BOLD_GREY}3. ${WHITE}关闭自动更新"
+        echo -e "${LIGHT_CYAN}1. ${LIGHT_WHITE}现在更新            ${BOLD_GREY}2. ${LIGHT_WHITE}开启自动更新            ${BOLD_GREY}3. ${LIGHT_WHITE}关闭自动更新"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}0. ${WHITE}返回主菜单"
+        echo -e "${LIGHT_CYAN}0. ${LIGHT_WHITE}返回主菜单"
         print_echo_line_1
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

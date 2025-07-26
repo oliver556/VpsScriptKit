@@ -105,7 +105,7 @@ system_info_utils() {
     # CPU 占用/使用率
 	cpu_usage_percent=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else printf "%.0f\n", (($2+$4-u1) * 100 / (t-t1))}' \
 		<(grep 'cpu ' /proc/stat) <(sleep 1; grep 'cpu ' /proc/stat))
-    
+
     # 系统负载 / CPU 负载
     load=$(uptime | awk '{print $(NF-2), $(NF-1), $NF}')
 
@@ -121,7 +121,7 @@ system_info_utils() {
     # ==========================================================
 	# 获取系统网络状态
 	system_info_output_status
-	
+
     # ==========================================================
     # 网络算法
 	congestion_algorithm=$(sysctl -n net.ipv4.tcp_congestion_control)
@@ -159,7 +159,7 @@ system_info_utils() {
 	timezone=$(system_info_current_timezone)
 	# 系统当前时间
 	current_time=$(date "+%Y-%m-%d %I:%M %p")
-    
+
     # ==========================================================
     # 运行时间
 	runtime=$(cat /proc/uptime | awk -F. '{run_days=int($1 / 86400);run_hours=int(($1 % 86400) / 3600);run_minutes=int(($1 % 3600) / 60); if (run_days > 0) printf("%d天 ", run_days); if (run_hours > 0) printf("%d时 ", run_hours); printf("%d分\n", run_minutes)}')
@@ -179,52 +179,52 @@ system_info_utils() {
 system_info_show() {
 	clear
 
-    echo -e "${BLUE}正在查询中，请稍后...${WHITE}"
+    echo -e "${BLUE}正在查询中，请稍后...${LIGHT_WHITE}"
 
     system_info_utils
 
-    echo -e "${GREEN}查询完成${WHITE}"
+    echo -e "${GREEN}查询完成${LIGHT_WHITE}"
     sleep 1
     clear
-    
+
 	echo ""
 	echo -e "系统信息查询"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}主机名:       ${WHITE}$hostname"
-	echo -e "${LIGHT_CYAN}系统版本:     ${WHITE}$os_info"
-	echo -e "${LIGHT_CYAN}Linux版本:    ${WHITE}$kernel_version"
+	echo -e "${LIGHT_CYAN}主机名:       ${LIGHT_WHITE}$hostname"
+	echo -e "${LIGHT_CYAN}系统版本:     ${LIGHT_WHITE}$os_info"
+	echo -e "${LIGHT_CYAN}Linux版本:    ${LIGHT_WHITE}$kernel_version"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}CPU架构:      ${WHITE}$cpu_arch"
-	echo -e "${LIGHT_CYAN}CPU型号:      ${WHITE}$cpu_info"
-	echo -e "${LIGHT_CYAN}CPU核心数:    ${WHITE}$cpu_cores"
-	echo -e "${LIGHT_CYAN}CPU频率:      ${WHITE}$cpu_freq"
+	echo -e "${LIGHT_CYAN}CPU架构:      ${LIGHT_WHITE}$cpu_arch"
+	echo -e "${LIGHT_CYAN}CPU型号:      ${LIGHT_WHITE}$cpu_info"
+	echo -e "${LIGHT_CYAN}CPU核心数:    ${LIGHT_WHITE}$cpu_cores"
+	echo -e "${LIGHT_CYAN}CPU频率:      ${LIGHT_WHITE}$cpu_freq"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}CPU占用:      ${WHITE}$cpu_usage_percent%"
-	echo -e "${LIGHT_CYAN}系统负载:     ${WHITE}$load"
-	echo -e "${LIGHT_CYAN}物理内存:     ${WHITE}$mem_info"
-	echo -e "${LIGHT_CYAN}虚拟内存:     ${WHITE}$swap_info"
-	echo -e "${LIGHT_CYAN}硬盘占用:     ${WHITE}$disk_info"
+	echo -e "${LIGHT_CYAN}CPU占用:      ${LIGHT_WHITE}$cpu_usage_percent%"
+	echo -e "${LIGHT_CYAN}系统负载:     ${LIGHT_WHITE}$load"
+	echo -e "${LIGHT_CYAN}物理内存:     ${LIGHT_WHITE}$mem_info"
+	echo -e "${LIGHT_CYAN}虚拟内存:     ${LIGHT_WHITE}$swap_info"
+	echo -e "${LIGHT_CYAN}硬盘占用:     ${LIGHT_WHITE}$disk_info"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}总接收:       ${WHITE}$rx"
-	echo -e "${LIGHT_CYAN}总发送:       ${WHITE}$tx"
+	echo -e "${LIGHT_CYAN}总接收:       ${LIGHT_WHITE}$rx"
+	echo -e "${LIGHT_CYAN}总发送:       ${LIGHT_WHITE}$tx"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}网络算法:     ${WHITE}$congestion_algorithm $queue_algorithm"
+	echo -e "${LIGHT_CYAN}网络算法:     ${LIGHT_WHITE}$congestion_algorithm $queue_algorithm"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}运营商:       ${WHITE}$isp_info"
+	echo -e "${LIGHT_CYAN}运营商:       ${LIGHT_WHITE}$isp_info"
 	if [ -n "$ipv4_address" ]; then
-		echo -e "${LIGHT_CYAN}IPv4地址:     ${WHITE}$ipv4_address"
+		echo -e "${LIGHT_CYAN}IPv4地址:     ${LIGHT_WHITE}$ipv4_address"
 	fi
 
 	if [ -n "$ipv6_address" ]; then
-		echo -e "${LIGHT_CYAN}IPv6地址:     ${WHITE}$ipv6_address"
+		echo -e "${LIGHT_CYAN}IPv6地址:     ${LIGHT_WHITE}$ipv6_address"
 	fi
-	echo -e "${LIGHT_CYAN}DNS地址:      ${WHITE}$dns_addresses"
-	echo -e "${LIGHT_CYAN}内网地址:     ${WHITE}$internal_ip"
+	echo -e "${LIGHT_CYAN}DNS地址:      ${LIGHT_WHITE}$dns_addresses"
+	echo -e "${LIGHT_CYAN}内网地址:     ${LIGHT_WHITE}$internal_ip"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}地理位置:     ${WHITE}$country $city"
-	echo -e "${LIGHT_CYAN}系统时间:     ${WHITE}$timezone $current_time"
+	echo -e "${LIGHT_CYAN}地理位置:     ${LIGHT_WHITE}$country $city"
+	echo -e "${LIGHT_CYAN}系统时间:     ${LIGHT_WHITE}$timezone $current_time"
 	echo -e "${LIGHT_CYAN}-------------"
-	echo -e "${LIGHT_CYAN}运行时长:     ${WHITE}$runtime"
+	echo -e "${LIGHT_CYAN}运行时长:     ${LIGHT_WHITE}$runtime"
 	echo
 }
 

@@ -64,14 +64,14 @@ system_reinstall_bin456789() {
 #   hint_reboot
 ###
 hint_reboot() {
-    echo -e "${LIGHT_CYAN}安装完成！系统 3 秒后自动重启...${WHITE}"
+    echo -e "${LIGHT_CYAN}安装完成！系统 3 秒后自动重启...${LIGHT_WHITE}"
 
     for i in {3..1}; do
-        echo -e "${LIGHT_CYAN}${i}...${WHITE}"
+        echo -e "${LIGHT_CYAN}${i}...${LIGHT_WHITE}"
         sleep 1
     done
 
-    echo -e "${LIGHT_CYAN}重启中...${WHITE}"
+    echo -e "${LIGHT_CYAN}重启中...${LIGHT_WHITE}"
 
     sleep 1
 
@@ -174,15 +174,15 @@ start_reinstall_process() {
     local system_param="$6"
 
     # 显示最终确认信息
-    echo -e "${LIGHT_CYAN}请最后确认您的安装选项:${WHITE}"
+    echo -e "${LIGHT_CYAN}请最后确认您的安装选项:${LIGHT_WHITE}"
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}- 系统版本:${WHITE} ${BOLD_RED}${system_version_name}${WHITE}"
-    echo -e "${LIGHT_CYAN}- 初始用户:${WHITE} ${YELLOW}${user}${WHITE}"
-    echo -e "${LIGHT_CYAN}- 初始密码:${WHITE} ${YELLOW}${pass}${WHITE}"
-    echo -e "${LIGHT_CYAN}- 初始端口:${WHITE} ${YELLOW}${port}${WHITE}"
+    echo -e "${LIGHT_CYAN}- 系统版本:${LIGHT_WHITE} ${BOLD_RED}${system_version_name}${LIGHT_WHITE}"
+    echo -e "${LIGHT_CYAN}- 初始用户:${LIGHT_WHITE} ${YELLOW}${user}${LIGHT_WHITE}"
+    echo -e "${LIGHT_CYAN}- 初始密码:${LIGHT_WHITE} ${YELLOW}${pass}${LIGHT_WHITE}"
+    echo -e "${LIGHT_CYAN}- 初始端口:${LIGHT_WHITE} ${YELLOW}${port}${LIGHT_WHITE}"
     print_echo_line_1
     echo
-    echo -e "${BOLD_RED}警告：这将清除目标服务器上的所有数据！请先复制好您的初始用户名、密码、端口，以免重装后无法连接。${WHITE}"
+    echo -e "${BOLD_RED}警告：这将清除目标服务器上的所有数据！请先复制好您的初始用户名、密码、端口，以免重装后无法连接。${LIGHT_WHITE}"
 
     if ! ask_to_continue; then
         return
@@ -196,7 +196,7 @@ start_reinstall_process() {
     clear
 
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}马上开始重装系统${WHITE}"
+    echo -e "${LIGHT_CYAN}马上开始重装系统${LIGHT_WHITE}"
     print_echo_line_1
 
     # 动态调用传入的安装函数名，并将系统名称作为参数传递给它
@@ -300,7 +300,7 @@ system_reinstall_selection() {
             ;;
 
         *)
-            echo -e "${BOLD_RED}错误: 暂不支持您选择的系统: '${system_selection}'${WHITE}"
+            echo -e "${BOLD_RED}错误: 暂不支持您选择的系统: '${system_selection}'${LIGHT_WHITE}"
             break_end no_wait
             ;;
     esac

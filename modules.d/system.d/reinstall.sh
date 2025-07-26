@@ -28,27 +28,27 @@ system_reinstall_menu() {
         clear
         sub_menu_title "⚙️  一键重装系统"
         echo -e "${BOLD_RED}注意: 重装系统有风险失联，不放这心者慎用。重装预计花费15分钟，请提前备份数据。"
-        echo -e "${GREY}感谢 MollyLau 大佬 和 bin456789 大佬 的脚本支持！${WHITE} "
+        echo -e "${GREY}感谢 MollyLau 大佬 和 bin456789 大佬 的脚本支持！${LIGHT_WHITE} "
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${WHITE}Debian 12            ${LIGHT_CYAN}2.  ${WHITE}Debian 11 ${BOLD_YELLOW}★${WHITE}"
-        echo -e "${LIGHT_CYAN}3.  ${WHITE}Debian 10            ${LIGHT_CYAN}4.  ${WHITE}Debian 9"
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}Debian 12            ${LIGHT_CYAN}2.  ${LIGHT_WHITE}Debian 11 ${BOLD_YELLOW}★${LIGHT_WHITE}"
+        echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}Debian 10            ${LIGHT_CYAN}4.  ${LIGHT_WHITE}Debian 9"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}11. ${WHITE}Ubuntu 24.04         ${LIGHT_CYAN}12. ${WHITE}Ubuntu 22.04 ${BOLD_YELLOW}★${WHITE}"
-        echo -e "${LIGHT_CYAN}13. ${WHITE}Ubuntu 20.04         ${LIGHT_CYAN}14. ${WHITE}Ubuntu 18.04"
+        echo -e "${LIGHT_CYAN}11. ${LIGHT_WHITE}Ubuntu 24.04         ${LIGHT_CYAN}12. ${LIGHT_WHITE}Ubuntu 22.04 ${BOLD_YELLOW}★${LIGHT_WHITE}"
+        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}Ubuntu 20.04         ${LIGHT_CYAN}14. ${LIGHT_WHITE}Ubuntu 18.04"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}21. ${WHITE}CentOS 10            ${LIGHT_CYAN}22. ${WHITE}CentOS 9"
+        echo -e "${LIGHT_CYAN}21. ${LIGHT_WHITE}CentOS 10            ${LIGHT_CYAN}22. ${LIGHT_WHITE}CentOS 9"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}31. ${WHITE}Alpine Linux"
+        echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}Alpine Linux"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}41. ${WHITE}Windows 11           ${LIGHT_CYAN}42. ${WHITE}Windows 10"
-        echo -e "${BOLD_GREY}43. ${WHITE}Windows 7            ${LIGHT_CYAN}44. ${WHITE}Windows Server 2022"
-        echo -e "${LIGHT_CYAN}45. ${WHITE}Windows Server 2019  ${LIGHT_CYAN}46. ${WHITE}Windows Server 2016"
+        echo -e "${LIGHT_CYAN}41. ${LIGHT_WHITE}Windows 11           ${LIGHT_CYAN}42. ${LIGHT_WHITE}Windows 10"
+        echo -e "${BOLD_GREY}43. ${LIGHT_WHITE}Windows 7            ${LIGHT_CYAN}44. ${LIGHT_WHITE}Windows Server 2022"
+        echo -e "${LIGHT_CYAN}45. ${LIGHT_WHITE}Windows Server 2019  ${LIGHT_CYAN}46. ${LIGHT_WHITE}Windows Server 2016"
         print_echo_line_1
         if [ "$system_param" = "dd" ]; then
-            echo -e "${LIGHT_CYAN}0. ${WHITE}退出脚本"
+            echo -e "${LIGHT_CYAN}0. ${LIGHT_WHITE}退出脚本"
             print_echo_line_3
         else
-            echo -e "${LIGHT_CYAN}0.  ${WHITE}返回上一级菜单"
+            echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单"
             print_echo_line_3
         fi
         echo ""

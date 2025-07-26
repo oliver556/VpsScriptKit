@@ -71,10 +71,10 @@ _install_dependencies() {
             return 1
         fi
         print_echo_line_1 "front_line"
-        echo -e "${LIGHT_GREEN}✅ 依赖安装完成。${WHITE}"
+        echo -e "${LIGHT_GREEN}✅ 依赖安装完成。${LIGHT_WHITE}"
         print_echo_line_1 "back_line"
     else
-        echo -e "${LIGHT_GREEN}✅ 核心依赖已满足。${WHITE}"
+        echo -e "${LIGHT_GREEN}✅ 核心依赖已满足。${LIGHT_WHITE}"
     fi
 
     # --- 步骤 4: 处理特定于系统的服务 ---
@@ -107,10 +107,10 @@ _install_acme_client() {
 
     # 检查 acme.sh 客户端是否已安装
     if [ -f "$HOME/.acme.sh/acme.sh" ]; then
-        echo -e "${LIGHT_GREEN}✅ acme.sh 客户端已安装，尝试更新...${WHITE}"
+        echo -e "${LIGHT_GREEN}✅ acme.sh 客户端已安装，尝试更新...${LIGHT_WHITE}"
         "$HOME/.acme.sh/acme.sh" --upgrade
     else
-        echo -e "${LIGHT_CYAN}⏳ 正在从官方渠道安装 acme.sh 客户端...${WHITE}"
+        echo -e "${LIGHT_CYAN}⏳ 正在从官方渠道安装 acme.sh 客户端...${LIGHT_WHITE}"
         # 安装 acme.sh。它会自动创建一个默认的定时任务。
         curl https://get.acme.sh | sh
     fi
@@ -118,12 +118,12 @@ _install_acme_client() {
     export PATH="$HOME/.acme.sh:$PATH"
     # 检查 acme.sh 命令是否真的可用了，作为最终验证。
     if ! command -v acme.sh &>/dev/null; then
-        echo -e "${LIGHT_RED}❌ acme.sh 安装失败，请检查 ${LIGHT_GREEN}$HOME/.acme.sh${WHITE} 目录并查看日志。"
+        echo -e "${LIGHT_RED}❌ acme.sh 安装失败，请检查 ${LIGHT_GREEN}$HOME/.acme.sh${LIGHT_WHITE} 目录并查看日志。"
         return 1
     fi
 
     # --- 新增：设置自定义定时任务时间 ---
-    echo -e "${LIGHT_CYAN}⚙️  正在将自动续期任务时间设置为 [${custom_cron_time}]...${WHITE}"
+    echo -e "${LIGHT_CYAN}⚙️  正在将自动续期任务时间设置为 [${custom_cron_time}]...${LIGHT_WHITE}"
     # 定义 acme.sh 的 cron 命令部分，便于后续匹配和替换。
     local cron_job_command="$HOME/.acme.sh/acme.sh --cron"
     # 构建完整的新定时任务行。
@@ -136,7 +136,7 @@ _install_acme_client() {
     # 4. | crontab -：将前面处理好的最终结果，重新写入到 crontab 中。
     (crontab -l 2>/dev/null | grep -v "$cron_job_command" ; echo "$new_cron_job_line") | crontab -
 
-    echo -e "${LIGHT_GREEN}✅ acme.sh 客户端准备就绪，并已配置好定时任务。${WHITE}"
+    echo -e "${LIGHT_GREEN}✅ acme.sh 客户端准备就绪，并已配置好定时任务。${LIGHT_WHITE}"
 }
 
 ### === 函数：注册 ACME 账户 === ###
@@ -153,7 +153,7 @@ _install_acme_client() {
 _register_acme_account() {
     local email="$1"
     local ca_server="$2"
-    echo -e "${LIGHT_CYAN}📜 正在使用邮箱 ${LIGHT_GREEN}$email${WHITE} 向 ${LIGHT_GREEN}$ca_server${WHITE} 注册 ACME 账户...${WHITE}"
+    echo -e "${LIGHT_CYAN}📜 正在使用邮箱 ${LIGHT_GREEN}$email${LIGHT_WHITE} 向 ${LIGHT_GREEN}$ca_server${LIGHT_WHITE} 注册 ACME 账户...${LIGHT_WHITE}"
     "$HOME/.acme.sh/acme.sh" --register-account -m "$email" --server "$ca_server"
 }
 
@@ -171,11 +171,11 @@ _register_acme_account() {
 _issue_certificate() {
     local domain="$1"
     local ca_server="$2"
-    echo -e "${LIGHT_CYAN}🔐 正在为域名 ${LIGHT_GREEN}$domain${WHITE} 申请证书 (standalone 模式)...${WHITE}"
+    echo -e "${LIGHT_CYAN}🔐 正在为域名 ${LIGHT_GREEN}$domain${LIGHT_WHITE} 申请证书 (standalone 模式)...${LIGHT_WHITE}"
     # standalone 模式会临时启动一个 web server 来完成验证。
     if ! "$HOME/.acme.sh/acme.sh" --issue --standalone -d "$domain" --server "$ca_server"; then
         log_error "❌ 证书申请失败！"
-        echo -e "${LIGHT_YELLOW}🔍 请检查：${WHITE}"
+        echo -e "${LIGHT_YELLOW}🔍 请检查：${LIGHT_WHITE}"
         echo -e "   1. 域名 ($domain) 是否正确解析到本机 IP。"
         echo -e "   2. 80 端口是否已被防火墙放行，并且未被其他程序 (如 Nginx, Apache) 占用。"
         return 1
@@ -201,7 +201,7 @@ _install_certificate() {
     local ca_server="$3"
     local cert_path="$4"
 
-    echo -e "${LIGHT_CYAN}📦 正在将证书安装到 ${LIGHT_GREEN}$cert_path${WHITE} ...${WHITE}"
+    echo -e "${LIGHT_CYAN}📦 正在将证书安装到 ${LIGHT_GREEN}$cert_path${LIGHT_WHITE} ...${LIGHT_WHITE}"
     sudo mkdir -p "$cert_path"
     if "$HOME/.acme.sh/acme.sh" --install-cert -d "$domain" \
         --key-file       "$cert_path/private.key" \
@@ -212,9 +212,9 @@ _install_certificate() {
     then
         echo_info "🎉 SSL 证书配置成功！"
         echo_info "🔔 记得复制以下路径信息，用于后续配置。"
-        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path/fullchain.crt${WHITE}"
-        echo_info "   - 私钥路径: ${BOLD_LIGHT_GREEN}$cert_path/private.key${WHITE}"
-        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path${WHITE} ..."
+        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path/fullchain.crt${LIGHT_WHITE}"
+        echo_info "   - 私钥路径: ${BOLD_LIGHT_GREEN}$cert_path/private.key${LIGHT_WHITE}"
+        echo_info "   - 证书路径: ${BOLD_LIGHT_GREEN}$cert_path${LIGHT_WHITE} ..."
         echo_info "   - acme.sh 已自动为您创建定时续期任务。"
     else
         log_error "❌ 证书安装步骤失败。"
@@ -255,7 +255,7 @@ _configure_firewall() {
     esac
 
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}⚙️  正在根据您的选择配置防火墙...${WHITE}"
+    echo -e "${LIGHT_CYAN}⚙️  正在根据您的选择配置防火墙...${LIGHT_WHITE}"
 
     case "$os_type" in
         debian_like)
@@ -315,7 +315,7 @@ _apply_ssl_certificate() {
     local cert_path="/etc/ssl/custom/$domain"
 
     # print_echo_line_1 "front_line"
-    echo -e "${LIGHT_CYAN}证书申请流程开始...${WHITE}"
+    echo -e "${LIGHT_CYAN}证书申请流程开始...${LIGHT_WHITE}"
 
     # --- 步骤 1: 安装依赖 ---
     _install_dependencies || return 1
@@ -335,7 +335,7 @@ _apply_ssl_certificate() {
     _install_certificate  "$domain" "$email" "$ca_server" "$cert_path" || return 1
 
     print_echo_line_1 "front_line"
-    echo -e "${BOLD_LIGHT_GREEN}✅ 所有证书申请和安装步骤已成功完成。${WHITE}"
+    echo -e "${BOLD_LIGHT_GREEN}✅ 所有证书申请和安装步骤已成功完成。${LIGHT_WHITE}"
     print_echo_line_1 "back_line"
 }
 
@@ -356,29 +356,29 @@ get_ssl_interaction() {
     fi
 
     print_echo_line_1
-    echo -e "${BOLD_YELLOW}SSL 证书申请向导${WHITE}"
+    echo -e "${BOLD_YELLOW}SSL 证书申请向导${LIGHT_WHITE}"
     print_echo_line_1
 
     # ======================================================================================
 
     # --- 步骤 1: 收集基本信息 ---
-    read -rp "${LIGHT_CYAN}请输入域名 (例如: example.com): ${WHITE}" domain
+    read -rp "${LIGHT_CYAN}请输入域名 (例如: example.com): ${LIGHT_WHITE}" domain
     if [[ -z "$domain" ]]; then
         echo "❌ 错误: 域名不能为空。" && sleep 2
         return
     fi
 
-    read -rp "${LIGHT_CYAN}请输入电子邮件 (用于ACME账户): ${WHITE}" email
+    read -rp "${LIGHT_CYAN}请输入电子邮件 (用于ACME账户): ${LIGHT_WHITE}" email
     if [[ -z "$email" ]]; then
         echo "❌ 错误: 邮箱不能为空。" && sleep 2
         return
     fi
 
-    echo -e "${LIGHT_CYAN}请选择证书颁发机构 (CA):${WHITE}"
+    echo -e "${LIGHT_CYAN}请选择证书颁发机构 (CA):${LIGHT_WHITE}"
     echo -e "  ${LIGHT_CYAN}1) ${LIGHT_GREEN}Let's Encrypt (推荐)"
-    echo -e "  ${LIGHT_CYAN}2) ${WHITE}Buypass"
-    echo -e "  ${LIGHT_CYAN}3) ${WHITE}ZeroSSL"
-    read -rp "${LIGHT_CYAN}输入选项 [1-3] (默认为1): ${WHITE}" ca_choice
+    echo -e "  ${LIGHT_CYAN}2) ${LIGHT_WHITE}Buypass"
+    echo -e "  ${LIGHT_CYAN}3) ${LIGHT_WHITE}ZeroSSL"
+    read -rp "${LIGHT_CYAN}输入选项 [1-3] (默认为1): ${LIGHT_WHITE}" ca_choice
     local ca_server
     case $ca_choice in
         2) ca_server="buypass" ;;
@@ -392,19 +392,19 @@ get_ssl_interaction() {
 
     # --- 步骤 1.5: 定时续期时间设置 (新増) ---
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}定时续期时间设置${WHITE}"
+    echo -e "${LIGHT_CYAN}定时续期时间设置${LIGHT_WHITE}"
     print_echo_line_1
-    echo -e "${LIGHT_YELLOW}请设置自动续期任务的执行时间 (24小时制)。合理的随机时间有助于避免网络拥堵。\n${WHITE}"
+    echo -e "${LIGHT_YELLOW}请设置自动续期任务的执行时间 (24小时制)。合理的随机时间有助于避免网络拥堵。\n${LIGHT_WHITE}"
 
     # 让用户输入小时，提供默认值
-    read -rp "${LIGHT_CYAN}请输入小时 (0-23, 默认为凌晨2点): ${WHITE}" cron_hour
+    read -rp "${LIGHT_CYAN}请输入小时 (0-23, 默认为凌晨2点): ${LIGHT_WHITE}" cron_hour
     # 如果用户输入为空或不是数字，则使用默认值 2
     [[ -z "$cron_hour" || ! "$cron_hour" =~ ^[0-9]+$ || "$cron_hour" -gt 23 ]] && cron_hour=2
 
     # 让用户输入分钟，提供随机默认值
     # $((RANDOM % 60)) 会生成一个 0-59 之间的随机数
     default_minute=$((RANDOM % 60))
-    read -rp "${LIGHT_CYAN}请输入分钟 (0-59, 默认为随机值 ${default_minute}): ${WHITE}" cron_minute
+    read -rp "${LIGHT_CYAN}请输入分钟 (0-59, 默认为随机值 ${default_minute}): ${LIGHT_WHITE}" cron_minute
     # 如果用户输入为空或不是数字，则使用随机默认值
     [[ -z "$cron_minute" || ! "$cron_minute" =~ ^[0-9]+$ || "$cron_minute" -gt 59 ]] && cron_minute=$default_minute
 
@@ -417,18 +417,18 @@ get_ssl_interaction() {
 
     # --- 步骤 2: 防火墙配置 ---
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}防火墙配置${WHITE}"
+    echo -e "${LIGHT_CYAN}防火墙配置${LIGHT_WHITE}"
     print_echo_line_1
-    echo -e "${LIGHT_YELLOW}证书申请需要通过公网HTTP(80端口)验证，请配置防火墙。\n${WHITE}"
+    echo -e "${LIGHT_YELLOW}证书申请需要通过公网HTTP(80端口)验证，请配置防火墙。\n${LIGHT_WHITE}"
 
     # 定义一个变量来存储用户的防火墙操作选择
     local firewall_action=""
 
-    echo -e "${LIGHT_CYAN}防火墙操作:${WHITE}"
-    echo -e "  ${LIGHT_CYAN}1) ${WHITE}禁用防火墙 ${LIGHT_GREEN}(推荐)${WHITE}"
-    echo -e "  ${LIGHT_CYAN}2) ${WHITE}允许 HTTP (80端口) 流量通过防火墙${WHITE}"
-    echo -e "  ${LIGHT_CYAN}3) ${WHITE}不做任何更改 (我已手动配置好)${WHITE}"
-    read -rp "${LIGHT_CYAN}输入选项 [1-3] (默认为1): ${WHITE}" firewall_choice
+    echo -e "${LIGHT_CYAN}防火墙操作:${LIGHT_WHITE}"
+    echo -e "  ${LIGHT_CYAN}1) ${LIGHT_WHITE}禁用防火墙 ${LIGHT_GREEN}(推荐)${LIGHT_WHITE}"
+    echo -e "  ${LIGHT_CYAN}2) ${LIGHT_WHITE}允许 HTTP (80端口) 流量通过防火墙${LIGHT_WHITE}"
+    echo -e "  ${LIGHT_CYAN}3) ${LIGHT_WHITE}不做任何更改 (我已手动配置好)${LIGHT_WHITE}"
+    read -rp "${LIGHT_CYAN}输入选项 [1-3] (默认为1): ${LIGHT_WHITE}" firewall_choice
 
     case $firewall_choice in
         2)
@@ -436,7 +436,7 @@ get_ssl_interaction() {
             ;;
         3)
             firewall_action="" # 用户选择不操作，所以为空
-            echo -e "${LIGHT_YELLOW}⚠️  您选择了不自动配置防火墙，请确保80端口可被公网访问。${WHITE}"
+            echo -e "${LIGHT_YELLOW}⚠️  您选择了不自动配置防火墙，请确保80端口可被公网访问。${LIGHT_WHITE}"
             ;;
         *) # 包含输入1和直接回车的情况
             firewall_action="disable"
@@ -446,27 +446,27 @@ get_ssl_interaction() {
     clear
 
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}请确认申请信息：${WHITE}"
-    echo -e "  - ${LIGHT_CYAN}域名:${WHITE}   $domain"
-    echo -e "  - ${LIGHT_CYAN}邮箱:${WHITE}   $email"
-    echo -e "  - ${LIGHT_CYAN}CA:${WHITE}     $ca_server"
+    echo -e "${LIGHT_CYAN}请确认申请信息：${LIGHT_WHITE}"
+    echo -e "  - ${LIGHT_CYAN}域名:${LIGHT_WHITE}   $domain"
+    echo -e "  - ${LIGHT_CYAN}邮箱:${LIGHT_WHITE}   $email"
+    echo -e "  - ${LIGHT_CYAN}CA:${LIGHT_WHITE}     $ca_server"
     # print_echo_line_1
 
     # 根据用户的选择显示防火墙的配置意图
     case "$firewall_action" in
         "disable")
-            echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${YELLOW}将完全禁用 (您的默认选择)${WHITE}"
+            echo -e "  - ${LIGHT_CYAN}防火墙:${LIGHT_WHITE} ${YELLOW}将完全禁用 (您的默认选择)${LIGHT_WHITE}"
             ;;
         "allow_http")
-            echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${LIGHT_GREEN}将放行 HTTP (80端口)${WHITE}"
+            echo -e "  - ${LIGHT_CYAN}防火墙:${LIGHT_WHITE} ${LIGHT_GREEN}将放行 HTTP (80端口)${LIGHT_WHITE}"
             ;;
         "")
-            echo -e "  - ${LIGHT_CYAN}防火墙:${WHITE} ${WHITE}不作更改${WHITE}"
+            echo -e "  - ${LIGHT_CYAN}防火墙:${LIGHT_WHITE} ${LIGHT_WHITE}不作更改${LIGHT_WHITE}"
             ;;
     esac
 
     print_echo_line_1
-    read -rp "${LIGHT_YELLOW}确认无误并开始申请吗? ${LIGHT_RED}[y/N]: ${WHITE}" start_apply
+    read -rp "${LIGHT_YELLOW}确认无误并开始申请吗? ${LIGHT_RED}[y/N]: ${LIGHT_WHITE}" start_apply
     if [[ "$start_apply" =~ ^[yY](es)?$ ]]; then
         # 在执行核心申请流程之前，先根据用户的选择配置好防火墙。
         _configure_firewall "$firewall_action"
@@ -476,7 +476,7 @@ get_ssl_interaction() {
 
     else
         echo
-        echo -e "${LIGHT_RED}🚫 操作已取消。${WHITE}"
+        echo -e "${LIGHT_RED}🚫 操作已取消。${LIGHT_WHITE}"
     fi
 
     break_end
@@ -498,7 +498,7 @@ get_ssl_interaction() {
 list_issued_domains() {
     clear
     print_echo_line_1
-    echo -e "${LIGHT_CYAN}🔎  正在查询已由 acme.sh 签发的域名列表...${WHITE}"
+    echo -e "${LIGHT_CYAN}🔎  正在查询已由 acme.sh 签发的域名列表...${LIGHT_WHITE}"
     print_echo_line_1
 
     local acme_sh_path="$HOME/.acme.sh/acme.sh"
@@ -519,7 +519,7 @@ list_issued_domains() {
     if echo "$list_output" | grep -q "Main_Domain"; then
         echo "$list_output"
     else
-        echo -e "${LIGHT_YELLOW}当前没有找到任何已签发的域名记录。${WHITE}"
+        echo -e "${LIGHT_YELLOW}当前没有找到任何已签发的域名记录。${LIGHT_WHITE}"
     fi
 
     break_end
@@ -536,42 +536,42 @@ list_issued_domains() {
 reset_environment() {
     clear
     print_echo_line_1
-    echo -e "${LIGHT_RED}${BOLD}🔥🔥🔥 警告：危险操作 🔥🔥🔥${WHITE}"
+    echo -e "${LIGHT_RED}${BOLD}🔥🔥🔥 警告：危险操作 🔥🔥🔥${LIGHT_WHITE}"
     print_echo_line_1
     echo -e "${YELLOW}此操作将彻底删除 acme.sh 的所有数据，包括："
     echo -e "  - 客户端程序 (${HOME}/.acme.sh)"
     echo -e "  - 所有账户信息和证书记录"
     echo -e "  - 所有相关的定时续期任务"
-    echo -e "此过程几乎是不可逆的！\n${WHITE}"
+    echo -e "此过程几乎是不可逆的！\n${LIGHT_WHITE}"
 
     read -rp "您确定要继续吗? 请输入 'yes' 确认: " confirmation
     if [[ "$confirmation" != "yes" ]]; then
-        echo -e "\n ${LIGHT_GREEN}🚫 操作已取消。${WHITE}"
+        echo -e "\n ${LIGHT_GREEN}🚫 操作已取消。${LIGHT_WHITE}"
         break_end
         return
     fi
 
     # 第二次确认，针对已安装的证书目录
     echo ""
-    read -rp "${LIGHT_RED}${BOLD}是否同时删除所有已安装的证书目录 (/etc/ssl/custom)？这也是不可逆的！ [y/N]: ${WHITE}" delete_certs
+    read -rp "${LIGHT_RED}${BOLD}是否同时删除所有已安装的证书目录 (/etc/ssl/custom)？这也是不可逆的！ [y/N]: ${LIGHT_WHITE}" delete_certs
     if [[ "$delete_certs" =~ ^[yY](es)?$ ]]; then
-        echo -e "${YELLOW}⚙️  正在删除已安装的证书目录...${WHITE}"
+        echo -e "${YELLOW}⚙️  正在删除已安装的证书目录...${LIGHT_WHITE}"
         # 使用 sudo 是因为该目录通常由 root 创建
         sudo rm -rf /etc/ssl/custom
         echo "✅ 已删除 /etc/ssl/custom"
     fi
 
-    echo -e "${YELLOW}⚙️  正在移除 acme.sh 的定时续期任务...${WHITE}"
+    echo -e "${YELLOW}⚙️  正在移除 acme.sh 的定时续期任务...${LIGHT_WHITE}"
     # 安全地从 crontab 中移除 acme.sh 的任务行
     (crontab -l 2>/dev/null | grep -v 'acme.sh --cron') | crontab -
     echo "✅ 定时任务已移除。"
 
-    echo -e "${YELLOW}⚙️  正在删除 acme.sh 客户端主目录...${WHITE}"
+    echo -e "${YELLOW}⚙️  正在删除 acme.sh 客户端主目录...${LIGHT_WHITE}"
     rm -rf "$HOME/.acme.sh"
     echo "✅ 已删除 $HOME/.acme.sh"
 
     print_echo_line_1
-    echo -e "${LIGHT_GREEN}✅ 环境重置完成。${WHITE}"
+    echo -e "${LIGHT_GREEN}✅ 环境重置完成。${LIGHT_WHITE}"
     print_echo_line_1
     break_end
 }
