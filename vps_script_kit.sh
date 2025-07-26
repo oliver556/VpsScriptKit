@@ -8,14 +8,14 @@
 # @创建日期:     2025-07-15
 # @修改日期:     2025-07-25
 #
-# @使用方法:     v -[参数]
+# @使用方法:     v [参数]
 # @参数选项:
-#   -h, --help                       显示此帮助信息
-#   -v, --version                    显示脚本版本
-#   -u, --update                     系统更新
-#   -ssl                             安装 SSL 证书
-#   -dd                              一键重装系统
-#   -docker [install|uninstall]      管理 Docker
+#   -h, help                      显示此帮助信息
+#   -v, version                   显示脚本版本
+#   install, add, 安装            安装
+#   remove, uninstall, 卸载       卸载
+#   update, 更新                  系统更新
+#   docker [install|uninstall]   管理 Docker
 #
 # @依赖:         bash, wget, curl, git
 # @许可证:       MIT
@@ -28,7 +28,10 @@ source "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/lib/public/init_li
 MODULE_DIR="$ROOT_DIR/modules.d"
 
 ### === 处理 v 快捷命令行参数 === ###
-handle_args "$@"
+# 如果参数不为空，则调用 handle_args 函数
+if [ "$#" -ne 0 ]; then
+    handle_args "$@"
+fi
 
 ### === 日志记录 === ###
 log_action "Vps Script Kit 脚本 已启动。"

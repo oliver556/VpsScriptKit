@@ -10,16 +10,29 @@
 #
 # @使用方法:     ./handle_args.sh [参数]
 # @参数选项:
-#   -h, --help      显示此帮助信息。
-#   -u, --update    更新脚本到最新版本。
-#   -d, --uninstall 卸载脚本。
-#   -v, --version   显示脚本版本。
+#   h, help                      显示此帮助信息
+#   v, version                   显示脚本版本
+#   install, add, 安装            安装
+#   remove, uninstall, 卸载       卸载
+#   update, 更新                  系统更新
+#   docker [install|uninstall]   管理 Docker
+#   dd, 重装                      重装系统
 #
 # @依赖:         bash
 # @许可证:       MIT
 ### =================================================================================
 
+### === 导入系统更新模块 === ###
+source "$ROOT_DIR/modules.d/system.d/system_update.sh"
+
+### === 导入系统清理模块 === ###
+source "$ROOT_DIR/modules.d/system.d/system_clean.sh"
+
+### === 导入重装系统模块 === ###
 source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
+
+### === 导入 v 命令参考用例 === ###
+source "$ROOT_DIR/shell_scripts/vsk/v_info.sh"
 
 ### === 处理命令行参数 === ###
 #
@@ -37,36 +50,67 @@ source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
 handle_args (){
     local args="$1"
     case "$args" in
-        -u|--update)
-            echo -e "${BOLD_YELLOW}检测到更新请求，正在调用安装/更新程序...${WHITE}"
+        h|help)
+            # grep -E '@(使用方法|参数选项)|^#   -' "$0" | sed -e 's/^#//' -e 's/@/  /'
+            v_info
+            exit 0
+            ;;
+        v|version)
+            echo "${BOLD_CYAN}${SCRIPT_VERSION}${WHITE}"
+            exit 0
+            ;;
+        #==========================================
+        install|add|安装)
+            shift
+            install "$@"
+            ;;
+        remove|uninstall|卸载)
+            shift
+            uninstall "$@"
+            ;;
+        update|更新)
+            echo -e "${BOLD_YELLOW}检测到系统更新请求，正在调用系统更新程序...${WHITE}"
             log_action "[system.sh]" "系统更新"
             system_update_main
             exit 0
             ;;
-        -d|--uninstall)
-            echo -e "${BOLD_YELLOW}检测到卸载请求，正在调用卸载程序...${WHITE}"
-            vsk_uninstall_utils "yes"
+        clean|清理)
+            system_clean_main
             exit 0
             ;;
-        -v|--version)
-            echo "${BOLD_CYAN}${SCRIPT_VERSION}${WHITE}"
-            exit 0
-            ;;
-        -h|--help)
-            grep -E '@(使用方法|参数选项)|^#   -' "$0" | sed -e 's/^#//' -e 's/@/  /'
-            exit 0
-            ;;
-        -ssl)
-            echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
-            get_ssl_interaction
-            exit 0
-            ;;
-        -dd)
+        dd|重装)
             system_reinstall_menu "dd"
             exit 0
             ;;
-        -docker)
-            case "$2" in
+        #==========================================
+        ssl)
+            shift
+            case "$1" in
+                "")
+                    clear
+                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
+                    sleep 2
+                    # 要删除的代码
+                    exit 1
+                    # get_ssl_interaction
+                    ;;
+
+                ps)
+                    clear
+                    echo -e "${BOLD_GREEN}检测到 SSL 安装请求...${WHITE}"
+                    ;;
+
+                *)
+                    echo "错误: 无效的 ssl 命令 '$2'"
+                    echo "用法: v ssl [ps]"
+                    exit 1
+                    ;;
+            esac
+            ;;
+
+        docker)
+            shift
+            case "$1" in
                 install)
                     clear
                     echo -e "${BOLD_GREEN}检测到 Docker 安装请求...${WHITE}"
@@ -82,12 +126,17 @@ handle_args (){
                     exit 0
                 ;;
                 *)
-                    # 如果是 'v docker' 后面跟了未知的子命令，或者没有子命令
                     echo "错误: 无效的 docker 命令 '$2'"
-                    echo "用法: v -docker [install|uninstall]"
+                    echo "用法: v docker [install|uninstall]"
                     exit 1
                     ;;
             esac
+            ;;
+
+        *)
+            echo "错误: 无效的命令 '$1'"
+            echo "用法: v -h"
+            exit 1
             ;;
     esac
 }

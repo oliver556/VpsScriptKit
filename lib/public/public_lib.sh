@@ -293,6 +293,18 @@ echo_info() {
     echo -e "${BOLD_BLUE}$1${WHITE}"
 }
 
+### === 打印信息函数 === ###
+#
+# @描述
+#   本函数用于打印信息，使用浅蓝色。
+#
+# @示例
+#   echo_info
+###
+echo_info_light() {
+    echo -e "${LIGHT_CYAN}$1${WHITE}"
+}
+
 ### === 打印错误函数 === ###
 #
 # @描述
@@ -397,4 +409,17 @@ execute_and_propagate_restart() {
     if [[ $? -eq 10 ]]; then
         return 10
     fi
+}
+
+### === 提示该功能还在开发阶段 === ###
+#
+# @描述
+#   本函数用于提示该功能还在开发阶段。
+#
+# @示例
+#   echo_warning "该功能还在开发阶段"
+###
+print_dev() {
+    clear
+    echo -e "${BOLD_YELLOW}该功能还在开发阶段，敬请期待...${WHITE}"
 }
