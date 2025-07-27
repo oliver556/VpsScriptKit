@@ -57,8 +57,7 @@ docker_menu() {
             1)
                 clear
                 docker_install_main
-                sleep 1
-                break_end no_wait ;;
+                break_end ;;
             2)
                 clear
                 docker_global_status_main
@@ -71,7 +70,7 @@ docker_menu() {
             8)
                 clear
                 docker_uninstall_main
-                break_end no_wait
+                break_end
                 ;;
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;

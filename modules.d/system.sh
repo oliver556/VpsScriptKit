@@ -11,6 +11,9 @@
 # @许可证:       MIT
 ### =================================================================================
 
+### === 导入系统通用工具 === ###
+source "$ROOT_DIR/shell_scripts/system/general.sh"
+
 ### === 导入系统信息查询 === ###
 source "$ROOT_DIR/shell_scripts/system/info.sh"
 
@@ -53,8 +56,8 @@ source "$ROOT_DIR/shell_scripts/system/user_info_random.sh"
 ### === 导入定时任务管理 === ###
 source "$ROOT_DIR/modules.d/system.d/timing_tasks.sh"
 
-### === 导入系统通用工具 === ###
-source "$ROOT_DIR/shell_scripts/system/general.sh"
+### === 导入BBR3加速 === ###
+source "$ROOT_DIR/shell_scripts/system/bbrv3.sh"
 
 ### === 系统工具 主菜单 === ###
 #
@@ -74,7 +77,7 @@ system_menu() {
         echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${LIGHT_CYAN}12. ${LIGHT_WHITE}修改虚拟内存大小"
         echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理             ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${BOLD_GREY}17. ${LIGHT_WHITE}设置BBR3加速"
+        echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${LIGHT_CYAN}17. ${LIGHT_WHITE}设置BBR3加速"
         echo -e "${BOLD_GREY}18. ${LIGHT_WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${LIGHT_WHITE}iptables一键转发     ${BOLD_GREY}20. ${LIGHT_WHITE}NAT批量SSH连接测试"
         echo -e "${BOLD_GREY}21. ${LIGHT_WHITE}切换系统更新源       ${LIGHT_CYAN}22. ${LIGHT_WHITE}定时任务管理         ${BOLD_GREY}23. ${LIGHT_WHITE}ip开放端口扫描"
         print_echo_line_1
@@ -117,7 +120,7 @@ system_menu() {
             5)
                 log_action "[system.sh]" "开启ROOT密码登录"
                 set_root_login
-                break_end no_wait
+                break_end
                 ;;
             # 开放所有端口
             6)
@@ -140,12 +143,12 @@ system_menu() {
             9)
                 log_action "[system.sh]" "禁用ROOT账户创建新账户"
                 create_sudo_user_and_disable_root
-                break_end no_wait;;
+                break_end;;
             # 切换优先ipv4/ipv6
             10)
                 log_action "[system.sh]" "切换优先ipv4/ipv6"
                 system_v4_v6_priority_menu
-                break_end no_wait;;
+                break_end;;
             # 查看端口占用状态
             11)
                 log_action "[system.sh]" "查看端口占用状态"
@@ -156,12 +159,12 @@ system_menu() {
             12)
                 log_action "[system.sh]" "修改虚拟内存大小"
                 system_virtual_memory_menu
-                break_end no_wait;;
+                break_end;;
             # 用户管理
             13)
                 log_action "[system.sh]" "用户管理"
                 system_user_management_menu
-                break_end no_wait;;
+                break_end;;
             # 用户/密码生成器
             14)
                 log_action "[system.sh]" "用户/密码生成器"
@@ -172,16 +175,16 @@ system_menu() {
             15)
                 log_action "[system.sh]" "修改主机名"
                 change_hostname_main
-                break_end no_wait ;;
+                break_end ;;
             # 修改系统时区
             16)
                 log_action "[system.sh]" "修改系统时区"
                 system_time_zone_menu
-                break_end no_wait ;;
+                break_end ;;
             # 设置BBR3加速
             17)
                 log_action "[system.sh]" "设置BBR3加速"
-                print_dev
+                system_set_bbrv3
                 break_end ;;
             # 防火墙高级管理器
             18)

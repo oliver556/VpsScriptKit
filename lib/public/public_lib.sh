@@ -21,7 +21,7 @@
 ###
 break_end() {
     echo ""
-    echo -e "${GREEN}操作完成${LIGHT_WHITE}"
+    echo -e "${LIGHT_GREEN}操作完成${LIGHT_WHITE}"
     if [[ "$1" != "no_wait" ]]; then
         echo "按任意键继续..."
         read -n 1 -s -rp ""
@@ -99,7 +99,6 @@ is_user_root() {
         echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${LIGHT_WHITE}"
         echo
         echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${LIGHT_WHITE}"
-        break_end
 		return 1
 	fi
     return 0
@@ -431,4 +430,42 @@ execute_and_propagate_restart() {
 print_dev() {
     clear
     echo -e "${BOLD_YELLOW}该功能还在开发阶段，敬请期待...${LIGHT_WHITE}"
+}
+
+### === 检查磁盘空间 === ###
+#
+# @描述
+#   本函数用于检查磁盘空间。
+#
+# @示例
+#   check_disk_space
+###
+check_disk_space() {
+	required_gb=$1
+	required_space_mb=$((required_gb * 1024))
+	available_space_mb=$(df -m / | awk 'NR==2 {print $4}')
+
+	if [ $available_space_mb -lt $required_space_mb ]; then
+		echo -e "${BOLD_YELLOW}提示: 磁盘空间不足！${LIGHT_WHITE}"
+		echo -e "${LIGHT_CYAN}当前可用空间: ${LIGHT_WHITE}$((available_space_mb/1024))G"
+		echo -e "${LIGHT_CYAN}最小需求空间: ${LIGHT_WHITE}${required_gb}G"
+		echo -e "${LIGHT_RED}无法继续安装，请清理磁盘空间后重试。${LIGHT_WHITE}"
+		break_end
+        vskit
+	fi
+}
+
+### === 检查虚拟内存 === ###
+#
+# @描述
+#   本函数用于检查虚拟内存。
+#
+# @示例
+#   check_swap
+###
+check_swap() {
+    local swap_total=$(free -m | awk 'NR==3{print $2}')
+
+    # 判断是否需要创建虚拟内存
+    [ "$swap_total" -gt 0 ] || add_swap 1024
 }

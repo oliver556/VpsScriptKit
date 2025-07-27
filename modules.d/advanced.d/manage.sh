@@ -52,7 +52,7 @@ advanced_manage_menu() {
         case $MAIN_OPTION in
             1)
                 get_ssl_interaction
-                break_end no_wait
+                break_end
                 ;;
             2)
                 list_issued_domains
