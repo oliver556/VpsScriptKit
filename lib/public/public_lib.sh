@@ -207,7 +207,7 @@ gran_menu_title() {
     else
         echo -e "${BOLD_YELLOW}──────────────────────────────────────────────────────────────${LIGHT_WHITE}"
     fi
-    echo -e "${BOLD_YELLOW}${_title}${NC}"
+    echo -e "${BOLD_YELLOW}${_title}${LIGHT_WHITE}"
 }
 
 ### === echo 分割线 1=== ###
