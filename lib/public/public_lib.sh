@@ -77,7 +77,8 @@ ask_to_continue() {
 vskit() {
     clear
 	cd ~
-	bash v
+    v
+    exit
 }
 
 ### === 判断当前用户是否为 root 用户 === ###
