@@ -46,7 +46,7 @@ system_optimize_dns_menu() {
         echo ""
         echo -e "${LIGHT_CYAN}3. ${LIGHT_YELLOW}手动编辑 DNS 配置文件${LIGHT_WHITE}"
 
-        print_echo_line_1
+        print_echo_line_3
         echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
         print_echo_line_3
         echo ""
