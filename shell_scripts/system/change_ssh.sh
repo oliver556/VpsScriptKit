@@ -25,7 +25,7 @@ SSH_CONFIG_FILE="/etc/ssh/sshd_config"
 #   apply_new_port
 apply_new_port() {
     local new_port=$1
-    
+
 }
 
 ### === 读取当前的 SSH 端口号 === ###
@@ -56,9 +56,7 @@ _read_current_ssh_port() {
 change_ssh_main() {
     clear
 
-    if ! is_user_root; then
-        break_end
-    fi
+    is_user_root || return
 
     # local new_port=$1
     # apply_new_port "$new_port"

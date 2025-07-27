@@ -100,9 +100,8 @@ start_and_enable_docker() {
 #   docker_install_main
 ###
 docker_install_main() {
-    if ! is_user_root; then
-        break_end
-    fi
+
+    is_user_root || return
 
     local os_type
     os_type=$(get_os_type)

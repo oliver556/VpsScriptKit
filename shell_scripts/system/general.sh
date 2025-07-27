@@ -21,15 +21,12 @@
 ###
 create_sudo_user_and_disable_root() {
     # 1. 检查和准备环境
-    if ! is_user_root; then
-        return 1
-    fi
+    is_user_root || return
 
     clear
 
-    
     echo -e "${YELLOW}此脚本将创建一个新的 sudo 用户，并禁用 root 用户的密码登录。${LIGHT_WHITE}"
-    
+
     # 检查并确保 sudo 已安装
     if ! command -v sudo &> /dev/null; then
         echo "检测到 sudo 未安装，正在尝试安装..."
@@ -52,7 +49,7 @@ create_sudo_user_and_disable_root() {
             echo "操作已取消。"
             return
         fi
-        
+
         # 验证用户名是否已存在
         if id "$new_username" &>/dev/null; then
             echo -e "${LIGHT_RED}错误: 用户 '$new_username' 已存在，请换一个用户名。${LIGHT_WHITE}"
@@ -80,7 +77,7 @@ create_sudo_user_and_disable_root() {
         userdel -r "$new_username" &>/dev/null
         return 1
     fi
-    
+
     # 4. 赋予 Sudo 权限 (采用最佳实践)
     # 不直接修改 /etc/sudoers，而是在 /etc/sudoers.d/ 目录下创建用户专属的配置文件
     echo -e "${LIGHT_YELLOW}正在为用户 '$new_username' 配置 sudo 权限..."

@@ -19,6 +19,8 @@
 ###
 set_root_login() {
     clear
+
+    is_user_root || return
     
     echo -e "${BOLD_YELLOW}接下来将为您设置 root 用户密码，请根据提示操作。${LIGHT_WHITE}"
     if ! passwd root; then

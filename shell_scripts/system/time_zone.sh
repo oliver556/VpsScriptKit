@@ -44,9 +44,7 @@ set_system_time_zone_utils() {
 #   system_time_zone_main "Asia/Shanghai"
 ###
 system_time_zone_main() {
-	if ! is_user_root; then
-        break_end
-    fi
+    is_user_root || return
 
     local TIME_ZONE="$1"
 	set_system_time_zone_utils "$TIME_ZONE"

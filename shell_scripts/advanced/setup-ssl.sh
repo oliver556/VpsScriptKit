@@ -349,11 +349,8 @@ _apply_ssl_certificate() {
 ###
 get_ssl_interaction() {
     clear
-    # 检查是否是 root 用户
-    if ! is_user_root; then
-        break_end
-        return 1
-    fi
+
+    is_user_root || return
 
     print_echo_line_1
     echo -e "${BOLD_YELLOW}SSL 证书申请向导${LIGHT_WHITE}"

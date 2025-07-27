@@ -71,7 +71,7 @@ docker_menu() {
             8)
                 clear
                 docker_uninstall_main
-                break_end
+                break_end no_wait
                 ;;
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;

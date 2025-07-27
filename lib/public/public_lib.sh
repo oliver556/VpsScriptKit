@@ -90,6 +90,8 @@ vskit() {
 #   if is_user_root; then
 #       set_dns
 #   fi
+#
+#   is_user_root || return
 ###
 is_user_root() {
     if [ "$EUID" -ne 0 ]; then
@@ -97,8 +99,10 @@ is_user_root() {
         echo -e "${BOLD_RED}提示: 该功能需要使用 root 用户才能运行此脚本${LIGHT_WHITE}"
         echo
         echo -e  "${BOLD_YELLOW}请切换到 'root' 用户来执行。${LIGHT_WHITE}"
+        break_end
 		return 1
 	fi
+    return 0
 }
 
 ### === 检测当前 Linux 发行版类型 === ###

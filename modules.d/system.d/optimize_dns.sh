@@ -23,8 +23,6 @@ source "$ROOT_DIR/shell_scripts/system/optimize_dns.sh"
 #   system_optimize_dns_menu
 ###
 system_optimize_dns_menu() {
-    is_user_root
-
     while true; do
         clear
         sub_menu_title "⚙️  DNS 优化工具"
@@ -62,7 +60,7 @@ system_optimize_dns_menu() {
                 local dns1_ipv6="2606:4700:4700::1111"
                 local dns2_ipv6="2001:4860:4860::8888"
                 set_dns "$dns1_ipv4" "$dns2_ipv4" "$dns1_ipv6" "$dns2_ipv6"
-                break_end
+                break_end no_wait
                 ;;
             2)
                 # 定义国内DNS变量
@@ -71,7 +69,7 @@ system_optimize_dns_menu() {
                 local dns1_ipv6="2400:3200::1"
                 local dns2_ipv6="2402:4e:b:a::1"
                 set_dns "$dns1_ipv4" "$dns2_ipv4" "$dns1_ipv6" "$dns2_ipv6"
-                break_end
+                break_end no_wait
                 ;;
             3)
                 # 手动编辑前先解锁文件

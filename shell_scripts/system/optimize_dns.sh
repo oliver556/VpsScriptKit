@@ -20,6 +20,8 @@
 #   set_dns
 ###
 set_dns() {
+    is_user_root || return
+
     echo -e "${LIGHT_YELLOW}正在应用DNS设置...${LIGHT_WHITE}"
 
     # 重要的持久化步骤：如果 resolv.conf 文件被锁定了，先解锁
@@ -70,7 +72,5 @@ set_dns() {
 ###
 optimize_dns_main() {
     clear
-    if is_user_root; then
-        set_dns
-    fi
+    is_user_root || return
 }

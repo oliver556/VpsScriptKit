@@ -41,6 +41,9 @@ source "$ROOT_DIR/modules.d/system.d/optimize_dns.sh"
 ### === 导入切换优先ipv4/ipv6 === ###
 source "$ROOT_DIR/modules.d/system.d/v4_v6_priority.sh"
 
+### === 导入修改虚拟内存大小 === ###
+source "$ROOT_DIR/modules.d/system.d/virtual_memory.sh"
+
 ### === 导入系统通用工具 === ###
 source "$ROOT_DIR/shell_scripts/system/general.sh"
 
@@ -59,7 +62,7 @@ system_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
         echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址          ${LIGHT_CYAN}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
-        echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${BOLD_GREY}12. ${LIGHT_WHITE}修改虚拟内存大小"
+        echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${LIGHT_CYAN}12. ${LIGHT_WHITE}修改虚拟内存大小"
         echo -e "${BOLD_GREY}13. ${LIGHT_WHITE}用户管理             ${BOLD_GREY}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${BOLD_GREY}17. ${LIGHT_WHITE}设置BBR3加速"
@@ -104,12 +107,8 @@ system_menu() {
             # 开启ROOT密码登录
             5)
                 log_action "[system.sh]" "开启ROOT密码登录"
-                if is_user_root; then
-                    set_root_login
-                    break_end
-                else
-                    break_end
-                fi
+                set_root_login
+                break_end no_wait
                 ;;
             # 开放所有端口
             6)
@@ -132,7 +131,7 @@ system_menu() {
             9)
                 log_action "[system.sh]" "禁用ROOT账户创建新账户"
                 create_sudo_user_and_disable_root
-                break_end ;;
+                break_end no_wait;;
             # 切换优先ipv4/ipv6
             10)
                 log_action "[system.sh]" "切换优先ipv4/ipv6"
@@ -147,8 +146,8 @@ system_menu() {
             # 修改虚拟内存大小
             12)
                 log_action "[system.sh]" "修改虚拟内存大小"
-                print_dev
-                break_end ;;
+                system_virtual_memory_menu
+                break_end no_wait;;
             # 用户/密码生成器
             13)
                 log_action "[system.sh]" "用户/密码生成器"

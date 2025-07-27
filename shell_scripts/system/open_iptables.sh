@@ -58,11 +58,9 @@ _check_iptables_installed() {
 ###
 open_iptables() {
     clear
-    
-    if ! is_user_root; then
-        break_end
-    fi
-    
+
+    is_user_root || return
+
     _check_iptables_installed
     _save_iptables_rules
 

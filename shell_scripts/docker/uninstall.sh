@@ -130,9 +130,8 @@ docker_uninstall_utils() {
 #   docker_uninstall_main
 ###
 docker_uninstall_main() {
-    if ! is_user_root; then
-        break_end
-    fi
+    is_user_root || return
+
     docker_uninstall_utils
 }
 
