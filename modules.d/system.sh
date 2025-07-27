@@ -38,6 +38,9 @@ source "$ROOT_DIR/shell_scripts/system/set_root_login.sh"
 ### === 导入优化 DNS 地址 === ###
 source "$ROOT_DIR/modules.d/system.d/optimize_dns.sh"
 
+### === 导入切换优先ipv4/ipv6 === ###
+source "$ROOT_DIR/modules.d/system.d/v4_v6_priority.sh"
+
 ### === 导入系统通用工具 === ###
 source "$ROOT_DIR/shell_scripts/system/general.sh"
 
@@ -56,7 +59,7 @@ system_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
         echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址          ${LIGHT_CYAN}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
-        echo -e "${BOLD_GREY}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${LIGHT_WHITE}查看端口占用状态     ${BOLD_GREY}12. ${LIGHT_WHITE}修改虚拟内存大小"
+        echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${BOLD_GREY}11. ${LIGHT_WHITE}查看端口占用状态     ${BOLD_GREY}12. ${LIGHT_WHITE}修改虚拟内存大小"
         echo -e "${BOLD_GREY}13. ${LIGHT_WHITE}用户管理             ${BOLD_GREY}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${BOLD_GREY}17. ${LIGHT_WHITE}设置BBR3加速"
@@ -133,8 +136,8 @@ system_menu() {
             # 切换优先ipv4/ipv6
             10)
                 log_action "[system.sh]" "切换优先ipv4/ipv6"
-                print_dev
-                break_end ;;
+                system_v4_v6_priority_menu
+                break_end no_wait;;
             # 查看端口占用状态
             11)
                 log_action "[system.sh]" "查看端口占用状态"
