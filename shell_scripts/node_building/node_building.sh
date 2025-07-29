@@ -30,11 +30,13 @@ set_node_building_utils() {
             break_end no_wait
             ;;
         "tcp_tuning")
-#             if ! ask_to_continue "TCP 调优工具"; then
-#                 return
-#             fi
+            display_tcp_tuning_tutorial
+
+            if ! ask_to_continue "您已阅读完教程，是否要继续下载并执行 TCP 调优工具？"; then
+                return
+            fi
+
             install_tcp_tuning
-            break_end no_wait
             ;;
     esac
 }
@@ -43,18 +45,18 @@ set_node_building_utils() {
 install_3x_ui() {
     clear
     echo -e "${BOLD_LIGHT_GREEN}正在安装伊朗版 3X-UI 面板一键脚本...${LIGHT_WHITE}"
-	bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+	exec bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
 }
 
 ### === 新版X-UI面板一键脚本 主函数 === ###
 install_x_ui() {
     clear
     echo -e "${BOLD_LIGHT_GREEN}正在安装新版 X-UI 面板一键脚本...${LIGHT_WHITE} \n "
-	bash <(curl -Ls https://raw.githubusercontent.com/oliver556/x-ui/main/install.sh)
+	exec bash <(curl -Ls https://raw.githubusercontent.com/oliver556/x-ui/main/install.sh)
 }
 
-### === TCP调优工具 主函数 === ###
-install_tcp_tuning() {
+### === TCP调优教程 显示 === ###
+display_tcp_tuning_tutorial() {
     clear
     sub_menu_title "【简易教程】"
     gran_menu_title "【1. 获取平均延迟值】" "front_line"
@@ -89,25 +91,24 @@ install_tcp_tuning() {
     echo -e "iperf3 -c ip -R -t 30 -p 5201"
     print_echo_line_1
     echo -e "      观察输出的速度，完成测试！"
+}
 
-    # 确认继续执行
-    if ! ask_to_continue "TCP 调优工具1"; then
-        return
-    fi
-
+### === TCP调优工具 主函数 === ###
+install_tcp_tuning() {
     clear
-    echo -e "${BOLD_LIGHT_GREEN}正在安装 TCP 调优工具...${LIGHT_WHITE}"
-    wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh
-    sleep 1
-    echo_success "\nTCP 调优工具安装成功！\n"
+    echo -e "${BOLD_LIGHT_GREEN}正在下载 TCP 调优工具...${LIGHT_WHITE}"
+    if ! wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh; then
+        echo_error "工具下载失败，请检查网络或URL。"
+        return 1
+    fi
+    echo_success "工具下载成功！"
 
-    echo_info "正在设置权限"
-    sleep 1
+    echo_info "正在设置执行权限..."
     chmod +x tool.sh
 
-    echo_info "正在执行 TCP 调优工具... \n "
+    echo_info "准备执行 TCP 调优工具... \n"
     sleep 1
-    ./tool.sh
+    exec ./tool.sh
 }
 
 ### === 修改系统时区 主函数 === ###
