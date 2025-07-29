@@ -27,10 +27,8 @@ advanced_menu() {
         clear
         sub_menu_title "🚀  进阶工具"
         print_echo_line_1
-        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}SSL 证书管理         ${LIGHT_CYAN}2.  ${LIGHT_WHITE}暂未定"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}SSL 证书管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}       ${LIGHT_CYAN}2.  ${LIGHT_WHITE}暂未定"
+        break_menu_options "host"
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

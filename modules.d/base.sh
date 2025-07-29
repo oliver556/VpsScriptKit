@@ -32,9 +32,7 @@ base_menu() {
         echo -e "${LIGHT_CYAN}21. ${LIGHT_WHITE}iPerf3 网络测试工具"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}全部安装             ${LIGHT_CYAN}32. ${LIGHT_WHITE}全部卸载"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "host"
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

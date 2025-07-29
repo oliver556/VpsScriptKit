@@ -41,9 +41,7 @@ system_user_management_menu() {
         echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}赋予最高权限         ${LIGHT_CYAN}4.  ${LIGHT_WHITE}取消最高权限"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}5.  ${LIGHT_WHITE}删除账号"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

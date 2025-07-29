@@ -47,9 +47,9 @@ docker_menu() {
         echo "${BOLD_GREY}7.  ${LIGHT_WHITE}清除无用docker容器和镜像网络数据卷 ▶"
         print_echo_line_1
         echo "${LIGHT_CYAN}8.  ${LIGHT_WHITE}卸载Docker环境"
-        print_echo_line_1
+        print_echo_line_3
         echo "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_1
+        print_echo_line_3
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

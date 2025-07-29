@@ -469,3 +469,18 @@ check_swap() {
     # 判断是否需要创建虚拟内存
     [ "$swap_total" -gt 0 ] || add_swap 1024
 }
+
+### === 菜单返回提示 === ###
+break_menu_options() {
+    print_echo_line_3
+    if [[ "$1" == "host" ]]; then
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
+    elif [[ "$1" == "up" ]]; then
+        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单                                           ${LIGHT_CYAN}#"
+    elif [[ "$1" == "exit" ]]; then
+        echo -e "${LIGHT_CYAN}0. ${LIGHT_WHITE}退出脚本                                                  ${LIGHT_CYAN}#"
+    else
+        printf "${LIGHT_CYAN}0. ${LIGHT_WHITE} 退出程序                                                 ${LIGHT_CYAN}#\n"
+    fi
+    print_echo_line_3
+}

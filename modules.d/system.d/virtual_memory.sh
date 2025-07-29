@@ -27,9 +27,7 @@ system_virtual_memory_menu() {
         sub_menu_title "⚙️  修改虚拟内存大小"
         echo -e "${LIGHT_CYAN}当前虚拟内存: ${LIGHT_WHITE}$swap_info"
         echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}修改虚拟内存大小"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

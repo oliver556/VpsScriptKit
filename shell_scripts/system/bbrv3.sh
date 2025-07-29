@@ -55,7 +55,7 @@ _install_xanmod() {
         return 1
     fi
     echo "检测到您的CPU支持版本: x64v$version"
-    
+
     echo "--> 步骤5: 更新软件列表并安装内核..."
     apt update -y
     if ! apt install -y "linux-xanmod-x64v$version"; then
@@ -63,7 +63,7 @@ _install_xanmod() {
         rm -f "$repo_list_file" check_x86-64_psabi.sh # 清理
         return 1
     fi
-    
+
     echo "--> 清理临时文件..."
     rm -f "$repo_list_file" check_x86-64_psabi.sh*
     return 0
@@ -99,7 +99,7 @@ _uninstall_xanmod() {
 ###
 system_set_bbrv3() {
     is_user_root || return
-    
+
     # 处理 aarch64 (ARM) 架构
     if [ "$(uname -m)" = "aarch64" ]; then
         echo "检测到 ARM64 架构，将执行专用脚本..."
@@ -128,9 +128,7 @@ system_set_bbrv3() {
             print_echo_line_1
             echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}更新 XanMod 内核"
             echo -e "${LIGHT_CYAN}2.  ${LIGHT_WHITE}卸载 XanMod 内核"
-            print_echo_line_3
-            echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回"
-            print_echo_line_3
+            break_menu_options "up"
             read -rp "请输入你的选择: " sub_choice
             case "$sub_choice" in
                 1) # 更新 = 先卸载 + 再安装
@@ -152,9 +150,9 @@ system_set_bbrv3() {
                         read -p "按任意键返回..."
                     fi
                     ;;
-                0) 
+                0)
                     break ;;
-                *) 
+                *)
                     echo "无效选择，请重试。" && sleep 1 ;;
             esac
         done

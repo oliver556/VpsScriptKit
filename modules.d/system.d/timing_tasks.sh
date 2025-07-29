@@ -22,14 +22,12 @@
 #   system_timing_tasks_menu
 ###
 system_timing_tasks_menu() {
-    
+
     while true; do
         clear
         sub_menu_title "⚙️  切换优先ipv4/ipv6"
         echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}添加定时任务            ${LIGHT_CYAN}2.  ${LIGHT_WHITE}删除定时任务            ${LIGHT_CYAN}3.  ${LIGHT_WHITE}编辑定时任务"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

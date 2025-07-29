@@ -67,9 +67,7 @@ vsk_log_tool_menu() {
         echo -e "${LIGHT_CYAN}2. ${LIGHT_WHITE}按模块筛选日志"
         echo -e "${LIGHT_CYAN}3. ${LIGHT_WHITE}清空日志文件"
         echo -e "${LIGHT_CYAN}4. ${LIGHT_WHITE}导出日志副本"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "host"
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

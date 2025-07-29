@@ -76,22 +76,19 @@ system_menu() {
         echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统信息查询         ${LIGHT_CYAN}2.  ${LIGHT_WHITE}系统更新             ${LIGHT_CYAN}3.  ${LIGHT_WHITE}系统清理"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
-        echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址          ${LIGHT_CYAN}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
-        echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6    ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${LIGHT_CYAN}12. ${LIGHT_WHITE}修改虚拟内存大小"
-        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理             ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
+        echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址 ${LIGHT_CYAN}▶${LIGHT_WHITE}        ${LIGHT_CYAN}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
+        echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6 ${LIGHT_CYAN}▶${LIGHT_WHITE}  ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${LIGHT_CYAN}12. ${LIGHT_WHITE}修改虚拟内存大小 ${LIGHT_CYAN}▶${LIGHT_WHITE}"
+        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}          ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${LIGHT_CYAN}17. ${LIGHT_WHITE}设置BBR3加速"
         echo -e "${BOLD_GREY}18. ${LIGHT_WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${LIGHT_WHITE}iptables一键转发     ${BOLD_GREY}20. ${LIGHT_WHITE}NAT批量SSH连接测试"
-        echo -e "${BOLD_GREY}21. ${LIGHT_WHITE}切换系统更新源       ${LIGHT_CYAN}22. ${LIGHT_WHITE}定时任务管理         ${BOLD_GREY}23. ${LIGHT_WHITE}ip开放端口扫描"
+        echo -e "${BOLD_GREY}21. ${LIGHT_WHITE}切换系统更新源       ${LIGHT_CYAN}22. ${LIGHT_WHITE}定时任务管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}       ${BOLD_GREY}23. ${LIGHT_WHITE}ip开放端口扫描"
         print_echo_line_1
         echo -e "${BOLD_GREY}55. ${LIGHT_WHITE}设置脚本启动快捷键"
         echo -e "${BOLD_GREY}66. ${LIGHT_WHITE}一条龙系统调优"
         echo -e "${BOLD_GREY}98. ${LIGHT_WHITE}NAT小鸡一键重装系统"
-        echo -e "${LIGHT_RED}99. ${LIGHT_WHITE}一键重装系统 ▶"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
-        echo ""
+        echo -e "${LIGHT_RED}99. ${LIGHT_WHITE}一键重装系统 ${LIGHT_CYAN}▶${LIGHT_WHITE}"
+        break_menu_options "host"
         read -rp "👉 请输入你的选择: " sys_choice
 
         case "$sys_choice" in
@@ -162,12 +159,12 @@ system_menu() {
             12)
                 log_action "[system.sh]" "修改虚拟内存大小"
                 system_virtual_memory_menu
-                break_end;;
+                break_end ;;
             # 用户管理
             13)
                 log_action "[system.sh]" "用户管理"
                 system_user_management_menu
-                break_end;;
+                break_end ;;
             # 用户/密码生成器
             14)
                 log_action "[system.sh]" "用户/密码生成器"

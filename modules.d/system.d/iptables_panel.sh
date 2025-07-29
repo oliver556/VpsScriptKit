@@ -42,9 +42,7 @@ system_iptables_panel_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}阻止指定国家IP         ${LIGHT_CYAN}16. ${LIGHT_WHITE}仅允许指定国家IP"
         echo -e "${LIGHT_CYAN}17. ${LIGHT_WHITE}解除指定国家IP限制"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

@@ -41,9 +41,7 @@ vsk_menu() {
         echo -e "${LIGHT_CYAN}3.  ${LIGHT_WHITE}脚本操作日志"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}66. ${BOLD_GREEN}v${LIGHT_WHITE} 命令高级用法${LIGHT_WHITE}"
-        print_echo_line_1
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_1
+        break_menu_options "host"
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

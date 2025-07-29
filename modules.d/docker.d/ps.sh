@@ -36,9 +36,7 @@ docker_ps_menu() {
         print_echo_line_1
         echo -e "${LIGHT_CYAN}11. ${LIGHT_WHITE}进入指定容器      ${LIGHT_CYAN}12. ${LIGHT_WHITE}查看容器日志"
         echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}查看容器网络      ${LIGHT_CYAN}14. ${LIGHT_WHITE}查看容器占用"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单                                               ${LIGHT_CYAN}#"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -rp "👉 请输入你的选择: " MAIN_OPTION
 

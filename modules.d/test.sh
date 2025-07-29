@@ -43,9 +43,7 @@ test_menu() {
         gran_menu_title "[B] 性能检测"
         echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}bench 性能测试"
         echo -e "${LIGHT_CYAN}32. ${LIGHT_WHITE}spiritysdx 融合怪测评"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "host"
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice
 

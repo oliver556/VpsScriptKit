@@ -43,13 +43,10 @@ system_reinstall_menu() {
         echo -e "${LIGHT_CYAN}41. ${LIGHT_WHITE}Windows 11           ${LIGHT_CYAN}42. ${LIGHT_WHITE}Windows 10"
         echo -e "${BOLD_GREY}43. ${LIGHT_WHITE}Windows 7            ${LIGHT_CYAN}44. ${LIGHT_WHITE}Windows Server 2022"
         echo -e "${LIGHT_CYAN}45. ${LIGHT_WHITE}Windows Server 2019  ${LIGHT_CYAN}46. ${LIGHT_WHITE}Windows Server 2016"
-        print_echo_line_1
         if [ "$system_param" = "dd" ]; then
-            echo -e "${LIGHT_CYAN}0. ${LIGHT_WHITE}退出脚本"
-            print_echo_line_3
+            break_menu_options "exit"
         else
-            echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单"
-            print_echo_line_3
+            break_menu_options "up"
         fi
         echo ""
         read -rp "👉 请输入你的选择: " sys_choice

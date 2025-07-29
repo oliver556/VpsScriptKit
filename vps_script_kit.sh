@@ -90,18 +90,19 @@ while true; do
     main_menu_title "            🧰  一款全功能的 Linux 管理脚本！      ${SCRIPT_VERSION}"
     echo -e "${LIGHT_YELLOW}#            💡  Tip: 命令行输入 ${BOLD_GREEN}v${LIGHT_WHITE} ${LIGHT_YELLOW}可快速启动脚本            #${LIGHT_WHITE}"
     print_echo_line_1
-    printf "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}2.  ${LIGHT_WHITE}基础工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}3.  ${LIGHT_WHITE}进阶工具     ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}4.  ${LIGHT_WHITE}Docker 管理  ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}1.  ${LIGHT_WHITE}系统工具     ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}2.  ${LIGHT_WHITE}基础工具     ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}3.  ${LIGHT_WHITE}进阶工具     ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}4.  ${LIGHT_WHITE}Docker 管理  ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}8.  ${LIGHT_WHITE}测试脚本合集 ▶                                           ${LIGHT_CYAN}#\n"
-    printf "${LIGHT_CYAN}9.  ${LIGHT_WHITE}节点搭建脚本 ▶                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}8.  ${LIGHT_WHITE}测试脚本合集 ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
+    printf "${LIGHT_CYAN}9.  ${LIGHT_WHITE}节点搭建脚本 ${LIGHT_CYAN}▶${LIGHT_WHITE}                                           ${LIGHT_CYAN}#\n"
     print_echo_line_1
-    printf "${LIGHT_CYAN}99. ${LIGHT_WHITE}脚本工具 ▶                                               ${LIGHT_CYAN}#\n"
-    print_echo_line_3
-    printf "${LIGHT_CYAN}0. ${LIGHT_WHITE} 退出程序                                                 ${LIGHT_CYAN}#\n"
-    print_echo_line_3
+    printf "${LIGHT_CYAN}99. ${LIGHT_WHITE}脚本工具 ${LIGHT_CYAN}▶${LIGHT_WHITE}                                               ${LIGHT_CYAN}#\n"
+    # print_echo_line_3
+    # printf "${LIGHT_CYAN}0. ${LIGHT_WHITE} 退出程序                                                 ${LIGHT_CYAN}#\n"
+    # print_echo_line_3
+    break_menu_options
 
     # 🔽 用户输入
     read -rp "$(echo -e "${LIGHT_CYAN}👉 请输入你的选择: ${LIGHT_WHITE}")" choice

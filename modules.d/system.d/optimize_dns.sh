@@ -45,10 +45,7 @@ system_optimize_dns_menu() {
         echo -e "     v6: 2400:3200::1, 2402:4e:b:a::1"
         echo ""
         echo -e "${LIGHT_CYAN}3. ${LIGHT_YELLOW}手动编辑 DNS 配置文件${LIGHT_WHITE}"
-
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

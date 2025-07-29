@@ -21,15 +21,13 @@
 ###
 system_bbrv3_menu() {
     is_user_root || return
-    
+
     while true; do
         clear
         sub_menu_title "⚙️  BBR3管理"
 
         echo -e "${LIGHT_CYAN}1.  ${LIGHT_WHITE}IPv4 优先            ${LIGHT_CYAN}2.  ${LIGHT_WHITE}IPv6 优先            ${LIGHT_CYAN}3.  ${LIGHT_WHITE}IPv6 修复工具"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回上一级菜单"
-        print_echo_line_3
+        break_menu_options "up"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 

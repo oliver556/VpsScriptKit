@@ -55,9 +55,7 @@ system_time_zone_menu() {
         echo -e "${LIGHT_CYAN}25. ${LIGHT_WHITE}巴西时间              ${LIGHT_CYAN}26. ${LIGHT_WHITE}阿根廷时间"
         gran_menu_title "[D] 其他"
         echo -e "${LIGHT_CYAN}31. ${LIGHT_WHITE}UTC全球标准时间"
-        print_echo_line_3
-        echo -e "${LIGHT_CYAN}0.  ${LIGHT_WHITE}返回主菜单"
-        print_echo_line_3
+        break_menu_options "host"
         echo ""
         read -r -p "👉 请输入你的选择: " sys_choice
 
