@@ -96,19 +96,38 @@ display_tcp_tuning_tutorial() {
 ### === TCP调优工具 主函数 === ###
 install_tcp_tuning() {
     clear
-    echo -e "${BOLD_LIGHT_GREEN}正在下载 TCP 调优工具...${LIGHT_WHITE}"
-    if ! wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh; then
-        echo_error "工具下载失败，请检查网络或URL。"
-        return 1
-    fi
-    echo_success "工具下载成功！"
+        local max_retries=3
+        local retry_count=0
+        local download_success=false
+        local original_url="https://github.viplee.top/https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh"
 
-    echo_info "正在设置执行权限..."
-    chmod +x tool.sh
+        echo -e "${BOLD_LIGHT_GREEN}正在下载 TCP 调优工具...${LIGHT_WHITE}"
 
-    echo_info "准备执行 TCP 调优工具... \n"
-    sleep 1
-    exec ./tool.sh
+        while [ $retry_count -lt $max_retries ]; do
+            if wget -q "$original_url" -O tool.sh; then
+                download_success=true
+                break
+            else
+                retry_count=$((retry_count + 1))
+                echo_warning "下载失败，正在进行第 $retry_count 次重试..."
+                sleep 2 #
+            fi
+        done
+
+        if [ "$download_success" = "false" ]; then
+            echo_error "已达到最大重试次数，工具下载失败。"
+            return 1
+        fi
+
+        echo_success "工具下载成功！"
+        chmod +x tool.sh
+
+        echo_info "正在设置执行权限..."
+        exec ./tool.sh
+
+        echo_info "准备执行 TCP 调优工具... \n"
+        sleep 1
+        exec ./tool.sh
 }
 
 ### === 修改系统时区 主函数 === ###
