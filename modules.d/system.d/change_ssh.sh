@@ -25,6 +25,6 @@ source "$ROOT_DIR/shell_scripts/system/change_ssh.sh"
 change_ssh_menu() {
     while true; do
         clear
-        sub_menu_title "🖥️  SSH 端口修改"
+        sub_menu_title "⚙️  SSH 端口修改"
     done
 }

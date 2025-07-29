@@ -56,6 +56,9 @@ source "$ROOT_DIR/shell_scripts/system/user_info_random.sh"
 ### === 导入定时任务管理 === ###
 source "$ROOT_DIR/modules.d/system.d/timing_tasks.sh"
 
+### === 导入防火墙管理面板 === ###
+source "$ROOT_DIR/modules.d/system.d/iptables_panel.sh"
+
 ### === 导入BBR3加速 === ###
 source "$ROOT_DIR/shell_scripts/system/bbrv3.sh"
 
@@ -189,8 +192,9 @@ system_menu() {
             # 防火墙高级管理器
             18)
                 log_action "[system.sh]" "防火墙高级管理器"
+                # system_iptables_panel_menu
                 print_dev
-                break_end ;;
+                break_end no_wait;;
             # iptables一键转发
             19)
                 log_action "[system.sh]" "iptables一键转发"

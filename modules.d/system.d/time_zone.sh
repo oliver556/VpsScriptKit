@@ -23,11 +23,11 @@ source "$ROOT_DIR/shell_scripts/system/time_zone.sh"
 #   system_time_zone_menu
 ###
 system_time_zone_menu() {
-    is_user_root || return
+    # is_user_root || return
 
     while true; do
         clear
-        sub_menu_title "🖥️  系统时间信息"
+        sub_menu_title "⚙️  系统时间信息"
 
         # 系统当前时区
         timezone=$(system_info_current_timezone)
@@ -64,70 +64,70 @@ system_time_zone_menu() {
         case "$sys_choice" in
             1)
                 system_time_zone_main "Asia/Shanghai"
-                break_end no_wait
+                break_end no_wait ;;
             2)
                 system_time_zone_main "Asia/Hong_Kong"
-                break_end no_wait
+                break_end no_wait ;;
             3)
                 system_time_zone_main "Asia/Tokyo"
-                break_end no_wait
+                break_end no_wait ;;
             4)
                 system_time_zone_main "Asia/Seoul"
-                break_end no_wait
+                break_end no_wait ;;
             5)
                 system_time_zone_main "Asia/Singapore"
-                break_end no_wait
+                break_end no_wait ;;
             6)
                 system_time_zone_main "Asia/Kolkata"
-                break_end no_wait
+                break_end no_wait ;;
             7)
                 system_time_zone_main "Asia/Dubai"
-                break_end no_wait
+                break_end no_wait ;;
             8)
                 system_time_zone_main "Australia/Sydney"
-                break_end no_wait
+                break_end no_wait ;;
             9)
                 system_time_zone_main "Asia/Bangkok"
-                break_end no_wait
+                break_end no_wait ;;
             11)
                 system_time_zone_main "Europe/London"
-                break_end no_wait
+                break_end no_wait ;;
             12)
                 system_time_zone_main "Europe/Paris"
-                break_end no_wait
+                break_end no_wait ;;
             13)
                 system_time_zone_main "Europe/Berlin"
-                break_end no_wait
+                break_end no_wait ;;
             14)
                 system_time_zone_main "Europe/Moscow"
-                break_end no_wait
+                break_end no_wait ;;
             15)
                 system_time_zone_main "Europe/Amsterdam"
-                break_end no_wait
+                break_end no_wait ;;
             16)
                 system_time_zone_main "Europe/Madrid"
-                break_end no_wait
+                break_end no_wait ;;
             21)
                 system_time_zone_main "America/Los_Angeles"
-                break_end no_wait
+                break_end no_wait ;;
             22)
                 system_time_zone_main "America/New_York"
-                break_end no_wait
+                break_end no_wait ;;
             23)
                 system_time_zone_main "America/Vancouver"
-                break_end no_wait
+                break_end no_wait ;;
             24)
                 system_time_zone_main "America/Mexico_City"
-                break_end no_wait
+                break_end no_wait ;;
             25)
                 system_time_zone_main "America/Sao_Paulo"
-                break_end no_wait
+                break_end no_wait ;;
             26)
                 system_time_zone_main "America/Argentina/Buenos_Aires"
-                break_end no_wait
+                break_end no_wait ;;
             31)
                 system_time_zone_main "UTC"
-                break_end no_wait
+                break_end no_wait ;;
             # 返回主菜单
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
