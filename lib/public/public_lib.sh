@@ -471,6 +471,19 @@ check_swap() {
 }
 
 ### === 菜单返回提示 === ###
+#
+# @描述
+#   本函数用于打印菜单返回提示。
+#
+# @参数 $1: 返回类型
+#   - "host" 返回主菜单
+#   - "up" 返回上一级菜单
+#   - "exit" 退出脚本
+#   - 其他 退出程序
+#
+# @示例
+#   break_menu_options "host"
+###
 break_menu_options() {
     print_echo_line_3
     if [[ "$1" == "host" ]]; then
