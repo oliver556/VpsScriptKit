@@ -30,9 +30,9 @@ set_node_building_utils() {
             break_end no_wait
             ;;
         "tcp_tuning")
-            if ! ask_to_continue "TCP 调优工具"; then
-                return
-            fi
+#             if ! ask_to_continue "TCP 调优工具"; then
+#                 return
+#             fi
             install_tcp_tuning
             break_end no_wait
             ;;
@@ -56,10 +56,6 @@ install_x_ui() {
 ### === TCP调优工具 主函数 === ###
 install_tcp_tuning() {
     clear
-    echo -e "${BOLD_LIGHT_GREEN}正在安装 TCP 调优工具...${LIGHT_WHITE}"
-    wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh && chmod +x tool.sh
-    echo_success "\nTCP 调优工具安装成功！\n"
-
     sub_menu_title "【简易教程】"
     gran_menu_title "【1. 获取平均延迟值】" "front_line"
     echo -e "   打开电脑终端, ping下VPS的IP, 看下延迟, 取平均值, ${LIGHT_RED}并记下这个数值${LIGHT_WHITE}。"
@@ -95,11 +91,20 @@ install_tcp_tuning() {
     echo -e "      观察输出的速度，完成测试！"
 
     # 确认继续执行
-    if ! ask_to_continue "TCP 调优工具"; then
+    if ! ask_to_continue "TCP 调优工具1"; then
         return
     fi
 
     clear
+    echo -e "${BOLD_LIGHT_GREEN}正在安装 TCP 调优工具...${LIGHT_WHITE}"
+    wget -q https://raw.githubusercontent.com/BlackSheep-cry/TCP-Optimization-Tool/main/tool.sh -O tool.sh
+    sleep 1
+    echo_success "\nTCP 调优工具安装成功！\n"
+
+    echo_info "正在设置权限"
+    sleep 1
+    chmod +x tool.sh
+
     echo_info "正在执行 TCP 调优工具... \n "
     sleep 1
     ./tool.sh
