@@ -22,7 +22,7 @@ source "$ROOT_DIR/shell_scripts/system/update_source.sh"
 #   system_update_source_menu
 ###
 system_update_source_menu() {
-    # is_user_root || return
+    is_user_root || return
 
     while true; do
         clear
