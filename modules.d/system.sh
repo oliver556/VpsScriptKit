@@ -78,11 +78,10 @@ system_menu() {
         echo -e "${LIGHT_CYAN}4.  ${LIGHT_WHITE}修改登录密码         ${LIGHT_CYAN}5.  ${LIGHT_WHITE}开启ROOT密码登录     ${BOLD_GREY}6.  ${LIGHT_WHITE}开放所有端口"
         echo -e "${BOLD_GREY}7.  ${LIGHT_WHITE}修改SSH端口          ${LIGHT_CYAN}8.  ${LIGHT_WHITE}优化DNS地址 ${LIGHT_CYAN}▶${LIGHT_WHITE}        ${LIGHT_CYAN}9.  ${LIGHT_WHITE}禁用ROOT账户创建新账户"
         echo -e "${LIGHT_CYAN}10. ${LIGHT_WHITE}切换优先ipv4/ipv6 ${LIGHT_CYAN}▶${LIGHT_WHITE}  ${LIGHT_CYAN}11. ${LIGHT_WHITE}查看端口占用状态     ${LIGHT_CYAN}12. ${LIGHT_WHITE}修改虚拟内存大小 ${LIGHT_CYAN}▶${LIGHT_WHITE}"
-        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}          ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
+        echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}           ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${LIGHT_CYAN}17. ${LIGHT_WHITE}设置BBR3加速"
-        echo -e "${BOLD_GREY}18. ${LIGHT_WHITE}防火墙高级管理器     ${BOLD_GREY}19. ${LIGHT_WHITE}iptables一键转发     ${BOLD_GREY}20. ${LIGHT_WHITE}NAT批量SSH连接测试"
-        echo -e "${BOLD_GREY}21. ${LIGHT_WHITE}切换系统更新源       ${LIGHT_CYAN}22. ${LIGHT_WHITE}定时任务管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}       ${BOLD_GREY}23. ${LIGHT_WHITE}ip开放端口扫描"
+        echo -e "${LIGHT_CYAN}18. ${LIGHT_WHITE}防火墙高级管理器 ${LIGHT_CYAN}▶${LIGHT_WHITE}   ${LIGHT_CYAN}19. ${LIGHT_WHITE}定时任务管理         ${BOLD_GREY}20. ${LIGHT_WHITE}切换系统更新源"
         print_echo_line_1
         echo -e "${BOLD_GREY}55. ${LIGHT_WHITE}设置脚本启动快捷键"
         echo -e "${BOLD_GREY}66. ${LIGHT_WHITE}一条龙系统调优"
@@ -189,31 +188,21 @@ system_menu() {
             # 防火墙高级管理器
             18)
                 log_action "[system.sh]" "防火墙高级管理器"
-                # system_iptables_panel_menu
-                print_dev
+                clear
+                system_iptables_panel_menu
                 break_end no_wait;;
-            # iptables一键转发
-            19)
-                log_action "[system.sh]" "iptables一键转发"
-                print_dev
-                break_end ;;
-            # NAT批量SSH连接测试
-            20)
-                log_action "[system.sh]" "NAT批量SSH连接测试"
-                print_dev
-                break_end ;;
-            # 切换系统更新源
-            21)
-                log_action "[system.sh]" "切换系统更新源"
-                print_devÎÎ
-                break_end ;;
             # 定时任务管理
-            22)
+            19)
                 log_action "[system.sh]" "定时任务管理"
                 system_timing_tasks_menu
                 break_end ;;
+            # 切换系统更新源
+            20)
+                log_action "[system.sh]" "切换系统更新源"
+                print_devÎÎ
+                break_end ;;
             # ip开放端口扫描
-            23)
+            21)
                 log_action "[system.sh]" "ip开放端口扫描"
                 print_dev
                 break_end ;;
