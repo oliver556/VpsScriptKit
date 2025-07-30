@@ -59,6 +59,9 @@ source "$ROOT_DIR/modules.d/system.d/timing_tasks.sh"
 ### === 导入防火墙管理面板 === ###
 source "$ROOT_DIR/modules.d/system.d/iptables_panel.sh"
 
+### === 导入切换系统更新源 === ###
+source "$ROOT_DIR/modules.d/system.d/update_source.sh"
+
 ### === 导入BBR3加速 === ###
 source "$ROOT_DIR/shell_scripts/system/bbrv3.sh"
 
@@ -81,7 +84,7 @@ system_menu() {
         echo -e "${LIGHT_CYAN}13. ${LIGHT_WHITE}用户管理 ${LIGHT_CYAN}▶${LIGHT_WHITE}           ${LIGHT_CYAN}14. ${LIGHT_WHITE}用户/密码生成器"
         print_echo_line_1
         echo -e "${LIGHT_CYAN}15. ${LIGHT_WHITE}修改主机名           ${LIGHT_CYAN}16. ${LIGHT_WHITE}修改系统时区         ${LIGHT_CYAN}17. ${LIGHT_WHITE}设置BBR3加速"
-        echo -e "${LIGHT_CYAN}18. ${LIGHT_WHITE}防火墙高级管理器 ${LIGHT_CYAN}▶${LIGHT_WHITE}   ${LIGHT_CYAN}19. ${LIGHT_WHITE}定时任务管理         ${BOLD_GREY}20. ${LIGHT_WHITE}切换系统更新源"
+        echo -e "${LIGHT_CYAN}18. ${LIGHT_WHITE}防火墙高级管理器 ${LIGHT_CYAN}▶${LIGHT_WHITE}   ${LIGHT_CYAN}19. ${LIGHT_WHITE}定时任务管理         ${LIGHT_CYAN}20. ${LIGHT_WHITE}切换系统更新源"
         print_echo_line_1
         echo -e "${BOLD_GREY}55. ${LIGHT_WHITE}设置脚本启动快捷键"
         echo -e "${BOLD_GREY}66. ${LIGHT_WHITE}一条龙系统调优"
@@ -199,7 +202,7 @@ system_menu() {
             # 切换系统更新源
             20)
                 log_action "[system.sh]" "切换系统更新源"
-                print_devÎÎ
+                system_update_source_menu
                 break_end ;;
             # ip开放端口扫描
             21)

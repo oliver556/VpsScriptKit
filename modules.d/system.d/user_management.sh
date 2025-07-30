@@ -93,7 +93,6 @@ system_user_management_menu() {
                 # 删除用户及其主目录
                 userdel -r "$username"
                 ;;
-            # 返回主菜单
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
         esac

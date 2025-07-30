@@ -124,7 +124,6 @@ system_reinstall_menu() {
                 system_reinstall_main "Windows Server 2016"
                 break_end no_wait ;;
 
-            # 返回主菜单
             0)
                 if [ "$system_param" = "dd" ]; then
                     clear

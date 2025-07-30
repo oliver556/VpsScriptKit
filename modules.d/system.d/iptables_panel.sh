@@ -22,15 +22,15 @@ source "$ROOT_DIR/shell_scripts/system/iptables_panel.sh"
 #   system_iptables_panel_menu
 ###
 system_iptables_panel_menu() {
-    # is_user_root || return
+    is_user_root || return
 
     # 确保 iptables-persistent 或同类工具已安装
-    # if ! command -v netfilter-persistent &> /dev/null && ! (command -v systemctl &> /dev/null && systemctl list-unit-files | grep -q 'iptables.service'); then
-    #     read -p "未检测到iptables持久化工具,是否现在尝试安装(iptables-persistent)? [y/n]: " choice
-    #     if [[ "$choice" =~ ^[Yy]$ ]]; then
-    #         apt-get update && apt-get install iptables-persistent -y
-    #     fi
-    # fi
+    if ! command -v netfilter-persistent &> /dev/null && ! (command -v systemctl &> /dev/null && systemctl list-unit-files | grep -q 'iptables.service'); then
+        read -p "未检测到iptables持久化工具,是否现在尝试安装(iptables-persistent)? [y/n]: " choice
+        if [[ "$choice" =~ ^[Yy]$ ]]; then
+            apt-get update && apt-get install iptables-persistent -y
+        fi
+    fi
 
     while true; do
         clear

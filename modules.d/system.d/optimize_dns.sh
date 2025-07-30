@@ -81,7 +81,6 @@ system_optimize_dns_menu() {
                 fi
                 break_end
                 ;;
-            # 返回主菜单
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
         esac

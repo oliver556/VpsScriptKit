@@ -126,7 +126,6 @@ system_time_zone_menu() {
             31)
                 system_time_zone_main "UTC"
                 break_end no_wait ;;
-            # 返回主菜单
             0) break ;;
             *) echo "❌ 无效选项，请重新输入。" && sleep 1 ;;
         esac
