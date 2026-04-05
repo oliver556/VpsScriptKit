@@ -101,3 +101,36 @@ create_sudo_user_and_disable_root() {
     echo -e "为了安全，请重新登录并使用新用户进行操作: ${LIGHT_YELLOW}ssh ${new_username}@<your_server_ip>${LIGHT_WHITE}"
     print_echo_line_1
 }
+
+
+### =================================================================================
+### === 保存 iptables 规则 === ###
+# @描述
+#   本函数用于保存 iptables 规则 (使用系统标准工具)
+#
+# @示例
+#   save_iptables_rules
+###
+save_iptables_rules() {
+    echo_info "正在尝试使用标准工具持久化iptables规则..."
+    if command -v netfilter-persistent &> /dev/null; then
+        # 基于 Debian/Ubuntu 的系统
+        echo "检测到 'netfilter-persistent'，正在保存规则..."
+        netfilter-persistent save
+    elif command -v systemctl &> /dev/null && systemctl list-unit-files | grep -q 'iptables.service'; then
+        # 基于 RHEL/CentOS 的系统
+        echo "检测到 'iptables.service'，正在保存规则..."
+        service iptables save
+    else
+        echo -e "${BOLD_RED}警告: 未找到标准的iptables持久化工具 (如 iptables-persistent)。${LIGHT_WHITE}"
+        echo "规则可能在重启后丢失。建议安装 'iptables-persistent' (Debian/Ubuntu) 或 'iptables-services' (CentOS/RHEL)。"
+        return 1
+    fi
+    echo_success "规则已保存。"
+
+    if [ "$1" == "close_all_ports" ]; then
+        echo_warning "请立即添加一个新的SSH端口, 否则您将无法再次连接上服务器"
+        echo_warning "您可以添加一个新端口, 或者使用以下命令添加一个新端口"
+    fi
+}
+### =================================================================================

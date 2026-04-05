@@ -11,59 +11,62 @@
 # @许可证:       MIT
 ### =================================================================================
 
-### === 导入系统通用工具 === ###
-source "$ROOT_DIR/shell_scripts/system/general.sh"
-
-### === 导入系统信息查询 === ###
+### === 1. 系统信息查询 === ###
 source "$ROOT_DIR/shell_scripts/system/info.sh"
 
-### === 导入系统更新 === ###
+### === 2. 系统更新 === ###
 source "$ROOT_DIR/shell_scripts/system/update.sh"
 
-### === 导入系统清理 === ###
+### === 3. 系统清理 === ###
 source "$ROOT_DIR/shell_scripts/system/clean.sh"
 
-### === 导入修改系统时区 === ###
-source "$ROOT_DIR/modules.d/system.d/time_zone.sh"
-
-### === 导入一键重装安装 === ###
-source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
-
-### === 导入修改主机名 === ###
-source "$ROOT_DIR/modules.d/system.d/change_hostname.sh"
-
-### === 导入修改 SSH 端口 === ###
-source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
-
-### === 导入设置 root 用户密码 === ###
+### === 5. 设置 root 用户密码 === ###
 source "$ROOT_DIR/shell_scripts/system/set_root_login.sh"
 
-### === 导入优化 DNS 地址 === ###
+### === 6. 开放所有端口 === ###
+source "$ROOT_DIR/shell_scripts/system/open_all_oprts.sh"
+
+### === 8. 优化 DNS 地址 === ###
 source "$ROOT_DIR/modules.d/system.d/optimize_dns.sh"
 
-### === 导入切换优先ipv4/ipv6 === ###
+### === 10. 切换优先ipv4/ipv6 === ###
 source "$ROOT_DIR/modules.d/system.d/v4_v6_priority.sh"
 
-### === 导入修改虚拟内存大小 === ###
+### === 12. 修改虚拟内存大小 === ###
 source "$ROOT_DIR/modules.d/system.d/virtual_memory.sh"
 
-### === 导入用户管理 === ###
+### === 13. 用户管理 === ###
 source "$ROOT_DIR/modules.d/system.d/user_management.sh"
 
-### === 导入用户信息随机生成 === ###
+### === 14. 用户信息随机生成 === ###
 source "$ROOT_DIR/shell_scripts/system/user_info_random.sh"
 
-### === 导入定时任务管理 === ###
-source "$ROOT_DIR/modules.d/system.d/timing_tasks.sh"
+### === 15. 修改主机名 === ###
+source "$ROOT_DIR/modules.d/system.d/change_hostname.sh"
 
-### === 导入防火墙管理面板 === ###
+### === 16. 修改系统时区 === ###
+source "$ROOT_DIR/modules.d/system.d/time_zone.sh"
+
+### === 17. BBR3加速 === ###
+source "$ROOT_DIR/shell_scripts/system/bbrv3.sh"
+
+### === 18. 防火墙管理面板 === ###
 source "$ROOT_DIR/modules.d/system.d/iptables_panel.sh"
 
-### === 导入切换系统更新源 === ###
+### === 19. 定时任务管理 === ###
+source "$ROOT_DIR/modules.d/system.d/timing_tasks.sh"
+
+### === 20. 切换系统更新源 === ###
 source "$ROOT_DIR/modules.d/system.d/update_source.sh"
 
-### === 导入BBR3加速 === ###
-source "$ROOT_DIR/shell_scripts/system/bbrv3.sh"
+### === 99. 一键重装安装 === ###
+source "$ROOT_DIR/modules.d/system.d/reinstall.sh"
+
+### === 00. 系统通用工具 === ###
+source "$ROOT_DIR/shell_scripts/system/general.sh"
+
+# ### === 导入修改 SSH 端口 === ###
+# source "$ROOT_DIR/modules.d/system.d/change_ssh.sh"
 
 ### === 系统工具 主菜单 === ###
 #

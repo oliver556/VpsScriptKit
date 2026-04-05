@@ -182,7 +182,7 @@ start_reinstall_process() {
     echo -e "${LIGHT_CYAN}- 初始端口:${LIGHT_WHITE} ${YELLOW}${port}${LIGHT_WHITE}"
     print_echo_line_1
     echo
-    echo -e "${BOLD_RED}警告：这将清除目标服务器上的所有数据！请先复制好您的初始用户名、密码、端口，以免重装后无法连接。${LIGHT_WHITE}"
+    echo -e "${BOLD_RED}警告: 这将清除目标服务器上的所有数据！请先复制好您的初始用户名、密码、端口，以免重装后无法连接。${LIGHT_WHITE}"
 
     if ! ask_to_continue; then
         return
